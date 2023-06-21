@@ -6,7 +6,7 @@ import {
   fireEvent,
 } from '../../../utils/test/test-navigation-setup';
 import WorldClock, { testIds } from './index';
-import { testIds as listTestIds } from '../sections/WorldClockList';
+import { testIds as listTestIds } from '../sections/WorldClockChooseList';
 
 describe('Render a WorldClock Screen', () => {
   it('normal', () => {

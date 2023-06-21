@@ -1,10 +1,10 @@
 import 'react-native';
 import React from 'react';
 import { render } from '../../../../utils/test/test-navigation-setup';
-import WorldClockList from './index';
+import WorldClockChooseList from './index';
 
-describe('Render a WorldClock Screen', () => {
+describe('Render a WorldClockChooseList', () => {
   it('normal', () => {
-    render(<WorldClockList onChoose={() => {}} />);
+    render(<WorldClockChooseList onChoose={() => {}} />);
   });
 });
