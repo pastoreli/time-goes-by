@@ -17,7 +17,7 @@ const HomeNavigator: React.FC = () => {
   const theme = useTheme();
 
   const stackOptions: StackNavigationOptions = {
-    headerTintColor: theme.textColor.darken,
+    headerTintColor: theme.darken,
     headerStyle: {
       backgroundColor: theme.containerBg,
     },

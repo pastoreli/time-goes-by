@@ -2,10 +2,10 @@ import React from 'react';
 import { PressableAndroidRippleConfig } from 'react-native';
 import styled from 'styled-components/native';
 import { Text, PressableArea } from '../../../../components';
-import { timeZoneList } from '../../../../utils/lists/timeZone';
-import { timeZoneToDisplayText } from '../../../../utils/stringUtils/index';
+import { timeZoneToDisplayText } from '../../../../utils/stringUtils';
 
 export type WorldClockChooseListProps = {
+  list: string[];
   onChoose: (value: string) => void;
 };
 
@@ -15,20 +15,19 @@ const android_ripple: PressableAndroidRippleConfig = {
 };
 
 const WorldClockChooseList: React.FC<WorldClockChooseListProps> = ({
+  list,
   onChoose,
-}) => {
-  return (
-    <Container testID={testIds.CONTAINER}>
-      {timeZoneList.map(item => (
-        <ListItem key={item} onPress={() => onChoose(item)}>
-          <Text size={18} weight="medium">
-            {timeZoneToDisplayText(item)}
-          </Text>
-        </ListItem>
-      ))}
-    </Container>
-  );
-};
+}) => (
+  <Container testID={testIds.CONTAINER}>
+    {list.map(item => (
+      <ListItem key={item} onPress={() => onChoose(item)}>
+        <Text size={18} weight="medium">
+          {timeZoneToDisplayText(item)}
+        </Text>
+      </ListItem>
+    ))}
+  </Container>
+);
 
 export default WorldClockChooseList;
 

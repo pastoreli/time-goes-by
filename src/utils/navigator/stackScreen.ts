@@ -2,7 +2,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { Theme } from '../../interfaces/theme';
 
 export const stackScreenOptions = (theme: Theme): StackNavigationOptions => ({
-  headerTintColor: theme.textColor.darken,
+  headerTintColor: theme.darken,
   headerStyle: {
     backgroundColor: theme.containerBg,
     height: 50,
@@ -15,12 +15,12 @@ export const stackScreenOptions = (theme: Theme): StackNavigationOptions => ({
   headerRightContainerStyle: {
     top: -50,
     height: 25,
-    right: 10,
+    right: 20,
   },
   headerLeftContainerStyle: {
     top: -50,
     height: 25,
-    left: 10,
+    left: 20,
   },
   cardStyle: {
     backgroundColor: theme.containerBg,

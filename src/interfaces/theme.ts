@@ -6,6 +6,14 @@ export type Theme = {
   secondary: string;
   secondaryLight: string;
   secondaryDark: string;
+  lighthen: string;
+  lighthen1: string;
+  lighthen2: string;
+  lighthen3: string;
+  darken1: string;
+  darken2: string;
+  darken3: string;
+  darken: string;
   danger: string;
   dangerLight: string;
   warningLight: string;
@@ -17,10 +25,6 @@ export type Theme = {
   successSuperLight: string;
   successSecondary: string;
   containerBg: string;
-  borderRadius: string;
-  tabBar: {
-    color: string;
-  };
   dividerColor: string;
   card: {
     color: string;
@@ -31,19 +35,8 @@ export type Theme = {
     borderColor: string;
   };
   statusBarColor: string;
-  textColor: Record<TecColor, string>;
   text: Record<FontWeight, string>;
 };
-
-export type TecColor =
-  | 'lighthen'
-  | 'lighthen1'
-  | 'lighthen2'
-  | 'lighthen3'
-  | 'darken1'
-  | 'darken2'
-  | 'darken3'
-  | 'darken';
 
 export type FontWeight =
   | 'thin'
