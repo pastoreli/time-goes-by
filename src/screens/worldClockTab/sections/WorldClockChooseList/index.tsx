@@ -20,7 +20,7 @@ const WorldClockChooseList: React.FC<WorldClockChooseListProps> = ({
 }) => (
   <Container testID={testIds.CONTAINER}>
     {list.map(item => (
-      <ListItem key={item} onPress={() => onChoose(item)}>
+      <ListItem testID={testIds.ITEM} key={item} onPress={() => onChoose(item)}>
         <Text size={18} weight="medium">
           {timeZoneToDisplayText(item)}
         </Text>
@@ -46,5 +46,6 @@ const ListItem = styled(PressableArea).attrs(() => ({
 `;
 
 export enum testIds {
-  CONTAINER = 'WorldClockList-container',
+  CONTAINER = 'WorldClockChooseList-container',
+  ITEM = 'WorldClockChooseList-item',
 }

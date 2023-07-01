@@ -5,7 +5,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import Text from '../Text';
 
 export type TextFieldProps = TextInputProps & {
@@ -17,6 +17,7 @@ export type TextFieldProps = TextInputProps & {
 };
 
 const TextInput: React.FC<TextFieldProps> = ({
+  testID,
   style,
   label,
   append,
@@ -25,13 +26,14 @@ const TextInput: React.FC<TextFieldProps> = ({
   errorMessage,
   autoCapitalize = 'none',
   touched,
+  multiline,
   ...props
 }) => {
-  const textAlignVertical = props.multiline ? 'top' : undefined;
+  const textAlignVertical = multiline ? 'top' : undefined;
   const theme = useTheme();
 
   return (
-    <View testID="TextInput" style={style}>
+    <View testID={testID} style={style}>
       {Boolean(label) && (
         <Text
           size="14"
@@ -41,19 +43,25 @@ const TextInput: React.FC<TextFieldProps> = ({
           {label}
         </Text>
       )}
-      <Container testID="TextInput-Container">
+      <Container
+        testID={
+          multiline
+            ? testIds.TEXT_INPUT_CONTAINER_MULTILINE
+            : testIds.TEXT_INPUT_CONTAINER
+        }>
         {Boolean(prepend) && prepend}
         <Input
-          testID="TextInput-Input"
+          testID={testIds.TEXT_INPUT_FIELD}
           style={{ textAlignVertical }}
           autoCapitalize={autoCapitalize}
           editable={editable}
           placeholderTextColor={theme.lighthen3}
+          multiline={multiline}
           {...props}
         />
         {Boolean(append) && <View style={styles.append}>{append}</View>}
       </Container>
-      <Text color={theme.danger} testID="TextInput-ErrorText">
+      <Text color={theme.danger} testID={testIds.TEXT_INPUT_ERROR_TEXT}>
         {Boolean(errorMessage) && touched && editable ? errorMessage : ''}
       </Text>
     </View>
@@ -84,3 +92,10 @@ const styles = StyleSheet.create({
     marginRight: -4,
   },
 });
+
+export enum testIds {
+  TEXT_INPUT_CONTAINER = 'TextInput-container',
+  TEXT_INPUT_CONTAINER_MULTILINE = 'TextInput-container-multiline',
+  TEXT_INPUT_FIELD = 'TextInput-field',
+  TEXT_INPUT_ERROR_TEXT = 'TextInput-error-text',
+}

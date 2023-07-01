@@ -16,7 +16,6 @@ const PressableArea: React.FC<TouchableOpacityProps> = ({
     testID={
       Platform.OS === 'ios' ? testIds.IOS_PRESSABLE : testIds.ANDROID_PRESSABLE
     }>
-    {console.log('OS: ', Platform.OS)}
     {Platform.OS === 'ios' ? (
       <TouchableOpacity {...props}>{children}</TouchableOpacity>
     ) : (

@@ -31,11 +31,14 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
       )}
       <View>
         <TextInput
+          testID={testIds.SEARCH_HEADER_INPUT}
           value={search}
           placeholder="Search"
           prepend={<Icon name="magnify" size={25} color={theme.lighthen3} />}
           append={
-            <TouchableOpacity onPress={() => onSearchChange('')}>
+            <TouchableOpacity
+              testID={testIds.SEARCH_HEADER_ERASE}
+              onPress={() => onSearchChange('')}>
               <Icon name="close-circle" size={25} color={theme.lighthen3} />
             </TouchableOpacity>
           }
@@ -54,3 +57,8 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
 });
+
+export enum testIds {
+  SEARCH_HEADER_INPUT = 'Modalize-SearchHeader-input',
+  SEARCH_HEADER_ERASE = 'Modalize-SearchHeader-erase',
+}

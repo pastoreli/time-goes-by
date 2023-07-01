@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { SafeAreaView } from 'react-native';
 import { render, RenderOptions } from '@testing-library/react-native';
 import { ThemeProvider } from 'styled-components/native';
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 import lightTheme from '../../themes/light';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { LightTheme } from '../../themes';
@@ -9,6 +10,8 @@ import { Host } from 'react-native-portalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
+
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
 const MyLightTheme = {
   ...DefaultTheme,

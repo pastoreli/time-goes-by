@@ -51,10 +51,12 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
     item,
     drag,
   }) => (
-    <ListItem key={item}>
+    <ListItem testID={testIds.LIST_ITEM} key={item}>
       <View style={styles.rightItem}>
         {editMode && (
-          <MinusButton onPress={() => onDelete && onDelete(item)}>
+          <MinusButton
+            testID={testIds.DELETE_BUTON}
+            onPress={() => onDelete && onDelete(item)}>
             <Icon name="minus" size={24} color="white" />
           </MinusButton>
         )}
@@ -69,7 +71,10 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
       </View>
       <View>
         {editMode ? (
-          <TouchableOpacity style={styles.queueOrganizer} onLongPress={drag}>
+          <TouchableOpacity
+            testID={testIds.ORGANIZER_BUTTON}
+            style={styles.queueOrganizer}
+            onLongPress={drag}>
             <Icon name="menu" size={30} color={theme.lighthen3} />
           </TouchableOpacity>
         ) : (
@@ -82,16 +87,15 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
   );
 
   return (
-    <View style={styles.fillHeight}>
-      <DraggableFlatList
-        data={list}
-        onDragEnd={({ data }) => onListChange && onListChange(data)}
-        keyExtractor={item => item}
-        renderItem={RenderListItem}
-        onDragBegin={() => Vibration.vibrate()}
-        containerStyle={styles.fillHeight}
-      />
-    </View>
+    <DraggableFlatList
+      testID={testIds.LIST}
+      data={list}
+      keyExtractor={item => item}
+      renderItem={RenderListItem}
+      containerStyle={styles.fillHeight}
+      onDragBegin={() => Vibration.vibrate()}
+      onDragEnd={({ data }) => onListChange && onListChange(data)}
+    />
   );
 };
 
@@ -131,3 +135,10 @@ const MinusButton = styled.TouchableOpacity`
   height: 25px;
   border-radius: 50px;
 `;
+
+export enum testIds {
+  LIST = 'WorldClockList',
+  DELETE_BUTON = 'WorldClockList-delete-button',
+  LIST_ITEM = 'WorldClockList-list-item',
+  ORGANIZER_BUTTON = 'WorldClockList-organizer-button',
+}

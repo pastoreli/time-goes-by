@@ -66,7 +66,7 @@ const WorldClock = () => {
 
   const LeftNavButton = useCallback(
     () => (
-      <Pressable testID={testIds.NAV_RIGHT_BUTTON} onPress={toogleEditMode}>
+      <Pressable testID={testIds.NAV_LEFT_BUTTON} onPress={toogleEditMode}>
         <Text size={18} weight="medium" color={theme.primary}>
           {worldClockEditMode ? 'Done' : 'Edit'}
         </Text>
@@ -147,5 +147,6 @@ const styles = StyleSheet.create({
 });
 
 export enum testIds {
+  NAV_LEFT_BUTTON = 'WorldClock-nav-left-button',
   NAV_RIGHT_BUTTON = 'WorldClock-nav-right-button',
 }
