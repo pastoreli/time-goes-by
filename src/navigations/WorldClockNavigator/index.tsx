@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useTheme } from 'styled-components/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigatorUtils } from '../../hooks';
 
 // Interfaces
 import { WorldClockNavigatorRoutes } from '../../../routes';
@@ -8,21 +8,16 @@ import { WorldClockNavigatorRoutes } from '../../../routes';
 // Screens
 import WorldClockScreen from '../../screens/worldClockTab/WorldClock';
 
-// Utils
-import { stackScreenOptions } from '../../utils/navigator/stackScreen';
-
-const Stack = createStackNavigator<WorldClockNavigatorRoutes>();
+const Stack = createNativeStackNavigator<WorldClockNavigatorRoutes>();
 
 const WorldClockNavigator: React.FC = () => {
-  const theme = useTheme();
+  const { screenOptions } = useNavigatorUtils();
 
   return (
-    <Stack.Navigator initialRouteName="WorldClock">
-      <Stack.Screen
-        name="WorldClock"
-        component={WorldClockScreen}
-        options={stackScreenOptions(theme)}
-      />
+    <Stack.Navigator
+      initialRouteName="WorldClock"
+      screenOptions={screenOptions}>
+      <Stack.Screen name="WorldClock" component={WorldClockScreen} />
     </Stack.Navigator>
   );
 };

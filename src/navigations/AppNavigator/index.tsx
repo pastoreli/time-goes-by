@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from 'styled-components/native';
 
 // Interfaces
@@ -11,20 +8,10 @@ import { RootStack } from '../../../routes';
 // Screens
 import BottomNavigator from '../BottomNavigator';
 
-const Stack = createStackNavigator<RootStack>();
+const Stack = createNativeStackNavigator<RootStack>();
 
 const HomeNavigator: React.FC = () => {
   const theme = useTheme();
-
-  const stackOptions: StackNavigationOptions = {
-    headerTintColor: theme.darken,
-    headerStyle: {
-      backgroundColor: theme.containerBg,
-    },
-    cardStyle: {
-      backgroundColor: theme.containerBg,
-    },
-  };
 
   return (
     <Stack.Navigator initialRouteName="BottomNaviagtor">
@@ -33,7 +20,9 @@ const HomeNavigator: React.FC = () => {
         component={BottomNavigator}
         options={{
           headerShown: false,
-          ...stackOptions,
+          contentStyle: {
+            backgroundColor: theme.containerBg,
+          },
         }}
       />
     </Stack.Navigator>

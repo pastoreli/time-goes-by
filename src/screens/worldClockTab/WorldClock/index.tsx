@@ -144,8 +144,6 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
   },
 });
 

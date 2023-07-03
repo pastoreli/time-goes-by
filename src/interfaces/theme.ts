@@ -36,6 +36,7 @@ export type Theme = {
     borderColor: string;
   };
   statusBarColor: string;
+  shadowColor: string;
   text: Record<FontWeight, string>;
 };
 

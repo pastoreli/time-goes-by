@@ -28,14 +28,14 @@ const App = () => {
       <GestureHandlerRootView style={styles.gesture}>
         <ThemeProvider theme={theme}>
           <Host>
-            <SafeAreaView>
-              <NavigationContainer theme={MyNavigationTheme}>
-                <Container>
-                  <StatusBar backgroundColor="#C1C1C1" />
-                  <AppNavigator />
-                </Container>
-              </NavigationContainer>
-            </SafeAreaView>
+            {/* <SafeAreaView> */}
+            <NavigationContainer theme={MyNavigationTheme}>
+              <Container>
+                <StatusBar backgroundColor="#C1C1C1" translucent />
+                <AppNavigator />
+              </Container>
+            </NavigationContainer>
+            {/* </SafeAreaView> */}
           </Host>
         </ThemeProvider>
       </GestureHandlerRootView>

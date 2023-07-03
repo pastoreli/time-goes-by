@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useTheme } from 'styled-components/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigatorUtils } from '../../hooks';
 
 // Interfaces
 import { StopwatchNavigatorRoutes } from '../../../routes';
@@ -8,21 +8,14 @@ import { StopwatchNavigatorRoutes } from '../../../routes';
 // Screens
 import StopwatchScreen from '../../screens/stopwatchTab/Stopwatch';
 
-// Utils
-import { stackScreenOptions } from '../../utils/navigator/stackScreen';
-
-const Stack = createStackNavigator<StopwatchNavigatorRoutes>();
+const Stack = createNativeStackNavigator<StopwatchNavigatorRoutes>();
 
 const StopwatchNavigator: React.FC = () => {
-  const theme = useTheme();
+  const { screenOptions } = useNavigatorUtils();
 
   return (
-    <Stack.Navigator initialRouteName="Stopwatch">
-      <Stack.Screen
-        name="Stopwatch"
-        component={StopwatchScreen}
-        options={stackScreenOptions(theme)}
-      />
+    <Stack.Navigator initialRouteName="Stopwatch" screenOptions={screenOptions}>
+      <Stack.Screen name="Stopwatch" component={StopwatchScreen} />
     </Stack.Navigator>
   );
 };

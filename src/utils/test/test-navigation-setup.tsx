@@ -9,7 +9,7 @@ import { LightTheme } from '../../themes';
 import { Host } from 'react-native-portalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
@@ -52,7 +52,7 @@ export * from '@testing-library/react-native';
 // override render method
 export { customRender as render };
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export const MockScreen: React.FC<{ children: ReactNode }> = ({ children }) => (
   <Stack.Navigator initialRouteName="FirstScreen">

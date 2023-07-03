@@ -4,11 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { trigger, HapticFeedbackTypes } from 'react-native-haptic-feedback';
 import { Text } from '../../../../components';
 import styled, { useTheme } from 'styled-components/native';
 import dateUtil from '../../../../utils/date';
 import { timeZoneToDisplaySimpleText } from '../../../../utils/stringUtils';
+import { useTabBar } from '../../../../components/TabBar';
 
 export type WorldClockListProps = {
   list: string[];
@@ -24,6 +26,8 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
   onListChange,
 }) => {
   const theme = useTheme();
+  const { tabBarDistance } = useTabBar();
+  const safeAreaInsets = useSafeAreaInsets();
 
   const [date, setDate] = useState(dateUtil());
 
@@ -94,6 +98,12 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
       keyExtractor={item => item}
       renderItem={RenderListItem}
       containerStyle={styles.fillHeight}
+      contentContainerStyle={{
+        ...styles.listContainer,
+        paddingTop: safeAreaInsets.top + 60,
+        paddingBottom: tabBarDistance + 15,
+      }}
+      ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
       onDragBegin={() => trigger(HapticFeedbackTypes.impactMedium)}
       onDragEnd={({ data }) => onListChange && onListChange(data)}
       onRelease={() => trigger(HapticFeedbackTypes.impactMedium)}
@@ -106,6 +116,13 @@ export default WorldClockList;
 const styles = StyleSheet.create({
   fillHeight: {
     flex: 1,
+  },
+  listContainer: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  listSeparator: {
+    height: 15,
   },
   rightItem: {
     flexDirection: 'row',
@@ -120,12 +137,15 @@ const ListItem = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px
   height: 110px;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: ${({ theme }) => theme.dividerColor};
-  background-color: ${({ theme }) => `${theme.containerBg}E6`};
+  background-color: ${({ theme }) => theme.card.color};
+  border-radius: 20px;
+  shadow-opacity: 0.4;
+  shadow-radius: 4px;
+  shadow-color: ${({ theme }) => theme.shadowColor};
+  shadow-offset: 0px 2px;
+  /* background-color: ${({ theme }) => `${theme.containerBg}E6`}; */
 `;
 
 const MinusButton = styled.TouchableOpacity`

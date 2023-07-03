@@ -1,9 +1,9 @@
 import { Theme } from '../interfaces/theme';
 
 const darkTheme: Theme = {
-  primary: '#F9B233',
-  primaryDark: '#DF9000',
-  primaryLight: '#FFF8DE',
+  primary: '#8C81D3',
+  primaryDark: '#F0EDF8',
+  primaryLight: '#6156BD',
   primaryOpacity: 'rgba(249, 178, 51, 0.4)',
   secondary: '#F7F8F9',
   secondaryLight: '#FFF3CF',
@@ -30,7 +30,7 @@ const darkTheme: Theme = {
   containerSecondaryBg: '#202124',
   dividerColor: '#3E4043',
   card: {
-    color: '#F7F8F9',
+    color: '#35363A',
   },
   input: {
     bg: '#FFFFFF33',
@@ -38,6 +38,7 @@ const darkTheme: Theme = {
     borderColor: '#A7A9BC',
   },
   statusBarColor: '#FFFFFF',
+  shadowColor: '#23222566',
   text: {
     black: 'Montserrat-Black',
     blackItalic: 'Montserrat-BlackItalic',

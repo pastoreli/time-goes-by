@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useTheme } from 'styled-components/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useNavigatorUtils } from '../../hooks';
 
 // Interfaces
 import { TimerNavigatorRoutes } from '../../../routes';
@@ -8,21 +8,14 @@ import { TimerNavigatorRoutes } from '../../../routes';
 // Screens
 import HomeScreen from '../../screens/alarmTab/Alarm';
 
-// Utils
-import { stackScreenOptions } from '../../utils/navigator/stackScreen';
-
-const Stack = createStackNavigator<TimerNavigatorRoutes>();
+const Stack = createNativeStackNavigator<TimerNavigatorRoutes>();
 
 const TimerNavigator: React.FC = () => {
-  const theme = useTheme();
+  const { screenOptions } = useNavigatorUtils();
 
   return (
-    <Stack.Navigator initialRouteName="Timer">
-      <Stack.Screen
-        name="Timer"
-        component={HomeScreen}
-        options={stackScreenOptions(theme)}
-      />
+    <Stack.Navigator initialRouteName="Timer" screenOptions={screenOptions}>
+      <Stack.Screen name="Timer" component={HomeScreen} />
     </Stack.Navigator>
   );
 };
