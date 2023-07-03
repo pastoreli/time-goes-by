@@ -55,7 +55,7 @@ const TextInput: React.FC<TextFieldProps> = ({
           style={{ textAlignVertical }}
           autoCapitalize={autoCapitalize}
           editable={editable}
-          placeholderTextColor={theme.lighthen3}
+          placeholderTextColor={theme.darken1}
           multiline={multiline}
           {...props}
         />

@@ -15,7 +15,10 @@ import { useTheme } from 'styled-components/native';
 import { ModalizeSearchHeader, Text } from '../../../components';
 import { useWorldClockStorage } from '../../../hooks';
 import { timeZoneList } from '../../../utils/lists/timeZone';
-import { searchHandler } from '../../../utils/stringUtils';
+import {
+  searchHandler,
+  timeZoneToDisplayText,
+} from '../../../utils/stringUtils';
 
 // Sections
 import { WorldClockChooseList, WorldClockList } from '../sections';
@@ -23,7 +26,7 @@ import { WorldClockChooseList, WorldClockList } from '../sections';
 const searchTimeZone =
   (search: string) =>
   (timeZone: string): boolean =>
-    searchHandler(timeZone, search);
+    searchHandler(timeZoneToDisplayText(timeZone), search);
 
 const WorldClock = () => {
   const navigation = useNavigation();
@@ -105,7 +108,7 @@ const WorldClock = () => {
           modalTopOffset={safeAreaInsets.top}
           modalStyle={{
             ...styles.modalize,
-            backgroundColor: theme.containerBg,
+            backgroundColor: theme.containerSecondaryBg,
           }}
           handleStyle={{ backgroundColor: theme.lighthen3 }}
           handlePosition="inside"

@@ -9,16 +9,16 @@ export const stackScreenOptions = (theme: Theme): StackNavigationOptions => ({
     shadowColor: theme.dividerColor,
   },
   headerTitleContainerStyle: {
-    top: -50,
+    top: -40,
     height: 25,
   },
   headerRightContainerStyle: {
-    top: -50,
+    top: -40,
     height: 25,
     right: 20,
   },
   headerLeftContainerStyle: {
-    top: -50,
+    top: -40,
     height: 25,
     left: 20,
   },

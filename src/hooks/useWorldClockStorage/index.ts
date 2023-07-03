@@ -11,7 +11,6 @@ const useWorldClockStorage = () => {
   const [editMode, setEditMode] = useState(false);
 
   const handleUpdateList = (updatedList: string[]) => {
-    console.log('item: ', updatedList);
     syncStorage.setItem(
       storageKeys.WORLD_CLOCK_LIST,
       JSON.stringify(updatedList),
@@ -48,7 +47,6 @@ const useWorldClockStorage = () => {
 
   const initWorldClockItems = useCallback(async () => {
     const storageList = await syncStorage.getItem(storageKeys.WORLD_CLOCK_LIST);
-    console.log('storageList: ', storageList);
     if (storageList) {
       setList(JSON.parse(storageList));
     }

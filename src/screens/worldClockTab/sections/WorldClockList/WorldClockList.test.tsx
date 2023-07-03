@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vibration } from 'react-native';
+import { trigger, HapticFeedbackTypes } from 'react-native-haptic-feedback';
 import {
   act,
   fireEvent,
@@ -9,6 +9,11 @@ import dateUtil from '../../../../utils/date';
 import WorldClockList, { testIds } from './';
 
 const mockList = ['America/Sao_Paulo', 'Europe/London', 'Asia/Tokyo'];
+
+jest.mock('react-native-haptic-feedback', () => ({
+  ...jest.requireActual('react-native-haptic-feedback'),
+  trigger: jest.fn(),
+}));
 
 describe('Render a WorldClockList', () => {
   beforeAll(() => {
@@ -54,8 +59,6 @@ describe('Render a WorldClockList', () => {
     expect(calledOnDelete).toBe('Europe/London');
   });
   it('Should reorganize item', () => {
-    Vibration.vibrate = jest.fn();
-
     const listEdit = ['Europe/London', 'Asia/Tokyo', 'America/Sao_Paulo'];
     let reorganizeCalled: string[] = [];
 
@@ -72,13 +75,16 @@ describe('Render a WorldClockList', () => {
       fireEvent(organizerButton, 'onLongPress');
     });
 
-    expect(Vibration.vibrate).toBeCalled();
+    expect(trigger).toBeCalledWith(HapticFeedbackTypes.impactMedium);
 
     const list = getByTestId(testIds.LIST);
     act(() => {
+      fireEvent(list, 'onRelease');
       fireEvent(list, 'onDragEnd', { data: listEdit });
     });
 
+    expect(trigger).toBeCalledTimes(2);
+    expect(trigger).toBeCalledWith(HapticFeedbackTypes.impactMedium);
     expect(reorganizeCalled).toMatchObject(listEdit);
   });
 });

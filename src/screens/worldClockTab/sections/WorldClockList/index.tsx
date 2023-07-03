@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Vibration } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
+import { trigger, HapticFeedbackTypes } from 'react-native-haptic-feedback';
 import { Text } from '../../../../components';
 import styled, { useTheme } from 'styled-components/native';
 import dateUtil from '../../../../utils/date';
@@ -57,7 +58,7 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
           <MinusButton
             testID={testIds.DELETE_BUTON}
             onPress={() => onDelete && onDelete(item)}>
-            <Icon name="minus" size={24} color="white" />
+            <Icon name="minus" size={22} color="white" />
           </MinusButton>
         )}
         <View>
@@ -75,7 +76,7 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
             testID={testIds.ORGANIZER_BUTTON}
             style={styles.queueOrganizer}
             onLongPress={drag}>
-            <Icon name="menu" size={30} color={theme.lighthen3} />
+            <Icon name="menu" size={30} color={theme.lighthen2} />
           </TouchableOpacity>
         ) : (
           <Text size={56}>
@@ -93,8 +94,9 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
       keyExtractor={item => item}
       renderItem={RenderListItem}
       containerStyle={styles.fillHeight}
-      onDragBegin={() => Vibration.vibrate()}
+      onDragBegin={() => trigger(HapticFeedbackTypes.impactMedium)}
       onDragEnd={({ data }) => onListChange && onListChange(data)}
+      onRelease={() => trigger(HapticFeedbackTypes.impactMedium)}
     />
   );
 };
@@ -127,12 +129,11 @@ const ListItem = styled.View`
 `;
 
 const MinusButton = styled.TouchableOpacity`
-  padding-top: 1px;
-  padding-left: 0.5px;
+  padding-top: 0.5px;
   margin-right: 20px;
   background-color: ${({ theme }) => theme.danger};
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   border-radius: 50px;
 `;
 

@@ -27,12 +27,13 @@ const lightTheme: Theme = {
   info: '#2e5aac',
   infoLight: '#EEF2FA',
   containerBg: '#FFFFFF',
+  containerSecondaryBg: '#FFFFFF',
   dividerColor: '#D8D9DC',
   card: {
     color: '#F7F8F9',
   },
   input: {
-    bg: '#00000026',
+    bg: '#00000015',
     borderRadius: '6px',
     borderColor: '#A7A9BC',
   },

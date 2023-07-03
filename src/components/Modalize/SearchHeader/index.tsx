@@ -34,12 +34,12 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
           testID={testIds.SEARCH_HEADER_INPUT}
           value={search}
           placeholder="Search"
-          prepend={<Icon name="magnify" size={25} color={theme.lighthen3} />}
+          prepend={<Icon name="magnify" size={25} color={theme.darken1} />}
           append={
             <TouchableOpacity
               testID={testIds.SEARCH_HEADER_ERASE}
               onPress={() => onSearchChange('')}>
-              <Icon name="close-circle" size={25} color={theme.lighthen3} />
+              <Icon name="close-circle" size={25} color={theme.darken1} />
             </TouchableOpacity>
           }
           onChangeText={onSearchChange}

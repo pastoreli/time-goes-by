@@ -26,7 +26,8 @@ const darkTheme: Theme = {
   warningLight: '#FBEBC8',
   info: '#2e5aac',
   infoLight: '#EEF2FA',
-  containerBg: '#202124',
+  containerBg: '#000000',
+  containerSecondaryBg: '#202124',
   dividerColor: '#3E4043',
   card: {
     color: '#F7F8F9',

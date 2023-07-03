@@ -25,6 +25,7 @@ export type Theme = {
   successSuperLight: string;
   successSecondary: string;
   containerBg: string;
+  containerSecondaryBg: string;
   dividerColor: string;
   card: {
     color: string;
