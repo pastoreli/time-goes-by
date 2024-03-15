@@ -1,0 +1,763 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component append & prepend 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  block={true}
+  borderColor="#3B83F3"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#3B83F3",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "100%",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#3B83F3"
+    opacity={1}
+    style={
+      [
+        {
+          "backgroundColor": "#3B83F3",
+          "height": "100%",
+          "opacity": 1,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      testID="Prepend"
+    >
+      Prepend
+    </Text>
+    <Text
+      color="#FFFFFF"
+      size="16"
+      style={
+        [
+          {
+            "color": "#FFFFFF",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+    <Text
+      testID="Prepend"
+    >
+      Prepend
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button Component disabled 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#C6C9D8"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#C6C9D8",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#C6C9D8"
+    opacity={0.4}
+    style={
+      [
+        {
+          "backgroundColor": "#C6C9D8",
+          "height": "100%",
+          "opacity": 0.4,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      color="#53555C"
+      size="16"
+      style={
+        [
+          {
+            "color": "#53555C",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button Component loading 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#3B83F3"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#3B83F3",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#3B83F3"
+    opacity={1}
+    style={
+      [
+        {
+          "backgroundColor": "#3B83F3",
+          "height": "100%",
+          "opacity": 1,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <ActivityIndicator
+      color="#FFFFFF"
+      testID="Button-Loading"
+    />
+  </View>
+</View>
+`;
+
+exports[`Button Component normal 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#3B83F3"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#3B83F3",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#3B83F3"
+    opacity={1}
+    style={
+      [
+        {
+          "backgroundColor": "#3B83F3",
+          "height": "100%",
+          "opacity": 1,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      color="#FFFFFF"
+      size="16"
+      style={
+        [
+          {
+            "color": "#FFFFFF",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button Component outlined 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#3B83F3"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#3B83F3",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#3B83F3"
+    opacity={0.2}
+    style={
+      [
+        {
+          "backgroundColor": "#3B83F3",
+          "height": "100%",
+          "opacity": 0.2,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      color="#3B83F3"
+      size="16"
+      style={
+        [
+          {
+            "color": "#3B83F3",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button Component outlined with text color 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#3B83F3"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#3B83F3",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#3B83F3"
+    opacity={0.2}
+    style={
+      [
+        {
+          "backgroundColor": "#3B83F3",
+          "height": "100%",
+          "opacity": 0.2,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      color="#000"
+      size="16"
+      style={
+        [
+          {
+            "color": "#000",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button Component set color 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  activeOpacity={0.6}
+  borderColor="#f1f1f1"
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "transparent",
+        "borderColor": "#f1f1f1",
+        "borderRadius": 22.5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "minHeight": 40,
+        "minWidth": 150,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": "auto",
+      },
+    ]
+  }
+  testID="Button"
+>
+  <View
+    bg="#f1f1f1"
+    opacity={1}
+    style={
+      [
+        {
+          "backgroundColor": "#f1f1f1",
+          "height": "100%",
+          "opacity": 1,
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 15,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 15,
+        },
+      ]
+    }
+  >
+    <Text
+      color="#FFFFFF"
+      size="16"
+      style={
+        [
+          {
+            "color": "#FFFFFF",
+            "fontFamily": "Montserrat-SemiBold",
+            "fontSize": 16,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "textAlign": "auto",
+            "textTransform": "none",
+          },
+        ]
+      }
+      testID="Button-Text"
+      weight="semibold"
+    >
+      Press Me
+    </Text>
+  </View>
+</View>
+`;

@@ -1,0 +1,53 @@
+import { Theme } from '../interfaces/theme';
+
+const darkTheme: Theme = {
+  primary: '#3B83F3',
+  primaryDark: '#90B1F2',
+  primaryLight: '#2450B9',
+  lighthen: '#000000',
+  lighthen1: '#53555C',
+  lighthen2: '#787C87',
+  lighthen3: '#B1B4C4',
+  darken1: '#C6C9D8',
+  darken2: '#E8EAF3',
+  darken3: '#F5F7FB',
+  darken: '#FFFFFF',
+  danger: '#FF5F5F',
+  success: '#5ACA75',
+  warning: '#F5AA4A',
+  warningLight: '#FBEBC8',
+  containerBg: '#000000',
+  containerSecondaryBg: '#202124',
+  dividerColor: '#3E4043',
+  card: {
+    color: '#35363A',
+  },
+  input: {
+    bg: '#FFFFFF33',
+    borderRadius: '6px',
+  },
+  statusBarColor: '#FFFFFF',
+  shadowColor: '#23222566',
+  text: {
+    black: 'Montserrat-Black',
+    blackItalic: 'Montserrat-BlackItalic',
+    extrabold: 'Montserrat-ExtraBold',
+    extraboldItalic: 'Montserrat-ExtraBoldItalic',
+    bold: 'Montserrat-Bold',
+    boldItalic: 'Montserrat-BoldItalic',
+    semibold: 'Montserrat-SemiBold',
+    semiboldItalic: 'Montserrat-SemiBoldItalic',
+    medium: 'Montserrat-Medium',
+    mediumItalic: 'Montserrat-MediumItalic',
+    regular: 'Montserrat-Regular',
+    regularItalic: 'Montserrat-RegularItalic',
+    light: 'Montserrat-Light',
+    lightItalic: 'Montserrat-LightItalic',
+    extralight: 'Montserrat-ExtraLight',
+    extralightItalic: 'Montserrat-ExtraLightItalic',
+    thin: 'Montserrat-Thin',
+    thinItalic: 'Montserrat-ThinItalic',
+  },
+};
+
+export default darkTheme;
