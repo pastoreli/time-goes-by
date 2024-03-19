@@ -5,12 +5,18 @@ import { useTheme } from 'styled-components/native';
 import Text from '../Text';
 
 export type ClockProps = {
+  testID?: string;
   itemsList: Array<number[]>;
   values: number[];
   onChange: (value: number, listIndex: number) => void;
 };
 
-const Clock: React.FC<ClockProps> = ({ itemsList, values, onChange }) => {
+const Clock: React.FC<ClockProps> = ({
+  testID,
+  itemsList,
+  values,
+  onChange,
+}) => {
   const theme = useTheme();
 
   if (itemsList.length > 3) {
@@ -32,14 +38,17 @@ const Clock: React.FC<ClockProps> = ({ itemsList, values, onChange }) => {
   }, [itemsList]);
 
   return (
-    <View style={styles.container}>
+    <View testID={testID} style={styles.container}>
       {itemsList.map((item, index) => (
         <Fragment key={`item-${index}`}>
           <ScrollPicker
+            testID={`${testID}-${testIds.CLOCK_PICKER}-${index}`}
             dataSource={item}
             selectedIndex={values[index]}
             renderItem={(data, _, isSelected) => (
-              <View style={itemStyles[index]}>
+              <View
+                testID={`${testID}-${testIds.CLOCK_PIKER_ITEM_VALUE}-${index}-${data}${isSelected ? '-selected' : ''}`}
+                style={itemStyles[index]}>
                 <Text
                   size={36}
                   color={isSelected ? theme.darken : theme.darken1}
@@ -117,3 +126,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
   },
 });
+
+export enum testIds {
+  CLOCK_PICKER = 'Clock-picker',
+  CLOCK_PIKER_ITEM_VALUE = 'Clock-picker-item-value',
+}

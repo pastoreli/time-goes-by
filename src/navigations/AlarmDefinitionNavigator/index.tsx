@@ -67,7 +67,7 @@ const AlarmDefinitionNavigator = () => {
         name="AlarmRingtonesSelection"
         component={RingtonesScreen}
         options={{
-          title: 'Sim',
+          title: 'Som',
           headerBackTitle: 'Voltar',
         }}
       />

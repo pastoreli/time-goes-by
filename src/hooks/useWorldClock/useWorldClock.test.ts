@@ -2,8 +2,22 @@ import { renderHook, waitFor } from '@testing-library/react-native';
 import syncStorage from '@react-native-async-storage/async-storage';
 import { StorageKeys } from '../../consts';
 import useWorldClock from '.';
+import { WorldClock } from '../../interfaces/worldClock';
 
-const mockList = ['Europe/London', 'Asia/Tokyo', 'America/Sao_Paulo'];
+const mockList: WorldClock[] = [
+  {
+    timeZone: 'Europe/London',
+    text: 'Europa - Londres',
+  },
+  {
+    timeZone: 'Asia/Tokyo',
+    text: 'Ásia - Tóquio',
+  },
+  {
+    timeZone: 'America/Sao_Paulo',
+    text: 'América - São Paulo',
+  },
+];
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(),
@@ -15,7 +29,7 @@ const handleAsynckStorageMock = ({
   editMode = false,
   emptyList = false,
 }: {
-  list?: string[];
+  list?: WorldClock[];
   editMode?: boolean;
   emptyList?: boolean;
 }) => {
@@ -26,8 +40,9 @@ const handleAsynckStorageMock = ({
     [StorageKeys.WORLD_CLOCK_EDIT_MODE]: editMode.toString(),
   };
 
-  (syncStorage.getItem as jest.Mock).mockImplementation((value: StorageKeys) =>
-    Promise.resolve(mockGetData[value]),
+  (syncStorage.getItem as jest.Mock).mockImplementation(
+    (value: StorageKeys.WORLD_CLOCK_LIST | StorageKeys.WORLD_CLOCK_EDIT_MODE) =>
+      Promise.resolve(mockGetData[value]),
   );
 };
 
@@ -52,6 +67,17 @@ describe('useWorldClock', () => {
         expect(result.current.worldClockList).toMatchObject([]);
       });
     });
+    it('Should refetch a storage list', async () => {
+      const { result } = renderHook(() => useWorldClock());
+
+      result.current.refetchWorldClockList();
+
+      await waitFor(() => {
+        expect(syncStorage.getItem).toHaveBeenCalledWith(
+          StorageKeys.WORLD_CLOCK_LIST,
+        );
+      });
+    });
   });
   describe('worldClockEditMode', () => {
     it('Should return edit mode status', async () => {
@@ -64,18 +90,23 @@ describe('useWorldClock', () => {
   });
   describe('setWorldClockItem', () => {
     it('Shold add a new item to the storage list', async () => {
+      const newItem: WorldClock = {
+        text: 'América - Toronto',
+        timeZone: 'America/Toronto',
+      };
+
       const { result } = renderHook(() => useWorldClock());
 
       await waitFor(() => {
         expect(result.current.worldClockList.length).not.toBe(0);
       });
 
-      result.current.setWorldClockItem('America/Toronto');
+      result.current.setWorldClockItem(newItem);
 
       await waitFor(() => {
-        expect(syncStorage.setItem).toBeCalledWith(
+        expect(syncStorage.setItem).toHaveBeenCalledWith(
           StorageKeys.WORLD_CLOCK_LIST,
-          JSON.stringify([...mockList, 'America/Toronto']),
+          JSON.stringify([...mockList, newItem]),
         );
       });
     });
@@ -89,12 +120,21 @@ describe('useWorldClock', () => {
       result.current.setWorldClockItem(mockList[0]);
 
       await waitFor(() => {
-        expect(syncStorage.setItem).not.toBeCalled();
+        expect(syncStorage.setItem).not.toHaveBeenCalled();
       });
     });
   });
   describe('updateWorldClockList', () => {
-    const mockNewList = ['America/Toronto', 'Europe/Paris'];
+    const mockNewList: WorldClock[] = [
+      {
+        text: 'América - Toronto',
+        timeZone: 'America/Toronto',
+      },
+      {
+        text: 'Europa - Paris',
+        timeZone: 'Europe/Paris',
+      },
+    ];
     it('Shold update the storage list with a new list', async () => {
       const { result } = renderHook(() => useWorldClock());
 
@@ -105,7 +145,7 @@ describe('useWorldClock', () => {
       result.current.updateWorldClockList(mockNewList);
 
       await waitFor(() => {
-        expect(syncStorage.setItem).toBeCalledWith(
+        expect(syncStorage.setItem).toHaveBeenCalledWith(
           StorageKeys.WORLD_CLOCK_LIST,
           JSON.stringify(mockNewList),
         );
@@ -123,7 +163,7 @@ describe('useWorldClock', () => {
       result.current.deleteWorldClockItem(mockList[1]);
 
       await waitFor(() => {
-        expect(syncStorage.setItem).toBeCalledWith(
+        expect(syncStorage.setItem).toHaveBeenCalledWith(
           StorageKeys.WORLD_CLOCK_LIST,
           JSON.stringify([mockList[0], mockList[2]]),
         );
@@ -137,7 +177,7 @@ describe('useWorldClock', () => {
       result.current.toogleEditMode();
 
       await waitFor(() => {
-        expect(syncStorage.setItem).toBeCalledWith(
+        expect(syncStorage.setItem).toHaveBeenCalledWith(
           StorageKeys.WORLD_CLOCK_EDIT_MODE,
           true.toString(),
         );
@@ -154,7 +194,7 @@ describe('useWorldClock', () => {
       result.current.toogleEditMode();
 
       await waitFor(() => {
-        expect(syncStorage.setItem).toBeCalledWith(
+        expect(syncStorage.setItem).toHaveBeenCalledWith(
           StorageKeys.WORLD_CLOCK_EDIT_MODE,
           false.toString(),
         );

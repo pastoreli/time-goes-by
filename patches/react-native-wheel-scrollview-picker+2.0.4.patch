@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native-wheel-scrollview-picker/index.tsx b/node_modules/react-native-wheel-scrollview-picker/index.tsx
+index 4d3e5db..669a1ef 100644
+--- a/node_modules/react-native-wheel-scrollview-picker/index.tsx
++++ b/node_modules/react-native-wheel-scrollview-picker/index.tsx
+@@ -40,6 +40,7 @@ const isViewStyle = (style: ViewProps["style"]): style is ViewStyle => {
+ };
+ 
+ export type ScrollPickerProps<ItemT extends string | number> = {
++  testID?: string;
+   style?: ViewProps["style"];
+   dataSource: Array<ItemT>;
+   selectedIndex?: number;
+@@ -241,7 +242,7 @@ const ScrollPicker: { <ItemT extends string | number>(props: ScrollPickerProps<I
+   const CustomScrollViewComponent = scrollViewComponent || ScrollView;
+ 
+   return (
+-    <View style={wrapperStyle}>
++    <View testID={propsState.testID} style={wrapperStyle}>
+       <View style={highlightStyle} />
+       <CustomScrollViewComponent
+         ref={sView}
