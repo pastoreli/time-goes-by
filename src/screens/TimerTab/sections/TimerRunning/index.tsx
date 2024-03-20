@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import dateUtils from '../../../../utils/date';
 import { ClockTimeType, integerToClockTime } from '../../../../utils/time';
 import { Timer } from '../../../../interfaces/timer';
+import { useTabBar } from '../../../../components/TabBar';
 
 export type TimerRunningProps = {
   timer: Timer;
@@ -26,6 +27,7 @@ const TimerRunning: React.FC<TimerRunningProps> = ({
   onStatusUpdate,
 }) => {
   const theme = useTheme();
+  const { tabBarDistance } = useTabBar();
 
   const screenWidth = Dimensions.get('screen').width;
 
@@ -100,7 +102,7 @@ const TimerRunning: React.FC<TimerRunningProps> = ({
   }, [timer]);
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, paddingBottom: tabBarDistance }}>
       <View style={styles.progressContainer}>
         <AnimatedCircularProgress
           size={screenWidth - 100}

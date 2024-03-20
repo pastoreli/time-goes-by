@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
@@ -31,7 +30,6 @@ const AlarmList: React.FC<AlarmListProps> = ({
 }) => {
   const theme = useTheme();
   const { tabBarDistance } = useTabBar();
-  const safeAreaInsets = useSafeAreaInsets();
 
   const RenderListItem: React.FC<RenderItemParams<Alarm>> = ({
     item,
@@ -90,7 +88,6 @@ const AlarmList: React.FC<AlarmListProps> = ({
       containerStyle={styles.fillHeight}
       contentContainerStyle={{
         ...styles.listContainer,
-        paddingTop: safeAreaInsets.top + 60,
         paddingBottom: tabBarDistance + 15,
       }}
       ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
@@ -108,6 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContainer: {
+    paddingTop: 20,
     paddingLeft: 10,
     paddingRight: 10,
   },

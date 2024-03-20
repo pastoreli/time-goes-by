@@ -99,7 +99,6 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
       containerStyle={styles.fillHeight}
       contentContainerStyle={{
         ...styles.listContainer,
-        paddingTop: safeAreaInsets.top + 60,
         paddingBottom: tabBarDistance + 15,
       }}
       ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContainer: {
+    paddingTop: 20,
     paddingLeft: 10,
     paddingRight: 10,
   },

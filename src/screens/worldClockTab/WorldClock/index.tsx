@@ -86,8 +86,7 @@ const WorldClock = () => {
     return (
       <View
         style={{
-          flex: 1,
-          paddingTop: safeAreaInsets.top + 60,
+          ...styles.emptyContainer,
           paddingBottom: tabBarDistance + 15,
         }}>
         <EmptyInfo
@@ -123,6 +122,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
+    flex: 1,
+  },
+  emptyContainer: {
     flex: 1,
   },
 });

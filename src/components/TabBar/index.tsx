@@ -9,7 +9,7 @@ import Text from '../Text';
 
 export type TabBarProps = BottomTabBarProps;
 
-const CONTAINER_HEIGHT = 70;
+const CONTAINER_HEIGHT = 55;
 
 type TabItemProps = {
   testID?: string;
@@ -24,19 +24,21 @@ const TabBar: React.FC<TabBarProps> = ({ navigation, state }) => {
   const colorScheme = useColorScheme();
   const safeAreaInsets = useSafeAreaInsets();
 
+  const tabHeight = CONTAINER_HEIGHT + safeAreaInsets.bottom;
+
   const TabItem: React.FC<TabItemProps> = useCallback(
     ({ testID, icon, text, active, onPress }) => {
       return (
         <ItemContainer testID={testID} onPress={onPress}>
           <Icon
             name={icon}
-            size={26}
+            size={30}
             color={active ? theme.primary : theme.darken2}
           />
           <Text
             size={10}
             color={active ? theme.primary : theme.darken2}
-            weight="medium"
+            weight="semibold"
             style={styles.itemText}>
             {text}
           </Text>
@@ -47,30 +49,28 @@ const TabBar: React.FC<TabBarProps> = ({ navigation, state }) => {
   );
 
   return (
-    <Container testID={testIds.TAB_BAR} bottom={safeAreaInsets.bottom}>
-      <ContainerShadow>
-        <ContainerShape>
-          <BlurView
-            style={styles.blurView}
-            blurType={colorScheme === 'dark' ? 'dark' : 'light'}
-            blurRadius={10}>
-            <Content>
-              {menus.map((item, index) => (
-                <TabItem
-                  key={item.text}
-                  testID={`${testIds.TAB_BAR_ITEM}-${index}${
-                    state.index === index ? '-active' : ''
-                  }`}
-                  icon={item.icon}
-                  text={item.text}
-                  active={state.index === index}
-                  onPress={() => navigation.navigate(item.screen)}
-                />
-              ))}
-            </Content>
-          </BlurView>
-        </ContainerShape>
-      </ContainerShadow>
+    <Container testID={testIds.TAB_BAR} height={tabHeight}>
+      <ContainerShape height={tabHeight}>
+        <BlurView
+          style={styles.blurView}
+          blurType={colorScheme === 'dark' ? 'dark' : 'light'}
+          blurRadius={10}>
+          <Content height={tabHeight}>
+            {menus.map((item, index) => (
+              <TabItem
+                key={item.text}
+                testID={`${testIds.TAB_BAR_ITEM}-${index}${
+                  state.index === index ? '-active' : ''
+                }`}
+                icon={item.icon}
+                text={item.text}
+                active={state.index === index}
+                onPress={() => navigation.navigate(item.screen)}
+              />
+            ))}
+          </Content>
+        </BlurView>
+      </ContainerShape>
     </Container>
   );
 };
@@ -117,41 +117,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const Container = styled.View<{ bottom: number }>`
+const Container = styled.View<{ height: number }>`
   position: absolute;
   width: 100%;
-  height: 70px;
-  bottom: ${({ bottom }) => `${bottom - 5}px`};
-  padding-left: 20px;
-  padding-right: 20px;
+  height: ${({ height }) => `${height}px`};
+  bottom: 0;
 `;
 
-const ContainerShadow = styled.View`
-  shadow-opacity: 0.75;
-  shadow-radius: 8px;
-  shadow-color: ${({ theme }) => theme.shadowColor};
-  shadow-offset: 0px 2px;
-`;
-
-const ContainerShape = styled.View`
+const ContainerShape = styled.View<{ height: number }>`
   flex-direction: row;
   align-items: center;
-  height: 70px;
-  border-radius: 50px;
-  overflow: hidden;
+  height: ${({ height }) => `${height}px`};
+  padding-top: 1px;
 `;
 
-const Content = styled.View`
+const Content = styled.View<{ height: number }>`
   flex-direction: row;
   justify-content: space-around;
-  height: 70px;
+  height: ${({ height }) => `${height}px`};
   background-color: ${({ theme }) => `${theme.card.color}B3`};
-  padding: 0 20px;
+  padding: 0 15px;
+  border-top-width: 1px;
+  border-top-color: ${({ theme }) => theme.dividerColor};
 `;
 
 const ItemContainer = styled.TouchableOpacity`
   align-items: center;
-  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
   flex: 1;
   height: 100%;
 `;

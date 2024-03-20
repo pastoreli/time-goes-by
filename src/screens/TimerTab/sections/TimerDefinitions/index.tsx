@@ -29,7 +29,7 @@ const TimerDefinitions: React.FC<TimerDefinitionsProps> = ({
   };
 
   return (
-    <View style={{ ...styles.container, paddingTop: safeAreaInsets.top + 40 }}>
+    <View style={styles.container}>
       <Clock
         itemsList={[hour24List, zerotoSixty, zerotoSixty]}
         values={timer}

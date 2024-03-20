@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styled, { useTheme } from 'styled-components/native';
+import { useTheme } from 'styled-components/native';
 import { Text, Button } from '../../../components';
 import { useAppState } from '@react-native-community/hooks';
 import { ClockTimeType, integerToClockTime } from '../../../utils/time';
@@ -105,7 +105,7 @@ const Stopwatch = () => {
   }, [appState, timer, lapList, isActive]);
 
   return (
-    <Container paddinTop={safeAreaInsets.top + 70}>
+    <View style={styles.container}>
       <View style={styles.timer}>
         <Text size={70} textAlign="center">
           {formatTimmer(timer)}
@@ -155,13 +155,18 @@ const Stopwatch = () => {
           </View>
         ))}
       </ScrollView>
-    </Container>
+    </View>
   );
 };
 
 export default Stopwatch;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingTop: 20,
+  },
   timer: {
     paddingLeft: 20,
     paddingRight: 20,
@@ -186,10 +191,3 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 });
-
-const Container = styled(View)<{ paddinTop: number }>`
-  background-color: ${({ theme }) => theme.containerBg};
-  flex: 1;
-  padding-top: ${({ paddinTop }) => `${paddinTop}px`};
-  justify-content: space-between;
-`;

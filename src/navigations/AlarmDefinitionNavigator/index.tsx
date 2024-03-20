@@ -43,6 +43,9 @@ const AlarmDefinitionNavigator = () => {
       screenOptions={{
         ...screenOptions,
         headerShown: true,
+        headerStyle: {
+          backgroundColor: theme.containerSecondaryBg,
+        },
         contentStyle: {
           backgroundColor: theme.containerSecondaryBg,
           paddingTop: 20,
