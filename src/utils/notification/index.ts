@@ -3,6 +3,8 @@ import notifee, {
   TriggerType,
   Notification,
   EventDetail,
+  AndroidImportance,
+  AlarmType,
 } from '@notifee/react-native';
 import { ClockTimeType, clockTimeToInteger } from '../time';
 import {
@@ -56,6 +58,9 @@ export const scheduleNotifications = async ({
   const channelId = await notifee.createChannel({
     id: id,
     name: id,
+    vibration: true,
+    sound: config.android?.sound?.replace('.mp3', ''),
+    importance: AndroidImportance.HIGH,
   });
 
   for (
@@ -69,7 +74,9 @@ export const scheduleNotifications = async ({
         ...config,
         android: {
           ...config.android,
+          sound: config.android?.sound?.replace('.mp3', ''),
           channelId,
+          importance: AndroidImportance.HIGH,
         },
         data: {
           ...config.data,
@@ -81,6 +88,9 @@ export const scheduleNotifications = async ({
         timestamp:
           trigger.date + clockTimeToInteger(i * 7, ClockTimeType.SECONDS),
         repeatFrequency: i > 0 ? RepeatFrequency.NONE : trigger.repeatFrequency,
+        alarmManager: {
+          type: AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
+        },
       },
     );
   }
