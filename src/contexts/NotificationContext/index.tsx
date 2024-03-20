@@ -48,9 +48,6 @@ export const NotificationProvider: React.FC<PropsWithChildren> = ({
           },
         ],
       },
-    ]);
-
-    await notifee.setNotificationCategories([
       {
         id: NotificationActionsGroup.ALARM,
         actions: [
