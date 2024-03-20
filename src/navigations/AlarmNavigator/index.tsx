@@ -8,6 +8,7 @@ import { AlarmNavigatorRoutes } from '../../../routes';
 // Screens
 import AlarmScreen from '../../screens/alarmTab/Alarm';
 import AlarmDefinitionNavigator from '../AlarmDefinitionNavigator';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<AlarmNavigatorRoutes>();
 
@@ -27,7 +28,7 @@ const AlarmNavigator: React.FC = () => {
         name="AlarmDefinitionModal"
         component={AlarmDefinitionNavigator}
         options={{
-          presentation: 'modal',
+          presentation: Platform.OS === 'ios' ? 'modal' : 'card',
           headerShown: false,
         }}
       />

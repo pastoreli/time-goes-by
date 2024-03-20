@@ -61,6 +61,6 @@ export default Repeat;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    paddingTop: 60,
+    paddingTop: 10,
   },
 });

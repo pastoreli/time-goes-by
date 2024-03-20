@@ -4,17 +4,20 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
-import { View, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
+import { FloatingAction, IActionProps } from 'react-native-floating-action';
 import { Text, EmptyInfo } from '../../../components';
 import { useWorldClock } from '../../../hooks';
-
-// Sections
 import { WorldClockList } from '../sections';
 import { WorldClockNavigatorRoutes } from '../../../../routes';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTabBar } from '../../../components/TabBar';
+
+enum fabIds {
+  BT_ADD = 'btn_add',
+  BT_EDIT = 'btn_edit',
+}
 
 type ScreenNavigationProp = NavigationProp<
   WorldClockNavigatorRoutes,
@@ -25,7 +28,6 @@ const WorldClock = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const theme = useTheme();
   const screenIsFocused = useIsFocused();
-  const safeAreaInsets = useSafeAreaInsets();
   const { tabBarDistance } = useTabBar();
   const {
     worldClockList,
@@ -35,6 +37,19 @@ const WorldClock = () => {
     toogleEditMode,
     refetchWorldClockList,
   } = useWorldClock();
+
+  const fabActions: IActionProps[] = [
+    {
+      icon: <Icon name="plus" size={25} color={theme.lighthen} />,
+      name: fabIds.BT_ADD,
+      color: theme.primary,
+    },
+    {
+      icon: <Icon name="pencil-outline" size={22} color={theme.lighthen} />,
+      name: fabIds.BT_EDIT,
+      color: theme.primary,
+    },
+  ];
 
   useEffect(() => {
     if (screenIsFocused) {
@@ -69,10 +84,24 @@ const WorldClock = () => {
     [theme.primary, toogleEditMode, worldClockEditMode],
   );
 
+  const handleFabActions = (id: fabIds) => {
+    if (id === fabIds.BT_ADD) {
+      handleGoToAdd();
+    } else {
+      toogleEditMode();
+    }
+  };
+
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: worldClockList.length > 0 ? LeftNavButton : undefined,
-      headerRight: worldClockList.length > 0 ? RightNavButton : undefined,
+      headerLeft:
+        worldClockList.length > 0 && Platform.OS === 'ios'
+          ? LeftNavButton
+          : undefined,
+      headerRight:
+        worldClockList.length > 0 && Platform.OS === 'ios'
+          ? RightNavButton
+          : undefined,
     });
   }, [LeftNavButton, RightNavButton, navigation, worldClockList]);
 
@@ -110,6 +139,29 @@ const WorldClock = () => {
             onDelete={deleteWorldClockItem}
           />
         </View>
+        {Platform.OS === 'android' && (
+          <FloatingAction
+            actions={worldClockEditMode ? undefined : fabActions}
+            color={theme.primary}
+            buttonSize={60}
+            distanceToEdge={{
+              vertical: tabBarDistance + 20,
+              horizontal: worldClockEditMode ? 0 : 30,
+            }}
+            position={worldClockEditMode ? 'center' : 'right'}
+            floatingIcon={
+              worldClockEditMode ? (
+                <Icon name="check" size={30} color="#FFFFFF" />
+              ) : undefined
+            }
+            onPressMain={() =>
+              worldClockEditMode ? toogleEditMode() : undefined
+            }
+            onPressItem={id =>
+              worldClockEditMode ? undefined : handleFabActions(id as fabIds)
+            }
+          />
+        )}
       </View>
     </>
   );

@@ -48,7 +48,6 @@ const AlarmDefinitionNavigator = () => {
         },
         contentStyle: {
           backgroundColor: theme.containerSecondaryBg,
-          paddingTop: 20,
         },
       }}>
       <Stack.Screen

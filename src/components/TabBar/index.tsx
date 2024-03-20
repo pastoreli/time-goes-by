@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
@@ -9,7 +9,7 @@ import Text from '../Text';
 
 export type TabBarProps = BottomTabBarProps;
 
-const CONTAINER_HEIGHT = 55;
+const CONTAINER_HEIGHT = 65;
 
 type TabItemProps = {
   testID?: string;
@@ -24,7 +24,13 @@ const TabBar: React.FC<TabBarProps> = ({ navigation, state }) => {
   const colorScheme = useColorScheme();
   const safeAreaInsets = useSafeAreaInsets();
 
-  const tabHeight = CONTAINER_HEIGHT + safeAreaInsets.bottom;
+  const tabHeight = useMemo(() => {
+    let value = CONTAINER_HEIGHT + safeAreaInsets.bottom;
+    if (safeAreaInsets.bottom > 0) {
+      value -= 10;
+    }
+    return value;
+  }, [safeAreaInsets]);
 
   const TabItem: React.FC<TabItemProps> = useCallback(
     ({ testID, icon, text, active, onPress }) => {
@@ -100,9 +106,16 @@ const menus = [
 
 export const useTabBar = () => {
   const safeAreaInsets = useSafeAreaInsets();
+  const tabHeight = useMemo(() => {
+    let value = CONTAINER_HEIGHT + safeAreaInsets.bottom;
+    if (safeAreaInsets.bottom > 0) {
+      value -= 10;
+    }
+    return value;
+  }, [safeAreaInsets]);
 
   return {
-    tabBarDistance: CONTAINER_HEIGHT + safeAreaInsets.bottom,
+    tabBarDistance: tabHeight,
   };
 };
 

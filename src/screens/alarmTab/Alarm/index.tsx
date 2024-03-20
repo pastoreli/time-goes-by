@@ -4,20 +4,24 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
-import { View, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
 import { Alarm as Alarmtype } from '../../../interfaces/alarm';
 import { useAlarm } from '../../../hooks';
 import { Text, EmptyInfo } from '../../../components';
-
-// Sections
 import { AlarmList } from '../sections';
 import { AlarmNavigatorRoutes } from '../../../../routes';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTabBar } from '../../../components/TabBar';
 import { useAppState } from '@react-native-community/hooks';
+import { FloatingAction, IActionProps } from 'react-native-floating-action';
+
+enum fabIds {
+  BT_ADD = 'btn_add',
+  BT_EDIT = 'btn_edit',
+}
 
 type ScreenNavigationProp = NavigationProp<AlarmNavigatorRoutes, 'Alarm'>;
 
@@ -38,6 +42,19 @@ const Alarm = () => {
     toogleActiveAlarm,
     refetchAlarmList,
   } = useAlarm();
+
+  const fabActions: IActionProps[] = [
+    {
+      icon: <Icon name="plus" size={25} color={theme.lighthen} />,
+      name: fabIds.BT_ADD,
+      color: theme.primary,
+    },
+    {
+      icon: <Icon name="pencil-outline" size={22} color={theme.lighthen} />,
+      name: fabIds.BT_EDIT,
+      color: theme.primary,
+    },
+  ];
 
   useEffect(() => {
     if (screenIsFocused) {
@@ -83,10 +100,24 @@ const Alarm = () => {
     [theme.primary, toogleEditMode, alarmEditMode],
   );
 
+  const handleFabActions = (id: fabIds) => {
+    if (id === fabIds.BT_ADD) {
+      handleGoToDefinitions();
+    } else {
+      toogleEditMode();
+    }
+  };
+
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: alarmList.length > 0 ? LeftNavButton : undefined,
-      headerRight: alarmList.length > 0 ? RightNavButton : undefined,
+      headerLeft:
+        alarmList.length > 0 && Platform.OS === 'ios'
+          ? LeftNavButton
+          : undefined,
+      headerRight:
+        alarmList.length > 0 && Platform.OS === 'ios'
+          ? RightNavButton
+          : undefined,
     });
   }, [RightNavButton, LeftNavButton, navigation, alarmList]);
 
@@ -131,6 +162,27 @@ const Alarm = () => {
           onSelect={handleGoToDefinitions}
         />
       </View>
+      {Platform.OS === 'android' && (
+        <FloatingAction
+          actions={alarmEditMode ? undefined : fabActions}
+          color={theme.primary}
+          buttonSize={60}
+          distanceToEdge={{
+            vertical: tabBarDistance + 20,
+            horizontal: alarmEditMode ? 0 : 30,
+          }}
+          position={alarmEditMode ? 'center' : 'right'}
+          floatingIcon={
+            alarmEditMode ? (
+              <Icon name="check" size={30} color="#FFFFFF" />
+            ) : undefined
+          }
+          onPressMain={() => (alarmEditMode ? toogleEditMode() : undefined)}
+          onPressItem={id =>
+            alarmEditMode ? undefined : handleFabActions(id as fabIds)
+          }
+        />
+      )}
     </View>
   );
 };

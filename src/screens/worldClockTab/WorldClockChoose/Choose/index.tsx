@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
-import styled from 'styled-components/native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled, { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text, SearchInput, BlockButton } from '../../../../components';
 import { searchHandler } from '../../../../utils/stringUtils';
@@ -24,6 +25,7 @@ const Choose: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const safeAreaInsets = useSafeAreaInsets();
   const { setWorldClockItem } = useWorldClock();
+  const theme = useTheme();
 
   const [search, setSearch] = useState('');
 
@@ -56,13 +58,18 @@ const Choose: React.FC = () => {
   return (
     <View testID={testIds.CONTAINER}>
       <Header>
-        <Text
-          size={16}
-          weight="semibold"
-          textAlign="center"
-          textMargin="0px 0 10px 0">
-          Escolha uma cidade
-        </Text>
+        <View style={styles.headerContent}>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Icon name="arrow-left" size={30} color={theme.primary} />
+          </Pressable>
+          <Text
+            size={16}
+            weight="semibold"
+            textAlign="center"
+            textMargin="0 0 4px 0">
+            Escolha uma cidade
+          </Text>
+        </View>
         <SearchInput value={search} onChangeText={setSearch} />
       </Header>
       <FlatList
@@ -89,6 +96,12 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginBottom: 10,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingBottom: 10,
   },
 });
 

@@ -8,6 +8,7 @@ import { WorldClockNavigatorRoutes } from '../../../routes';
 // Screens
 import WorldClockScreen from '../../screens/worldClockTab/WorldClock';
 import WorldClockChooseNavigator from '../WorldClockChooseNavigator';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<WorldClockNavigatorRoutes>();
 
@@ -29,7 +30,7 @@ const WorldClockNavigator: React.FC = () => {
         name="WorldClockChooseModal"
         component={WorldClockChooseNavigator}
         options={{
-          presentation: 'modal',
+          presentation: Platform.OS === 'ios' ? 'modal' : 'card',
           headerShown: false,
         }}
       />

@@ -62,7 +62,7 @@ const Definition = () => {
     <ScrollView
       style={{ ...styles.container }}
       contentContainerStyle={{
-        paddingBottom: safeAreaInsets.bottom + 10,
+        paddingBottom: safeAreaInsets.bottom + 30,
       }}>
       <StatusBar backgroundColor="#C1C1C1" translucent style="light" />
       <Clock

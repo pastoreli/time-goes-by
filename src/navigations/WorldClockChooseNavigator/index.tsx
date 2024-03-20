@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components/native';
 import { WorldClockChooseRoutes } from '../../../routes';
 import { ChooseScreen } from '../../screens/worldClockTab/WorldClockChoose';
 import { useNavigatorUtils } from '../../hooks';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<WorldClockChooseRoutes>();
 
@@ -19,7 +20,7 @@ const AlarmDefinitionNavigator = () => {
         headerShown: true,
         contentStyle: {
           backgroundColor: theme.containerSecondaryBg,
-          paddingTop: 20,
+          paddingTop: Platform.OS === 'ios' ? 30 : 50,
         },
       }}>
       <Stack.Screen
