@@ -20,6 +20,8 @@ export enum RepeatNotificatonType {
   ALL = 3,
 }
 
+const REPEAT_NOTIFICATION_NUMBER = 50;
+
 export type scheduleNotificationTriggerProps = {
   date: number;
   repeat?: RepeatNotificatonType;
@@ -46,7 +48,10 @@ export const scheduleNotifications = async ({
   trigger,
 }: scheduleNotificationProps) => {
   const repeatType = trigger.repeat || RepeatNotificatonType.ONLY_ONE;
-  const repeatCount = repeatType === RepeatNotificatonType.ONLY_ONE ? 1 : 11;
+  const repeatCount =
+    repeatType === RepeatNotificatonType.ONLY_ONE
+      ? 1
+      : REPEAT_NOTIFICATION_NUMBER;
 
   const channelId = await notifee.createChannel({
     id: id,
@@ -73,7 +78,8 @@ export const scheduleNotifications = async ({
       },
       {
         type: TriggerType.TIMESTAMP,
-        timestamp: trigger.date + i * 7000,
+        timestamp:
+          trigger.date + clockTimeToInteger(i * 7, ClockTimeType.SECONDS),
         repeatFrequency: i > 0 ? RepeatFrequency.NONE : trigger.repeatFrequency,
       },
     );
@@ -86,7 +92,7 @@ export const cancelScheduleNotifications = ({
 }: cancelScheduleNotificationsProps) => {
   const notificationsId: string[] = [];
   if (repeat !== RepeatNotificatonType.ONLY_ONE) {
-    for (let i = 1; i < 11; i++) {
+    for (let i = 1; i < REPEAT_NOTIFICATION_NUMBER; i++) {
       notificationsId.push(`${id}-${i}`);
     }
   }
@@ -127,9 +133,9 @@ const handleCancelAlarmNotifications = async (alarmId: string) => {
   const alarmItem = await getAlarmStorage(alarmId);
   if (alarmItem) {
     alarmItem.active = false;
-    alarmItem.notificationsId.forEach(item => {
+    alarmItem.notifications.forEach(item => {
       cancelScheduleNotifications({
-        id: item,
+        id: item.id,
         repeat: RepeatNotificatonType.ALL,
       });
     });
@@ -144,9 +150,25 @@ const handleAlarmNotification = async (
   if (notification.data) {
     const data = notification.data;
     const alarmData = data.alarm as Alarm;
-    let newDateTrigger = data.dateTrigger as number;
+    let currentNotification = alarmData.notifications.find(
+      item => item.id === data.id,
+    );
+    if (!currentNotification) {
+      throw new Error('There is something wrong with notification data body.');
+    }
+
     if (!snooze) {
-      newDateTrigger += clockTimeToInteger(1, ClockTimeType.WEEKS);
+      currentNotification.triggerDate += clockTimeToInteger(
+        1,
+        ClockTimeType.WEEKS,
+      );
+      alarmData.notifications[currentNotification.position] =
+        currentNotification;
+      const newPosition =
+        currentNotification.position + 1 < alarmData.notifications.length
+          ? currentNotification.position + 1
+          : 0;
+      currentNotification = alarmData.notifications[newPosition];
     }
     if (alarmData.repeat.length > 0 || snooze) {
       cancelScheduleNotifications({
@@ -155,24 +177,26 @@ const handleAlarmNotification = async (
         repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
       });
       scheduleNotifications({
-        id: data.id as string,
+        id: currentNotification.id,
         config: getAlarmNotificationBody({
-          id: data.id as string,
+          id: currentNotification.id,
           alarm: alarmData,
-          dateTrigger: newDateTrigger,
+          dateTrigger: currentNotification.triggerDate,
         }),
         trigger: {
           date: snooze
             ? dateUtils().valueOf() +
-              clockTimeToInteger(10, ClockTimeType.MINUTES)
-            : newDateTrigger,
+              clockTimeToInteger(1, ClockTimeType.MINUTES)
+            : currentNotification.triggerDate,
           repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
         },
       });
-      dysplayNotification(
-        'Time Goes By',
-        'Seu alarme irá tocar novamente em 10 minutos!',
-      );
+      if (snooze) {
+        dysplayNotification(
+          'Time Goes By',
+          'Seu alarme irá tocar novamente em 10 minutos!',
+        );
+      }
     } else {
       await handleCancelAlarmNotifications(alarmData.id);
     }

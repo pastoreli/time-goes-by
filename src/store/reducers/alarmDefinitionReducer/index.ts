@@ -29,7 +29,7 @@ const alarmDefinitionReducer = createSlice({
         repeat: [],
         snooze: true,
         active: true,
-        notificationsId: [],
+        notifications: [],
       };
 
       state.isUpdate = !!action.payload;

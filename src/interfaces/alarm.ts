@@ -5,6 +5,12 @@ export type AlarmSound = {
   file: string;
 };
 
+export type AlarmNotification = {
+  id: string;
+  position: number;
+  triggerDate: number;
+};
+
 export type Alarm = {
   id: string;
   name: string;
@@ -14,5 +20,5 @@ export type Alarm = {
   sound: AlarmSound;
   snooze: boolean;
   active: boolean;
-  notificationsId: string[];
+  notifications: AlarmNotification[];
 };

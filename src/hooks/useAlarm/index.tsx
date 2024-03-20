@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import syncStorage from '@react-native-async-storage/async-storage';
-import { Alarm } from '../../interfaces/alarm';
+import { Alarm, AlarmNotification } from '../../interfaces/alarm';
 import { NotificationId, StorageKeys } from '../../consts';
 import dateUtils from '../../utils/date';
 import { RepeatFrequency } from '@notifee/react-native';
@@ -24,17 +24,16 @@ const useAlarm = () => {
     setList(updatedList);
   };
 
-  const cancelNotifications = (notificationsId: string[]) => {
-    notificationsId.forEach(item => {
+  const cancelNotifications = (notifications: AlarmNotification[]) => {
+    notifications.forEach(item => {
       cancelScheduleNotifications({
-        id: item,
+        id: item.id,
         repeat: RepeatNotificatonType.ALL,
       });
     });
   };
 
-  const defineAlarmNotifications = (alarm: Alarm) => {
-    const notificationsId: string[] = [];
+  const getAlarmNotifications = (alarm: Alarm) => {
     const now = dateUtils();
     let closestAlarmDateTime = dateUtils()
       .hour(alarm.hour)
@@ -45,86 +44,93 @@ const useAlarm = () => {
       closestAlarmDateTime = closestAlarmDateTime.add(1, 'days');
     }
 
-    if (alarm.repeat.length > 0) {
-      const notificationDates = Array(7)
-        .fill(closestAlarmDateTime.day())
-        .reduce((result: dateUtils.Dayjs[], item, index) => {
-          const weekNumber = item + index > 6 ? index - 7 + item : item + index;
-          if (alarm.repeat.includes(weekNumber)) {
-            const itemDate = closestAlarmDateTime.add(index, 'days');
-            result.push(itemDate);
-          }
-          return result;
-        }, []);
-      notificationDates.forEach(item => {
-        const weekName = item.format('ddd').toLowerCase();
-        const notificationId = `${NotificationId.ALARM}-${alarm.id}-${weekName}`;
-        notificationsId.push(notificationId);
-        scheduleNotifications({
-          id: notificationId,
-          config: getAlarmNotificationBody({
+    if (alarm.repeat.length === 0) {
+      return [
+        {
+          id: `${NotificationId.ALARM}-${alarm.id}`,
+          position: 0,
+          triggerDate: closestAlarmDateTime.valueOf(),
+        },
+      ];
+    }
+
+    return Array(7)
+      .fill(closestAlarmDateTime.day())
+      .reduce((result: AlarmNotification[], item, index) => {
+        const weekNumber = item + index > 6 ? index - 7 + item : item + index;
+        if (alarm.repeat.includes(weekNumber)) {
+          const itemDate = closestAlarmDateTime.add(index, 'days');
+          const weekName = itemDate.format('ddd').toLowerCase();
+          const notificationId = `${NotificationId.ALARM}-${alarm.id}-${weekName}`;
+          result.push({
             id: notificationId,
-            dateTrigger: item.valueOf(),
-            alarm,
-          }),
-          trigger: {
-            date: item.valueOf(),
-            repeatFrequency: RepeatFrequency.WEEKLY,
-            repeat: RepeatNotificatonType.ALL,
-          },
-        });
-      });
-    } else {
-      const notificationId = `${NotificationId.ALARM}-${alarm.id}`;
-      notificationsId.push(notificationId);
+            position: index,
+            triggerDate: itemDate.valueOf(),
+          });
+        }
+        return result;
+      }, []);
+  };
+
+  const defineAlarmNotifications = (alarm: Alarm) => {
+    alarm.notifications.forEach(item => {
       scheduleNotifications({
-        id: notificationId,
+        id: item.id,
         config: getAlarmNotificationBody({
-          id: notificationId,
-          dateTrigger: closestAlarmDateTime.valueOf(),
+          id: item.id,
+          dateTrigger: item.triggerDate,
           alarm,
         }),
         trigger: {
-          date: closestAlarmDateTime.valueOf(),
-          repeat: RepeatNotificatonType.ALL,
+          date: item.triggerDate,
+          repeatFrequency:
+            alarm.repeat.length > 0
+              ? RepeatFrequency.WEEKLY
+              : RepeatFrequency.NONE,
+          repeat:
+            item.position > 0
+              ? RepeatNotificatonType.ONLY_ONE
+              : RepeatNotificatonType.ALL,
         },
       });
-    }
-
-    return notificationsId;
+    });
   };
 
   const setAlarmItem = (alarm: Alarm) => {
     const alarmCopy = JSON.parse(JSON.stringify(alarm)) as Alarm;
-    alarmCopy.notificationsId = defineAlarmNotifications(alarm);
+    // console.log('test: ', getAlarmNotifications(alarm));
+    alarmCopy.notifications = getAlarmNotifications(alarm);
+    defineAlarmNotifications(alarmCopy);
     const newList = [...list, alarmCopy];
     handleUpdateList(newList);
   };
 
   const toogleActiveAlarm = (alarm: Alarm) => {
-    let notificationsId = alarm.notificationsId;
-    if (alarm.active) {
-      cancelNotifications(alarm.notificationsId);
+    const alarmCopy = JSON.parse(JSON.stringify(alarm)) as Alarm;
+    if (alarmCopy.active) {
+      cancelNotifications(alarmCopy.notifications);
+      alarmCopy.active = false;
     } else {
-      notificationsId = defineAlarmNotifications(alarm);
+      alarmCopy.notifications = getAlarmNotifications(alarmCopy);
+      alarmCopy.active = true;
     }
+    defineAlarmNotifications(alarmCopy);
     const newList = list.map(item => {
-      const itemCopy = { ...item };
-      if (item.id === alarm.id) {
-        itemCopy.active = !itemCopy.active;
-        itemCopy.notificationsId = notificationsId;
+      let itemCopy = { ...item };
+      if (item.id === alarmCopy.id) {
+        itemCopy = alarmCopy;
       }
-
       return itemCopy;
     });
     handleUpdateList(newList);
   };
 
   const updateAlarm = (alarm: Alarm) => {
-    cancelNotifications(alarm.notificationsId);
+    cancelNotifications(alarm.notifications);
     const alarmCopy: Alarm = JSON.parse(JSON.stringify(alarm));
-    alarmCopy.notificationsId = defineAlarmNotifications(alarmCopy);
     alarmCopy.active = true;
+    alarmCopy.notifications = getAlarmNotifications(alarmCopy);
+    defineAlarmNotifications(alarmCopy);
     const newList = list.map(item =>
       item.id === alarmCopy.id ? alarmCopy : item,
     );
@@ -132,7 +138,7 @@ const useAlarm = () => {
   };
 
   const deleteAlarmItem = (alarm: Alarm) => {
-    cancelNotifications(alarm.notificationsId);
+    cancelNotifications(alarm.notifications);
     const newList = list.filter(item => item.id !== alarm.id);
     handleUpdateList(newList);
   };

@@ -17,6 +17,7 @@ import { AlarmNavigatorRoutes } from '../../../../routes';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTabBar } from '../../../components/TabBar';
+import { useAppState } from '@react-native-community/hooks';
 
 type ScreenNavigationProp = NavigationProp<AlarmNavigatorRoutes, 'Alarm'>;
 
@@ -27,6 +28,7 @@ const Alarm = () => {
   const screenIsFocused = useIsFocused();
   const safeAreaInsets = useSafeAreaInsets();
   const { tabBarDistance } = useTabBar();
+  const appState = useAppState();
   const {
     alarmEditMode,
     toogleEditMode,
@@ -93,6 +95,12 @@ const Alarm = () => {
       toogleEditMode();
     }
   }, [alarmList, alarmEditMode]);
+
+  useEffect(() => {
+    if (appState === 'active') {
+      refetchAlarmList();
+    }
+  }, [appState]);
 
   if (alarmList.length === 0) {
     return (

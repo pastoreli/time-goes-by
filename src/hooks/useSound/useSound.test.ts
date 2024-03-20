@@ -29,7 +29,7 @@ describe.skip('useSound', () => {
       SoundHandle.MAIN_BUNDLE,
       expect.any(Function),
     );
-    
+
     // await waitFor(() => {
     //   expect(SoundHandle.prototype.play).toHaveBeenCalled();
     // });
