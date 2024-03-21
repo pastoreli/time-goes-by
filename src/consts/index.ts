@@ -31,3 +31,9 @@ export enum NotificationActions {
   STOP = 'stopAction',
   SNOOZE = 'snoozeAction',
 }
+
+export enum AndroidChanels {
+  ALARMS = 'Alarms',
+  TIMERS = 'Timers',
+  SNOOZE = 'Snooe',
+}

@@ -1,7 +1,9 @@
 import { Alarm } from './src/interfaces/alarm';
 
 export type RootStack = {
-  BottomNaviagtor: undefined;
+  BottomNaviagtor: {
+    initialScreen?: keyof BottomNavigatorRoutes;
+  };
 };
 
 export type BottomNavigatorRoutes = {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import syncStorage from '@react-native-async-storage/async-storage';
 import { Alarm, AlarmNotification } from '../../interfaces/alarm';
-import { NotificationId, StorageKeys } from '../../consts';
+import { AndroidChanels, NotificationId, StorageKeys } from '../../consts';
 import dateUtils from '../../utils/date';
 import { RepeatFrequency } from '@notifee/react-native';
 import {
@@ -76,6 +76,7 @@ const useAlarm = () => {
     alarm.notifications.forEach(item => {
       scheduleNotifications({
         id: item.id,
+        chanelId: AndroidChanels.ALARMS,
         config: getAlarmNotificationBody({
           id: item.id,
           dateTrigger: item.triggerDate,
@@ -98,7 +99,6 @@ const useAlarm = () => {
 
   const setAlarmItem = (alarm: Alarm) => {
     const alarmCopy = JSON.parse(JSON.stringify(alarm)) as Alarm;
-    // console.log('test: ', getAlarmNotifications(alarm));
     alarmCopy.notifications = getAlarmNotifications(alarm);
     defineAlarmNotifications(alarmCopy);
     const newList = [...list, alarmCopy];

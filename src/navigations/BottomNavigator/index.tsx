@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Interfaces
-import { BottomNavigatorRoutes } from '../../../routes';
+import { BottomNavigatorRoutes, RootStack } from '../../../routes';
 
 // Components
 import { TabBar } from '../../components';
@@ -12,13 +12,20 @@ import WorldClockNavigator from '../WorldClockNavigator';
 import AlarmNavigator from '../AlarmNavigator';
 import StopwatchNavigator from '../StopwatchNavigator';
 import TimerNavigator from '../TimerNavigator';
+import { RouteProp, useRoute } from '@react-navigation/native';
+
+type ScreenRouteProp = RouteProp<RootStack, 'BottomNaviagtor'>;
 
 const Tab = createBottomTabNavigator<BottomNavigatorRoutes>();
 
 const BottomNavigator: React.FC = () => {
+  const route = useRoute<ScreenRouteProp>();
+
+  const { initialScreen } = route.params;
+
   return (
     <Tab.Navigator
-      initialRouteName="WorldClockTab"
+      initialRouteName={initialScreen ? initialScreen : 'WorldClockTab'}
       screenOptions={{ headerShown: false }}
       tabBar={props => <TabBar {...props} />}>
       <Tab.Screen name="WorldClockTab" component={WorldClockNavigator} />

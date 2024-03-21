@@ -12,7 +12,11 @@ import {
   getAlarmStorage,
   updateAlarm,
 } from '../alarm';
-import { NotificationActions, NotificationId } from '../../consts';
+import {
+  AndroidChanels,
+  NotificationActions,
+  NotificationId,
+} from '../../consts';
 import dateUtils from '../date';
 import { Alarm } from '../../interfaces/alarm';
 
@@ -34,6 +38,7 @@ export type scheduleNotificationConfigProps = Omit<Notification, 'id'>;
 
 export type scheduleNotificationProps = {
   id: string;
+  chanelId: AndroidChanels;
   config: scheduleNotificationConfigProps;
   trigger: scheduleNotificationTriggerProps;
 };
@@ -46,6 +51,7 @@ export type cancelScheduleNotificationsProps = {
 
 export const scheduleNotifications = async ({
   id,
+  chanelId,
   config,
   trigger,
 }: scheduleNotificationProps) => {
@@ -56,8 +62,8 @@ export const scheduleNotifications = async ({
       : REPEAT_NOTIFICATION_NUMBER;
 
   const channelId = await notifee.createChannel({
-    id: id,
-    name: id,
+    id: chanelId,
+    name: chanelId,
     vibration: true,
     sound: config.android?.sound?.replace('.mp3', ''),
     importance: AndroidImportance.HIGH,
@@ -115,16 +121,19 @@ export const cancelScheduleNotifications = ({
 export const dysplayNotification = async (
   title: string,
   description: string,
+  chanel: AndroidChanels,
 ) => {
   const channelId = await notifee.createChannel({
-    id: 'display',
-    name: 'display',
+    id: chanel,
+    name: chanel,
+    importance: AndroidImportance.HIGH,
   });
   await notifee.displayNotification({
     title: title,
     body: description,
     android: {
       channelId,
+      importance: AndroidImportance.HIGH,
     },
   });
 };
@@ -188,6 +197,7 @@ const handleAlarmNotification = async (
       });
       scheduleNotifications({
         id: currentNotification.id,
+        chanelId: AndroidChanels.ALARMS,
         config: getAlarmNotificationBody({
           id: currentNotification.id,
           alarm: alarmData,
@@ -205,6 +215,7 @@ const handleAlarmNotification = async (
         dysplayNotification(
           'Time Goes By',
           'Seu alarme irá tocar novamente em 10 minutos!',
+          AndroidChanels.SNOOZE,
         );
       }
     } else {

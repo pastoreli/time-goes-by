@@ -5,13 +5,13 @@ import App from './App';
 import { NotificationActions } from './src/consts';
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
-  if (type === EventType.ACTION_PRESS) {
-    if (
-      detail.pressAction?.id === NotificationActions.STOP ||
-      detail.pressAction?.id === NotificationActions.SNOOZE
-    ) {
-      await handleNotificationInteraction(detail);
-    }
+  if (
+    type === EventType.PRESS ||
+    (type === EventType.ACTION_PRESS &&
+      (detail.pressAction?.id === NotificationActions.STOP ||
+        detail.pressAction?.id === NotificationActions.SNOOZE))
+  ) {
+    await handleNotificationInteraction(detail);
   }
 });
 

@@ -5,12 +5,17 @@ import { ClockTimeType, clockTimeToInteger } from '../../../utils/time';
 import { useTimer } from '../../../hooks';
 import { useAppState } from '@react-native-community/hooks';
 import { Timer as TimerType } from '../../../interfaces/timer';
-import { NotificationActionsGroup, NotificationId } from '../../../consts';
+import {
+  AndroidChanels,
+  NotificationActionsGroup,
+  NotificationId,
+} from '../../../consts';
 import {
   RepeatNotificatonType,
   cancelScheduleNotifications,
   scheduleNotifications,
 } from '../../../utils/notification';
+import { androidSimpleStopActions } from '../../../utils/lists/notifications';
 
 const Timer = () => {
   const {
@@ -30,6 +35,7 @@ const Timer = () => {
     cancelNotification();
     scheduleNotifications({
       id: NotificationId.TIMER,
+      chanelId: AndroidChanels.TIMERS,
       config: {
         title: 'Time Goes By',
         body: 'Temporizador',
@@ -41,6 +47,10 @@ const Timer = () => {
         },
         android: {
           sound: 'alarm_1.mp3',
+          pressAction: {
+            id: 'default',
+          },
+          actions: androidSimpleStopActions,
         },
         data: {
           id: NotificationId.TIMER,

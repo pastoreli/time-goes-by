@@ -1,11 +1,16 @@
 import syncStorage from '@react-native-async-storage/async-storage';
 import {
+  NotificationActions,
   NotificationActionsGroup,
   NotificationId,
   StorageKeys,
 } from '../../consts';
 import { scheduleNotificationConfigProps } from '../notification';
 import { Alarm } from '../../interfaces/alarm';
+import {
+  androidAlarmActions,
+  androidSimpleStopActions,
+} from '../lists/notifications';
 
 export const updateAlarmStorageList = async (updatedList: Alarm[]) => {
   await syncStorage.setItem(
@@ -56,6 +61,12 @@ export const getAlarmNotificationBody = (data: {
     },
     android: {
       sound: data.alarm.sound.file,
+      pressAction: {
+        id: 'default',
+      },
+      actions: data.alarm.snooze
+        ? androidAlarmActions
+        : androidSimpleStopActions,
     },
     data: {
       id: data.id,
