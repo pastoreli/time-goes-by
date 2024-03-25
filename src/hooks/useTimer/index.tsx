@@ -8,8 +8,8 @@ const useTimer = () => {
   const [curentTimer, setCurrentTimer] = useState<Timer>();
 
   const handleSetTimer = (timer: number, pause = false) => {
-    const today = dateUtils();
-    const endDate = today.add(timer, 'milliseconds');
+    const today = new Date();
+    const endDate = dateUtils.addMilliseconds(today, timer);
     const timerBody: Timer = {
       endDate: endDate.valueOf(),
       paused: pause,
@@ -31,7 +31,7 @@ const useTimer = () => {
         setCurrentTimer(parsedTimer);
         return parsedTimer;
       } else {
-        const now = dateUtils();
+        const now = new Date();
 
         const lastTimer = parsedTimer.endDate - now.valueOf();
         const timer = {

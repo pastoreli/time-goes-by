@@ -7,7 +7,7 @@ import { AlarmDefinitionRoutes } from '../../../../../routes';
 import { RootState } from '../../../../store';
 import { updateAlarm } from '../../../../store/reducers/alarmDefinitionReducer';
 import { alarmSounds } from '../../../../utils/lists/sound';
-import { AlarmSound } from '../../../../interfaces/alarm';
+import { Sound } from '../../../../interfaces/sound';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -24,7 +24,7 @@ const Ringtones = () => {
   const dispatch = useDispatch();
   const safeAreaInsets = useSafeAreaInsets();
 
-  const handleRepeatChange = (value: AlarmSound) => {
+  const handleRepeatChange = (value: Sound) => {
     if (currentAlarm) {
       dispatch(updateAlarm({ ...currentAlarm, sound: value }));
     }

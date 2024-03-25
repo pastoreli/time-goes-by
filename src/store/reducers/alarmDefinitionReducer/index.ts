@@ -19,11 +19,13 @@ const alarmDefinitionReducer = createSlice({
   initialState,
   reducers: {
     initAlarm: (state, action: PayloadAction<Alarm | undefined>) => {
-      const today = dateUtils();
+      const today = new Date();
       state.alarm = action.payload || {
         id: uuid.v4().toString(),
-        hour: hour24List.findIndex(item => item === today.hour()),
-        minute: zerotoSixty.findIndex(item => item === today.minute()),
+        hour: hour24List.findIndex(item => item === dateUtils.getHours(today)),
+        minute: zerotoSixty.findIndex(
+          item => item === dateUtils.getMinutes(today),
+        ),
         name: '',
         sound: alarmSounds[0],
         repeat: [],

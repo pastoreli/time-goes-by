@@ -1,13 +1,13 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
-import dayOfYear from 'dayjs/plugin/dayOfYear';
-import 'dayjs/locale/pt-br';
+import * as dateFns from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import { formatInTimeZone, utcToZonedTime } from 'date-fns-tz';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.extend(dayOfYear);
-dayjs.locale('pt-br');
-dayjs.tz.setDefault(Intl.DateTimeFormat().resolvedOptions().timeZone);
+dateFns.setDefaultOptions({
+  locale: ptBR,
+});
 
-export default dayjs;
+export default {
+  ...dateFns,
+  formatInTimeZone,
+  utcToZonedTime,
+};

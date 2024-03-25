@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { trigger, HapticFeedbackTypes } from 'react-native-haptic-feedback';
 import { Text, Card } from '../../../../components';
 import styled, { useTheme } from 'styled-components/native';
@@ -28,13 +27,12 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
 }) => {
   const theme = useTheme();
   const { tabBarDistance } = useTabBar();
-  const safeAreaInsets = useSafeAreaInsets();
 
-  const [date, setDate] = useState(dateUtil());
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDate(dateUtil());
+      setDate(new Date());
     }, 1000);
 
     return () => clearInterval(interval);
@@ -42,9 +40,11 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
 
   const getDayDiffText = (timeZone: string) => {
     const dayLabels = ['Ontem', 'Hoje', 'Amanhã'];
-    const dayDiff = date.tz(timeZone).dayOfYear() - date.dayOfYear();
+    const timezoneDate = dateUtil.utcToZonedTime(date.valueOf(), timeZone);
+    const dayDiff =
+      dateUtil.getDayOfYear(timezoneDate) - dateUtil.getDayOfYear(date);
 
-    let hours = date.diff(date.tz(timeZone, true), 'hours').toString();
+    let hours = dateUtil.differenceInHours(timezoneDate, date).toString();
 
     if (parseInt(hours, 10) >= 0) {
       hours = `+${hours}`;
@@ -84,7 +84,10 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
             <Icon name="menu" size={30} color={theme.lighthen2} />
           </TouchableOpacity>
         ) : (
-          <Text size={56}>{date.tz(item.timeZone).format('H:mm')}</Text>
+          // <Text size={56}>{date.tz(item.timeZone).format('H:mm')}</Text>
+          <Text size={56}>
+            {dateUtil.formatInTimeZone(date.valueOf(), item.timeZone, 'H:mm')}
+          </Text>
         )}
       </View>
     </Card>

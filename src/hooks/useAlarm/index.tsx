@@ -34,14 +34,16 @@ const useAlarm = () => {
   };
 
   const getAlarmNotifications = (alarm: Alarm) => {
-    const now = dateUtils();
-    let closestAlarmDateTime = dateUtils()
-      .hour(alarm.hour)
-      .minute(alarm.minute)
-      .second(0);
+    const now = new Date();
+    let closestAlarmDateTime = dateUtils.set(new Date(), {
+      hours: alarm.hour,
+      minutes: alarm.minute,
+      seconds: 0,
+    });
 
     if (now.valueOf() > closestAlarmDateTime.valueOf()) {
-      closestAlarmDateTime = closestAlarmDateTime.add(1, 'days');
+      // closestAlarmDateTime = closestAlarmDateTime.add(1, 'days');
+      closestAlarmDateTime = dateUtils.addDays(closestAlarmDateTime, 1);
     }
 
     if (alarm.repeat.length === 0) {
@@ -55,12 +57,14 @@ const useAlarm = () => {
     }
 
     return Array(7)
-      .fill(closestAlarmDateTime.day())
+      .fill(dateUtils.getDay(closestAlarmDateTime))
       .reduce((result: AlarmNotification[], item, index) => {
         const weekNumber = item + index > 6 ? index - 7 + item : item + index;
         if (alarm.repeat.includes(weekNumber)) {
-          const itemDate = closestAlarmDateTime.add(index, 'days');
-          const weekName = itemDate.format('ddd').toLowerCase();
+          const itemDate = dateUtils.addDays(closestAlarmDateTime, index);
+          const weekName = dateUtils
+            .format(itemDate, 'ddd')
+            .toLocaleLowerCase();
           const notificationId = `${NotificationId.ALARM}-${alarm.id}-${weekName}`;
           result.push({
             id: notificationId,

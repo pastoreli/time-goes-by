@@ -1,11 +1,10 @@
 import syncStorage from '@react-native-async-storage/async-storage';
 import { StorageKeys } from '../../consts';
 import { Stopwatch, StopwatchNormalized } from '../../interfaces/stopwatch';
-import dateUtils from '../../utils/date';
 
 const useStopwatch = () => {
   const handleSetStopwarch = (stopwatch: StopwatchNormalized) => {
-    const now = dateUtils();
+    const now = new Date();
     const stopwatchBody: Stopwatch = {
       ...stopwatch,
       inactiveDate: now.valueOf(),
@@ -17,7 +16,7 @@ const useStopwatch = () => {
     const storageStopwatch = await syncStorage.getItem(StorageKeys.STOPWATCH);
     if (storageStopwatch) {
       const stopWatch = JSON.parse(storageStopwatch) as Stopwatch;
-      const now = dateUtils();
+      const now = new Date();
       const elapsedTime = now.valueOf() - stopWatch.inactiveDate;
       stopWatch.timer += stopWatch.paused ? 0 : elapsedTime;
       stopWatch.laps[0] += stopWatch.paused ? 0 : elapsedTime;

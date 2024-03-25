@@ -1,9 +1,5 @@
 import { WeekDay } from '../consts';
-
-export type AlarmSound = {
-  name: string;
-  file: string;
-};
+import { Sound } from './sound';
 
 export type AlarmNotification = {
   id: string;
@@ -11,14 +7,14 @@ export type AlarmNotification = {
   triggerDate: number;
 };
 
-export type Alarm = {
+export interface Alarm {
   id: string;
   name: string;
   hour: number;
   minute: number;
   repeat: WeekDay[];
-  sound: AlarmSound;
+  sound: Sound;
   snooze: boolean;
   active: boolean;
   notifications: AlarmNotification[];
-};
+}

@@ -17,7 +17,6 @@ import {
   NotificationActions,
   NotificationId,
 } from '../../consts';
-import dateUtils from '../date';
 import { Alarm } from '../../interfaces/alarm';
 
 export enum RepeatNotificatonType {
@@ -205,8 +204,8 @@ const handleAlarmNotification = async (
         }),
         trigger: {
           date: snooze
-            ? dateUtils().valueOf() +
-              clockTimeToInteger(1, ClockTimeType.MINUTES)
+            ? new Date().valueOf() +
+              clockTimeToInteger(10, ClockTimeType.MINUTES)
             : currentNotification.triggerDate,
           repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
         },

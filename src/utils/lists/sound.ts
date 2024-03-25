@@ -1,6 +1,6 @@
-import { AlarmSound } from '../../interfaces/alarm';
+import { Sound } from '../../interfaces/sound';
 
-export const alarmSounds: AlarmSound[] = [
+export const alarmSounds: Sound[] = [
   {
     name: 'Som 1',
     file: 'alarm_1.mp3',

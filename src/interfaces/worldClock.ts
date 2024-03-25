@@ -1,4 +1,4 @@
-export type WorldClock = {
+export interface WorldClock {
   timeZone: string;
   text: string;
-};
+}

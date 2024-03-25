@@ -10,6 +10,7 @@ import { useWorldClock } from '../../../../hooks';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorldClockChooseRoutes } from '../../../../../routes';
 import { WorldClock } from '../../../../interfaces/worldClock';
+import { StatusBar } from 'expo-status-bar';
 
 type ScreenNavigationProp = NavigationProp<
   WorldClockChooseRoutes,
@@ -57,6 +58,7 @@ const Choose: React.FC = () => {
 
   return (
     <View testID={testIds.CONTAINER}>
+      <StatusBar backgroundColor="#C1C1C1" translucent style="light" />
       <Header>
         <View style={styles.headerContent}>
           <Pressable onPress={() => navigation.goBack()}>

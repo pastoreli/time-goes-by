@@ -49,7 +49,7 @@ export const getAlarmNotificationBody = (data: {
 }): scheduleNotificationConfigProps => {
   return {
     title: 'Time Goes By',
-    body: 'Alarme',
+    body: `Alarme: ${data.alarm.name}`,
     ios: {
       sound: data.alarm.sound.file,
       interruptionLevel: 'critical',

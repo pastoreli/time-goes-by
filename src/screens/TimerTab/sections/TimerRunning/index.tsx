@@ -77,12 +77,12 @@ const TimerRunning: React.FC<TimerRunningProps> = ({
 
   const alarmOverTime = useMemo(() => {
     const clockTime = getTime(timer.lastTimer);
-    const today = dateUtils();
-    return today
-      .add(clockTime[0], 'hours')
-      .add(clockTime[1], 'minutes')
-      .add(clockTime[2], 'seconds')
-      .format('HH:mm');
+    const date = dateUtils.add(new Date(), {
+      hours: clockTime[0],
+      minutes: clockTime[1],
+      seconds: clockTime[2],
+    });
+    return dateUtils.format(date, 'HH:mm');
   }, [timer]);
 
   useEffect(() => {

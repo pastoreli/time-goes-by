@@ -28,7 +28,11 @@ describe('Render a WorldClockList', () => {
 
     mockList.forEach(item => {
       expect(
-        queryByText(dateUtil().tz(item).format('HH:mm').replace(/^0+/, '')),
+        queryByText(
+          dateUtil
+            .formatInTimeZone(new Date(), item, 'HH:mm')
+            .replace(/^0+/, ''),
+        ),
       ).toBeTruthy();
     });
   });

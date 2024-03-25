@@ -4,13 +4,13 @@ import { useTheme } from 'styled-components';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BlockButton from '../../BlockButton';
 import { alarmSounds } from '../../../utils/lists/sound';
-import { AlarmSound } from '../../../interfaces/alarm';
+import { Sound } from '../../../interfaces/sound';
 import { useSound } from '../../../hooks';
 
 export type ListRingtonesProps = {
   testID?: string;
-  value: AlarmSound;
-  onSelect?: (value: AlarmSound) => void;
+  value: Sound;
+  onSelect?: (value: Sound) => void;
 };
 
 const ListRingtones: React.FC<ListRingtonesProps> = ({
@@ -21,7 +21,7 @@ const ListRingtones: React.FC<ListRingtonesProps> = ({
   const theme = useTheme();
   const { playSound, stopSound } = useSound();
 
-  const handlePlaySound = (data: AlarmSound) => {
+  const handlePlaySound = (data: Sound) => {
     onSelect?.(data);
     playSound(data.file);
   };

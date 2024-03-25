@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '../../../utils/test/test-setup';
 import ListRingtones, { testIds } from './index';
 import { alarmSounds } from '../../../utils/lists/sound';
-import { AlarmSound } from '../../../interfaces/alarm';
+import { Sound } from '../../../interfaces/sound';
 
 const mockPlaySound = jest.fn();
 const mockStopSound = jest.fn();
@@ -26,7 +26,7 @@ describe('ListRingtones Component', () => {
     });
   });
   test('select sound', () => {
-    let selected: AlarmSound | null = null;
+    let selected: Sound | null = null;
     const { getByTestId } = render(
       <ListRingtones
         testID="list"
