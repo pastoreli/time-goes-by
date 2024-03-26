@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Clock, Button } from '../../../../components';
 import { hour24List, zerotoSixty } from '../../../../utils/lists/clock';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ClockTimeType, integerToClockTime } from '../../../../utils/time';
 
 export type TimerDefinitionsProps = {
@@ -14,8 +13,6 @@ const TimerDefinitions: React.FC<TimerDefinitionsProps> = ({
   preset,
   onSubmit,
 }) => {
-  const safeAreaInsets = useSafeAreaInsets();
-
   const [timer, setTimer] = useState([
     integerToClockTime(preset || 0, ClockTimeType.HOURS),
     integerToClockTime(preset || 0, ClockTimeType.MINUTES),

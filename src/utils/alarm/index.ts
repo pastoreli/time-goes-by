@@ -1,6 +1,5 @@
 import syncStorage from '@react-native-async-storage/async-storage';
 import {
-  NotificationActions,
   NotificationActionsGroup,
   NotificationId,
   StorageKeys,

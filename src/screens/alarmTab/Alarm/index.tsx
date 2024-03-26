@@ -13,7 +13,6 @@ import { Text, EmptyInfo } from '../../../components';
 import { AlarmList } from '../sections';
 import { AlarmNavigatorRoutes } from '../../../../routes';
 import { useNotification } from '../../../contexts/NotificationContext';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTabBar } from '../../../components/TabBar';
 import { useAppState } from '@react-native-community/hooks';
 import { FloatingAction, IActionProps } from 'react-native-floating-action';
@@ -30,7 +29,6 @@ const Alarm = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const { alarmNotificationAction } = useNotification();
   const screenIsFocused = useIsFocused();
-  const safeAreaInsets = useSafeAreaInsets();
   const { tabBarDistance } = useTabBar();
   const appState = useAppState();
   const {
