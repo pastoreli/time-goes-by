@@ -31,7 +31,7 @@ Time Goes By is developed by [Igor Pastoreli](https://www.instagram.com/igorpast
 
 ## Introduction
 
-Time Goes By is a cross-platform alarm app made for Android and IOS
+Time Goes By is a cross-platform clock app made for Android and IOS
 
 ![app-cover](https://github.com/pastoreli/my-clock/assets/22511012/84b05bb2-5221-4813-bba0-1c652461a2bf)
 
