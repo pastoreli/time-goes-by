@@ -29,6 +29,7 @@ const TimerDefinitions: React.FC<TimerDefinitionsProps> = ({
     <View style={styles.container}>
       <Clock
         itemsList={[hour24List, zerotoSixty, zerotoSixty]}
+        itemsIndicators={['h', 'm', 's']}
         values={timer}
         onChange={handleClockChange}
       />

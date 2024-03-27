@@ -7,6 +7,7 @@ import Text from '../Text';
 export type ClockProps = {
   testID?: string;
   itemsList: Array<number[]>;
+  itemsIndicators?: string[];
   values: number[];
   onChange: (value: number, listIndex: number) => void;
 };
@@ -14,6 +15,7 @@ export type ClockProps = {
 const Clock: React.FC<ClockProps> = ({
   testID,
   itemsList,
+  itemsIndicators,
   values,
   onChange,
 }) => {
@@ -48,12 +50,19 @@ const Clock: React.FC<ClockProps> = ({
             renderItem={(data, _, isSelected) => (
               <View
                 testID={`${testID}-${testIds.CLOCK_PIKER_ITEM_VALUE}-${index}-${data}${isSelected ? '-selected' : ''}`}
-                style={itemStyles[index]}>
+                style={{ ...styles.pickerItem, ...itemStyles[index] }}>
                 <Text
                   size={36}
                   color={isSelected ? theme.darken : theme.darken1}
                   weight={isSelected ? 'bold' : 'medium'}>
                   {data}
+                </Text>
+                <Text
+                  size={20}
+                  color={isSelected ? theme.darken : theme.darken1}
+                  weight={'medium'}
+                  textMargin="0 0 4px 2px">
+                  {itemsIndicators?.[index]}
                 </Text>
               </View>
             )}
@@ -98,14 +107,18 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },
+  pickerItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
   begin: {
     width: '100%',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     paddingRight: 30,
   },
   middle: {
     width: '100%',
-    alignItems: 'center',
+    justifyContent: 'center',
   },
   end: {
     width: '100%',

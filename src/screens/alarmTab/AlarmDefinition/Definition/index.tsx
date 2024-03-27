@@ -61,12 +61,14 @@ const Definition = () => {
   return (
     <ScrollView
       style={{ ...styles.container }}
+      automaticallyAdjustKeyboardInsets
       contentContainerStyle={{
         paddingBottom: safeAreaInsets.bottom + 30,
       }}>
       <StatusBar backgroundColor="#C1C1C1" translucent style="light" />
       <Clock
         itemsList={[hour24List, zerotoSixty]}
+        itemsIndicators={['h', 'm']}
         values={[currentAlarm.hour, currentAlarm.minute]}
         onChange={handleClockChange}
       />

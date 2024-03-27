@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-wheel-scrollview-picker/index.tsx b/node_modules/react-native-wheel-scrollview-picker/index.tsx
-index 4d3e5db..669a1ef 100644
+index 4d3e5db..fc047f2 100644
 --- a/node_modules/react-native-wheel-scrollview-picker/index.tsx
 +++ b/node_modules/react-native-wheel-scrollview-picker/index.tsx
 @@ -40,6 +40,7 @@ const isViewStyle = (style: ViewProps["style"]): style is ViewStyle => {
@@ -10,12 +10,21 @@ index 4d3e5db..669a1ef 100644
    style?: ViewProps["style"];
    dataSource: Array<ItemT>;
    selectedIndex?: number;
+@@ -70,7 +71,7 @@ export type ScrollPickerHandle = {
+ }
+ 
+ const ScrollPicker: { <ItemT extends string | number>(props: ScrollPickerProps<ItemT> & { ref?: Ref<ScrollPickerHandle> }): ReactNode } = React.forwardRef((propsState, ref) => {
+-  const { itemHeight = 30, style, scrollViewComponent, ...props } = propsState;
++  const { testID, itemHeight = 30, style, scrollViewComponent, ...props } = propsState;
+   const [initialized, setInitialized] = useState(false);
+   const [selectedIndex, setSelectedIndex] = useState(
+     props.selectedIndex && props.selectedIndex >= 0 ? props.selectedIndex : 0
 @@ -241,7 +242,7 @@ const ScrollPicker: { <ItemT extends string | number>(props: ScrollPickerProps<I
    const CustomScrollViewComponent = scrollViewComponent || ScrollView;
  
    return (
 -    <View style={wrapperStyle}>
-+    <View testID={propsState.testID} style={wrapperStyle}>
++    <View testID={testID} style={wrapperStyle}>
        <View style={highlightStyle} />
        <CustomScrollViewComponent
          ref={sView}
