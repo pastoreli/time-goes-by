@@ -25,6 +25,8 @@ enum fabIds {
 
 type ScreenNavigationProp = NavigationProp<AlarmNavigatorRoutes, 'Alarm'>;
 
+let backTimer: BackgroundTimer;
+
 const Alarm = () => {
   const theme = useTheme();
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -43,6 +45,10 @@ const Alarm = () => {
   } = useAlarm();
 
   const handleTimer = () => {
+    if(backTimer) {
+      backTimer?.
+    }
+    backTimer = BackgroundTimer.stopBackgroundTimer();
     BackgroundTimer.runBackgroundTimer(() => {
       console.log('test background');
     }, 3000);
