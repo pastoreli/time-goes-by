@@ -9,13 +9,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
 import { Alarm as Alarmtype } from '../../../interfaces/alarm';
 import { useAlarm } from '../../../hooks';
-import { Text, EmptyInfo } from '../../../components';
+import { Text, EmptyInfo, Button } from '../../../components';
 import { AlarmList } from '../sections';
 import { AlarmNavigatorRoutes } from '../../../../routes';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { useTabBar } from '../../../components/TabBar';
 import { useAppState } from '@react-native-community/hooks';
 import { FloatingAction, IActionProps } from 'react-native-floating-action';
+import BackgroundTimer from 'react-native-background-timer';
 
 enum fabIds {
   BT_ADD = 'btn_add',
@@ -40,6 +41,12 @@ const Alarm = () => {
     toogleActiveAlarm,
     refetchAlarmList,
   } = useAlarm();
+
+  const handleTimer = () => {
+    BackgroundTimer.runBackgroundTimer(() => {
+      console.log('test background');
+    }, 3000);
+  };
 
   const fabActions: IActionProps[] = [
     {
@@ -144,6 +151,8 @@ const Alarm = () => {
           actionText="Adicionar"
           onActionPress={() => handleGoToDefinitions()}
         />
+        {/* To remove */}
+        <Button onPress={handleTimer}>Add back</Button>
       </View>
     );
   }

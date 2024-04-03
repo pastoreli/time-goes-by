@@ -875,6 +875,8 @@ PODS:
   - React-Mapbuffer (0.73.6):
     - glog
     - React-debug
+  - react-native-background-timer (2.4.1):
+    - React-Core
   - react-native-blur (4.4.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1118,6 +1120,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector-modern`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1227,6 +1230,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-background-timer:
+    :path: "../node_modules/react-native-background-timer"
   react-native-blur:
     :path: "../node_modules/@react-native-community/blur"
   react-native-safe-area-context:
@@ -1329,6 +1334,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 85583ef014ce53d731a98c66a0e24496f7a83066
   React-logger: 3eb80a977f0d9669468ef641a5e1fabbc50a09ec
   React-Mapbuffer: 84ea43c6c6232049135b1550b8c60b2faac19fab
+  react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-blur: 799045500f56146afc46245148080e7b7623cb75
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
   React-nativeconfig: b4d4e9901d4cabb57be63053fd2aa6086eb3c85f
