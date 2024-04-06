@@ -10,6 +10,7 @@ import notifee, {
   AuthorizationStatus,
   EventType,
   Event,
+  AndroidNotificationSetting,
 } from '@notifee/react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import {
@@ -71,7 +72,10 @@ export const NotificationProvider: React.FC<PropsWithChildren> = ({
       announcement: true,
       criticalAlert: true,
     });
-
+    const settings = notifee.getNotificationSettings();
+    if ((await settings).android.alarm !== AndroidNotificationSetting.ENABLED) {
+      await notifee.openAlarmPermissionSettings();
+    }
     if (finalStatus.authorizationStatus < AuthorizationStatus.AUTHORIZED) {
       console.warn('User declined permissions');
     }
