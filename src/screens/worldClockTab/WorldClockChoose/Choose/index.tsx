@@ -1,5 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  View,
+  useColorScheme,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled, { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -27,6 +33,7 @@ const Choose: React.FC = () => {
   const safeAreaInsets = useSafeAreaInsets();
   const { setWorldClockItem } = useWorldClock();
   const theme = useTheme();
+  const colorScheme = useColorScheme();
 
   const [search, setSearch] = useState('');
 
@@ -58,7 +65,11 @@ const Choose: React.FC = () => {
 
   return (
     <View testID={testIds.CONTAINER}>
-      <StatusBar backgroundColor="#C1C1C1" translucent style="light" />
+      <StatusBar
+        backgroundColor={theme.containerSecondaryBg}
+        translucent
+        style={colorScheme === 'light' ? 'dark' : 'light'}
+      />
       <Header>
         <View style={styles.headerContent}>
           <Pressable onPress={() => navigation.goBack()}>

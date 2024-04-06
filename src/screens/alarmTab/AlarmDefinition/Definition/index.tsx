@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, useColorScheme } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,6 +29,7 @@ type ScreenNavigationProp = NavigationProp<
 const Definition = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const theme = useTheme();
+  const colorScheme = useColorScheme();
   const { alarm: currentAlarm, isUpdate } = useSelector(
     (state: RootState) => state.alarmDefinition,
   );
@@ -65,7 +66,11 @@ const Definition = () => {
       contentContainerStyle={{
         paddingBottom: safeAreaInsets.bottom + 30,
       }}>
-      <StatusBar backgroundColor="#C1C1C1" translucent style="light" />
+      <StatusBar
+        backgroundColor={theme.containerSecondaryBg}
+        translucent
+        style={colorScheme === 'light' ? 'dark' : 'light'}
+      />
       <Clock
         itemsList={[hour24List, zerotoSixty]}
         itemsIndicators={['h', 'm']}

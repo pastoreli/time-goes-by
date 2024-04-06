@@ -30,6 +30,7 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ initialScreen }) => {
           contentStyle: {
             backgroundColor: theme.containerBg,
           },
+          navigationBarColor: theme.card.color,
         }}
       />
     </Stack.Navigator>

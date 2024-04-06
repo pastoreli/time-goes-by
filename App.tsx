@@ -56,7 +56,11 @@ const App = () => {
             <NavigationContainer theme={MyNavigationTheme}>
               <NotificationProvider>
                 <Container>
-                  <StatusBar backgroundColor="#C1C1C1" translucent />
+                  <StatusBar
+                    backgroundColor={theme.container}
+                    translucent
+                    style={colorScheme === 'light' ? 'dark' : 'light'}
+                  />
                   <AppNavigator initialScreen={initialScreen} />
                 </Container>
               </NotificationProvider>
