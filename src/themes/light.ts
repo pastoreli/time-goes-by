@@ -27,6 +27,7 @@ const lightTheme: Theme = {
     borderRadius: '6px',
   },
   statusBarColor: '#FFFFFF',
+  bottomNavigation: '#FDFDFE',
   shadowColor: '#00000066',
   text: {
     black: 'Montserrat-Black',

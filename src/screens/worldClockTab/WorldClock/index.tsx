@@ -4,7 +4,13 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
-import { View, Pressable, StyleSheet, Platform } from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Platform,
+  useColorScheme,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
 import { FloatingAction, IActionProps } from 'react-native-floating-action';
@@ -13,6 +19,7 @@ import { useWorldClock } from '../../../hooks';
 import { WorldClockList } from '../sections';
 import { WorldClockNavigatorRoutes } from '../../../../routes';
 import { useTabBar } from '../../../components/TabBar';
+import { StatusBar } from 'expo-status-bar';
 
 enum fabIds {
   BT_ADD = 'btn_add',
@@ -29,6 +36,7 @@ const WorldClock = () => {
   const theme = useTheme();
   const screenIsFocused = useIsFocused();
   const { tabBarDistance } = useTabBar();
+  const colorScheme = useColorScheme();
   const {
     worldClockList,
     worldClockEditMode,
@@ -118,6 +126,11 @@ const WorldClock = () => {
           ...styles.emptyContainer,
           paddingBottom: tabBarDistance + 15,
         }}>
+        <StatusBar
+          backgroundColor={theme.containerBg}
+          translucent
+          style={colorScheme === 'light' ? 'dark' : 'light'}
+        />
         <EmptyInfo
           icon="web"
           title="Você ainda não escolheu um relógio!"
@@ -131,6 +144,11 @@ const WorldClock = () => {
   return (
     <>
       <View style={styles.container}>
+        <StatusBar
+          backgroundColor={theme.containerBg}
+          translucent
+          style={colorScheme === 'light' ? 'dark' : 'light'}
+        />
         <View style={styles.list}>
           <WorldClockList
             list={worldClockList}

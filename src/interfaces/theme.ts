@@ -25,6 +25,7 @@ export type Theme = {
     borderRadius: string;
   };
   statusBarColor: string;
+  bottomNavigation: string;
   shadowColor: string;
   text: Record<FontWeight, string>;
 };

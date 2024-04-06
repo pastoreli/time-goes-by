@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, useColorScheme } from 'react-native';
 import { TimerDefinitions, TimerRunning } from '../sections';
 import { ClockTimeType, clockTimeToInteger } from '../../../utils/time';
 import { useTimer } from '../../../hooks';
@@ -16,8 +16,12 @@ import {
   scheduleNotifications,
 } from '../../../utils/notification';
 import { androidSimpleStopActions } from '../../../utils/lists/notifications';
+import { StatusBar } from 'expo-status-bar';
+import { useTheme } from 'styled-components/native';
 
 const Timer = () => {
+  const theme = useTheme();
+  const colorScheme = useColorScheme();
   const {
     timer: currentTimer,
     setTimer,
@@ -123,6 +127,11 @@ const Timer = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={theme.containerBg}
+        translucent
+        style={colorScheme === 'light' ? 'dark' : 'light'}
+      />
       {currentTimer !== undefined ? (
         <TimerRunning
           timer={currentTimer}

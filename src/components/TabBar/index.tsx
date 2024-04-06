@@ -7,7 +7,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from '@react-native-community/blur';
 import Text from '../Text';
 
-export type TabBarProps = BottomTabBarProps;
+export type TabBarProps = BottomTabBarProps & {
+  show?: boolean;
+};
 
 const CONTAINER_HEIGHT = 65;
 
@@ -19,7 +21,7 @@ type TabItemProps = {
   onPress?: () => void;
 };
 
-const TabBar: React.FC<TabBarProps> = ({ navigation, state }) => {
+const TabBar: React.FC<TabBarProps> = ({ navigation, state, show }) => {
   const theme = useTheme();
   const colorScheme = useColorScheme();
   const safeAreaInsets = useSafeAreaInsets();
@@ -53,6 +55,10 @@ const TabBar: React.FC<TabBarProps> = ({ navigation, state }) => {
     },
     [theme],
   );
+
+  if (!show) {
+    return null;
+  }
 
   return (
     <Container testID={testIds.TAB_BAR} height={tabHeight}>

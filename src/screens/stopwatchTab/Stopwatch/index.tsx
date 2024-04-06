@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 import { Text, Button } from '../../../components';
 import { useAppState } from '@react-native-community/hooks';
 import { ClockTimeType, integerToClockTime } from '../../../utils/time';
 import { useStopwatch } from '../../../hooks';
+import { StatusBar } from 'expo-status-bar';
 
 const Stopwatch = () => {
   const safeAreaInsets = useSafeAreaInsets();
   const theme = useTheme();
   const appState = useAppState();
+  const colorScheme = useColorScheme();
   const { setStopwatch, findExistingStopwatch, clearStopwatch } =
     useStopwatch();
 
@@ -106,6 +108,11 @@ const Stopwatch = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={theme.containerBg}
+        translucent
+        style={colorScheme === 'light' ? 'dark' : 'light'}
+      />
       <View style={styles.timer}>
         <Text size={70} textAlign="center">
           {formatTimmer(timer)}

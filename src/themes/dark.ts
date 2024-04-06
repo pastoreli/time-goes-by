@@ -23,10 +23,11 @@ const darkTheme: Theme = {
     color: '#35363A',
   },
   input: {
-    bg: '#FFFFFF33',
+    bg: '#28282B',
     borderRadius: '6px',
   },
   statusBarColor: '#FFFFFF',
+  bottomNavigation: '#28282B',
   shadowColor: '#23222566',
   text: {
     black: 'Montserrat-Black',

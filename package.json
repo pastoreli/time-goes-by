@@ -1,6 +1,6 @@
 {
   "name": "time-goes-by",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",

@@ -13,7 +13,9 @@ import {
   initAlarm,
   resetAlarm,
 } from '../../store/reducers/alarmDefinitionReducer';
+import { showTabBar } from '../../store/reducers/layoutReducer';
 import { useNavigatorUtils } from '../../hooks';
+import { Platform } from 'react-native';
 
 type ScreenRouteProp = RouteProp<AlarmNavigatorRoutes, 'AlarmDefinitionModal'>;
 
@@ -30,6 +32,16 @@ const AlarmDefinitionNavigator = () => {
   useEffect(() => {
     dispatch(initAlarm(selectedAlarm));
   }, [selectedAlarm]);
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      dispatch(showTabBar(false));
+
+      return () => {
+        dispatch(showTabBar(true));
+      };
+    }
+  }, [showTabBar]);
 
   useEffect(() => {
     return () => {

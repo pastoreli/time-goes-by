@@ -4,7 +4,13 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
-import { View, Pressable, StyleSheet, Platform } from 'react-native';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Platform,
+  useColorScheme,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
 import { Alarm as Alarmtype } from '../../../interfaces/alarm';
@@ -16,6 +22,7 @@ import { useNotification } from '../../../contexts/NotificationContext';
 import { useTabBar } from '../../../components/TabBar';
 import { useAppState } from '@react-native-community/hooks';
 import { FloatingAction, IActionProps } from 'react-native-floating-action';
+import { StatusBar } from 'expo-status-bar';
 
 enum fabIds {
   BT_ADD = 'btn_add',
@@ -31,6 +38,7 @@ const Alarm = () => {
   const screenIsFocused = useIsFocused();
   const { tabBarDistance } = useTabBar();
   const appState = useAppState();
+  const colorScheme = useColorScheme();
   const {
     alarmEditMode,
     toogleEditMode,
@@ -138,6 +146,11 @@ const Alarm = () => {
           ...styles.emptyContainer,
           paddingBottom: tabBarDistance + 15,
         }}>
+        <StatusBar
+          backgroundColor={theme.containerBg}
+          translucent
+          style={colorScheme === 'light' ? 'dark' : 'light'}
+        />
         <EmptyInfo
           icon="alarm"
           title="Você ainda não configurou um alarme!"
@@ -150,6 +163,11 @@ const Alarm = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={theme.containerBg}
+        translucent
+        style={colorScheme === 'light' ? 'dark' : 'light'}
+      />
       <View style={styles.list}>
         <AlarmList
           list={alarmList}

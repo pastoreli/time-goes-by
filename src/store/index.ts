@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { alarmDefinitionReducer } from './reducers';
+import { alarmDefinitionReducer, layoutReducer } from './reducers';
 
 const store = configureStore({
   reducer: {
     alarmDefinition: alarmDefinitionReducer,
+    layout: layoutReducer,
   },
 });
 
