@@ -9,6 +9,7 @@ import { WorldClockNavigatorRoutes } from '../../../routes';
 import WorldClockScreen from '../../screens/worldClockTab/WorldClock';
 import WorldClockChooseNavigator from '../WorldClockChooseNavigator';
 import { useTheme } from 'styled-components/native';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<WorldClockNavigatorRoutes>();
 
@@ -34,6 +35,7 @@ const WorldClockNavigator: React.FC = () => {
           presentation: 'modal',
           headerShown: false,
           navigationBarColor: theme.containerSecondaryBg,
+          animation: Platform.OS === 'android' ? 'slide_from_right' : 'default',
         }}
       />
     </Stack.Navigator>

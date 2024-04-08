@@ -141,6 +141,7 @@ const Container = styled.View<{ height: number }>`
   width: 100%;
   height: ${({ height }) => `${height}px`};
   bottom: 0;
+  overflow: hidden;
 `;
 
 const ContainerShape = styled.View<{ height: number }>`

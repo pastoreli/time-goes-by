@@ -9,6 +9,7 @@ import { AlarmNavigatorRoutes } from '../../../routes';
 import AlarmScreen from '../../screens/alarmTab/Alarm';
 import AlarmDefinitionNavigator from '../AlarmDefinitionNavigator';
 import { useTheme } from 'styled-components/native';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<AlarmNavigatorRoutes>();
 
@@ -32,6 +33,7 @@ const AlarmNavigator: React.FC = () => {
           presentation: 'modal',
           headerShown: false,
           navigationBarColor: theme.containerSecondaryBg,
+          animation: Platform.OS === 'android' ? 'slide_from_right' : 'default',
         }}
       />
     </Stack.Navigator>

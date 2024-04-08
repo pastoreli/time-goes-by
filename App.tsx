@@ -53,18 +53,18 @@ const App = () => {
       <GestureHandlerRootView style={styles.gesture}>
         <ThemeProvider theme={theme}>
           <StoreProvider store={store}>
-            <NavigationContainer theme={MyNavigationTheme}>
-              <NotificationProvider>
-                <Container>
+            <Container>
+              <NavigationContainer theme={MyNavigationTheme}>
+                <NotificationProvider>
                   <StatusBar
-                    backgroundColor={theme.container}
+                    backgroundColor={theme.containerBg}
                     translucent
                     style={colorScheme === 'light' ? 'dark' : 'light'}
                   />
                   <AppNavigator initialScreen={initialScreen} />
-                </Container>
-              </NotificationProvider>
-            </NavigationContainer>
+                </NotificationProvider>
+              </NavigationContainer>
+            </Container>
           </StoreProvider>
         </ThemeProvider>
       </GestureHandlerRootView>

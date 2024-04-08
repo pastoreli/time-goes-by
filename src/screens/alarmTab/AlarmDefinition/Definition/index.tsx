@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
   ScrollView,
@@ -43,27 +43,31 @@ const Definition = () => {
   const { updateAlarm, setAlarmItem } = useAlarm();
   const safeAreaInsets = useSafeAreaInsets();
 
-  if (!currentAlarm) {
-    return null;
-  }
-
   const handleClockChange = (value: number, index: number) => {
-    dispatch(
-      updateAlarmReducer({
-        ...currentAlarm,
-        [index === 0 ? 'hour' : 'minute']: value,
-      }),
-    );
+    if (currentAlarm) {
+      dispatch(
+        updateAlarmReducer({
+          ...currentAlarm,
+          [index === 0 ? 'hour' : 'minute']: value,
+        }),
+      );
+    }
   };
 
   const handleSubmit = () => {
-    if (isUpdate) {
-      updateAlarm(currentAlarm);
-    } else {
-      setAlarmItem({ ...currentAlarm, name: currentAlarm.name || 'Alarm' });
+    if (currentAlarm) {
+      if (isUpdate) {
+        updateAlarm(currentAlarm);
+      } else {
+        setAlarmItem({ ...currentAlarm, name: currentAlarm.name || 'Alarm' });
+      }
+      navigation.goBack();
     }
-    navigation.goBack();
   };
+
+  if (!currentAlarm) {
+    return null;
+  }
 
   return (
     <ScrollView
