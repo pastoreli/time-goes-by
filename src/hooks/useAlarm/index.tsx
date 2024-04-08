@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import syncStorage from '@react-native-async-storage/async-storage';
 import { Alarm, AlarmNotification } from '../../interfaces/alarm';
-import { AndroidChanels, NotificationId, StorageKeys } from '../../consts';
+import {
+  AndroidChannels,
+  AndroidChannelGroups,
+  NotificationId,
+  StorageKeys,
+} from '../../consts';
 import dateUtils from '../../utils/date';
 import { RepeatFrequency } from '@notifee/react-native';
 import {
@@ -14,6 +19,9 @@ import {
   scheduleNotifications,
   cancelScheduleNotifications,
 } from '../../utils/notification';
+import { Platform } from 'react-native';
+
+const AndroidChannelGroup = AndroidChannelGroups.ALARM;
 
 const useAlarm = () => {
   const [list, setList] = useState<Alarm[]>([]);
@@ -24,11 +32,15 @@ const useAlarm = () => {
     setList(updatedList);
   };
 
-  const cancelNotifications = (notifications: AlarmNotification[]) => {
+  const cancelNotifications = (
+    notifications: AlarmNotification[],
+    deleteChannelId?: string,
+  ) => {
     notifications.forEach(item => {
       cancelScheduleNotifications({
         id: item.id,
         repeat: RepeatNotificatonType.ALL,
+        deleteChannelId,
       });
     });
   };
@@ -80,7 +92,13 @@ const useAlarm = () => {
     alarm.notifications.forEach(item => {
       scheduleNotifications({
         id: item.id,
-        chanelId: AndroidChanels.ALARMS,
+        channel: {
+          channelGroupId: AndroidChannelGroup.id,
+          channelGroupName: AndroidChannelGroup.name,
+          channelId: `${AndroidChannels.ALARMS}-${alarm.id}`,
+          channelName: `${AndroidChannels.ALARMS}-${alarm.id}`,
+          resetChannel: true,
+        },
         config: getAlarmNotificationBody({
           id: item.id,
           dateTrigger: item.triggerDate,
@@ -93,7 +111,7 @@ const useAlarm = () => {
               ? RepeatFrequency.WEEKLY
               : RepeatFrequency.NONE,
           repeat:
-            item.position > 0
+            item.position > 0 || Platform.OS === 'android'
               ? RepeatNotificatonType.ONLY_ONE
               : RepeatNotificatonType.ALL,
         },
@@ -117,8 +135,8 @@ const useAlarm = () => {
     } else {
       alarmCopy.notifications = getAlarmNotifications(alarmCopy);
       alarmCopy.active = true;
+      defineAlarmNotifications(alarmCopy);
     }
-    defineAlarmNotifications(alarmCopy);
     const newList = list.map(item => {
       let itemCopy = { ...item };
       if (item.id === alarmCopy.id) {
@@ -142,7 +160,10 @@ const useAlarm = () => {
   };
 
   const deleteAlarmItem = (alarm: Alarm) => {
-    cancelNotifications(alarm.notifications);
+    cancelNotifications(
+      alarm.notifications,
+      `${AndroidChannels.ALARMS}-${alarm.id}`,
+    );
     const newList = list.filter(item => item.id !== alarm.id);
     handleUpdateList(newList);
   };

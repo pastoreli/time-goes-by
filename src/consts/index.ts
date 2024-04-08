@@ -32,8 +32,19 @@ export enum NotificationActions {
   SNOOZE = 'snoozeAction',
 }
 
-export enum AndroidChanels {
+export enum AndroidChannels {
   ALARMS = 'Alarms',
   TIMERS = 'Timers',
   SNOOZE = 'Snooe',
 }
+
+export const AndroidChannelGroups = {
+  ALARM: {
+    id: 'ALARM',
+    name: 'Alarm',
+  },
+  TIMER: {
+    id: 'TIMER',
+    name: 'Timer',
+  },
+};

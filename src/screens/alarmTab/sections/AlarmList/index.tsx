@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DraggableFlatList, {
@@ -88,7 +88,7 @@ const AlarmList: React.FC<AlarmListProps> = ({
       containerStyle={styles.fillHeight}
       contentContainerStyle={{
         ...styles.listContainer,
-        paddingBottom: tabBarDistance + (Platform.OS === 'ios' ? 15 : 100),
+        paddingBottom: tabBarDistance + 15,
       }}
       ItemSeparatorComponent={() => <View style={styles.listSeparator} />}
       onDragBegin={() => trigger(HapticFeedbackTypes.impactMedium)}

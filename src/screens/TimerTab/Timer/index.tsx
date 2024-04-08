@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, useColorScheme } from 'react-native';
+import { View, StyleSheet, useColorScheme, Platform } from 'react-native';
 import { TimerDefinitions, TimerRunning } from '../sections';
 import { ClockTimeType, clockTimeToInteger } from '../../../utils/time';
 import { useTimer } from '../../../hooks';
 import { useAppState } from '@react-native-community/hooks';
 import { Timer as TimerType } from '../../../interfaces/timer';
 import {
-  AndroidChanels,
+  AndroidChannelGroups,
+  AndroidChannels,
   NotificationActionsGroup,
   NotificationId,
 } from '../../../consts';
@@ -18,6 +19,8 @@ import {
 import { androidSimpleStopActions } from '../../../utils/lists/notifications';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from 'styled-components/native';
+
+const AndroidChannelGroup = AndroidChannelGroups.TIMER;
 
 const Timer = () => {
   const theme = useTheme();
@@ -39,7 +42,12 @@ const Timer = () => {
     cancelNotification();
     scheduleNotifications({
       id: NotificationId.TIMER,
-      chanelId: AndroidChanels.TIMERS,
+      channel: {
+        channelGroupId: AndroidChannelGroup.id,
+        channelGroupName: AndroidChannelGroup.name,
+        channelId: AndroidChannels.TIMERS,
+        channelName: AndroidChannels.TIMERS,
+      },
       config: {
         title: 'Time Goes By',
         body: 'Temporizador',
@@ -47,6 +55,7 @@ const Timer = () => {
           sound: 'alarm_1.mp3',
           interruptionLevel: 'critical',
           critical: true,
+          criticalVolume: 1,
           categoryId: NotificationActionsGroup.SIMPLE_STOP,
         },
         android: {
@@ -64,7 +73,10 @@ const Timer = () => {
       },
       trigger: {
         date: timer.endDate,
-        repeat: RepeatNotificatonType.ALL,
+        repeat:
+          Platform.OS === 'android'
+            ? RepeatNotificatonType.ONLY_ONE
+            : RepeatNotificatonType.ALL,
       },
     });
   };

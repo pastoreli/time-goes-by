@@ -21,13 +21,7 @@ import { AlarmNavigatorRoutes } from '../../../../routes';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { useTabBar } from '../../../components/TabBar';
 import { useAppState } from '@react-native-community/hooks';
-import { FloatingAction, IActionProps } from 'react-native-floating-action';
 import { StatusBar } from 'expo-status-bar';
-
-enum fabIds {
-  BT_ADD = 'btn_add',
-  BT_EDIT = 'btn_edit',
-}
 
 type ScreenNavigationProp = NavigationProp<AlarmNavigatorRoutes, 'Alarm'>;
 
@@ -48,19 +42,6 @@ const Alarm = () => {
     toogleActiveAlarm,
     refetchAlarmList,
   } = useAlarm();
-
-  const fabActions: IActionProps[] = [
-    {
-      icon: <Icon name="plus" size={25} color={theme.lighthen} />,
-      name: fabIds.BT_ADD,
-      color: theme.primary,
-    },
-    {
-      icon: <Icon name="pencil-outline" size={22} color={theme.lighthen} />,
-      name: fabIds.BT_EDIT,
-      color: theme.primary,
-    },
-  ];
 
   useEffect(() => {
     if (screenIsFocused) {
@@ -84,46 +65,55 @@ const Alarm = () => {
     [navigation, alarmEditMode],
   );
 
-  const RightNavButton = useCallback(
-    () => (
+  const RightNavButton = useCallback(() => {
+    if (Platform.OS === 'android') {
+      return (
+        <View style={styles.androidButtons}>
+          {!alarmEditMode && (
+            <Pressable
+              testID={testIds.NAV_ADD_BUTTON}
+              onPress={() => handleGoToDefinitions()}>
+              <Icon name="plus" size={30} color={theme.darken} />
+            </Pressable>
+          )}
+          <Pressable testID={testIds.NAV_EDIT_BUTTON} onPress={toogleEditMode}>
+            <Icon
+              name={alarmEditMode ? 'check' : 'pencil-outline'}
+              size={alarmEditMode ? 30 : 26}
+              color={theme.darken}
+            />
+          </Pressable>
+        </View>
+      );
+    }
+
+    return (
       <Pressable
-        testID={testIds.NAV_RIGHT_BUTTON}
+        testID={testIds.NAV_ADD_BUTTON}
         onPress={() => handleGoToDefinitions()}>
         <Icon name="plus" size={30} color={theme.primary} />
       </Pressable>
-    ),
-    [theme.primary, handleGoToDefinitions],
-  );
+    );
+  }, [theme, alarmEditMode, toogleEditMode, handleGoToDefinitions]);
 
-  const LeftNavButton = useCallback(
-    () => (
-      <Pressable testID={testIds.NAV_LEFT_BUTTON} onPress={toogleEditMode}>
+  const LeftNavButton = useCallback(() => {
+    if (Platform.OS === 'android') {
+      return null;
+    }
+
+    return (
+      <Pressable testID={testIds.NAV_EDIT_BUTTON} onPress={toogleEditMode}>
         <Text size={18} weight="medium" color={theme.primary}>
           {alarmEditMode ? 'Concluir' : 'Editar'}
         </Text>
       </Pressable>
-    ),
-    [theme.primary, toogleEditMode, alarmEditMode],
-  );
-
-  const handleFabActions = (id: fabIds) => {
-    if (id === fabIds.BT_ADD) {
-      handleGoToDefinitions();
-    } else {
-      toogleEditMode();
-    }
-  };
+    );
+  }, [theme.primary, toogleEditMode, alarmEditMode]);
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft:
-        alarmList.length > 0 && Platform.OS === 'ios'
-          ? LeftNavButton
-          : undefined,
-      headerRight:
-        alarmList.length > 0 && Platform.OS === 'ios'
-          ? RightNavButton
-          : undefined,
+      headerLeft: alarmList.length > 0 ? LeftNavButton : undefined,
+      headerRight: alarmList.length > 0 ? RightNavButton : undefined,
     });
   }, [RightNavButton, LeftNavButton, navigation, alarmList]);
 
@@ -178,27 +168,6 @@ const Alarm = () => {
           onSelect={handleGoToDefinitions}
         />
       </View>
-      {Platform.OS === 'android' && (
-        <FloatingAction
-          actions={alarmEditMode ? undefined : fabActions}
-          color={theme.primary}
-          buttonSize={60}
-          distanceToEdge={{
-            vertical: tabBarDistance + 20,
-            horizontal: alarmEditMode ? 0 : 30,
-          }}
-          position={alarmEditMode ? 'center' : 'right'}
-          floatingIcon={
-            alarmEditMode ? (
-              <Icon name="check" size={30} color="#FFFFFF" />
-            ) : undefined
-          }
-          onPressMain={() => (alarmEditMode ? toogleEditMode() : undefined)}
-          onPressItem={id =>
-            alarmEditMode ? undefined : handleFabActions(id as fabIds)
-          }
-        />
-      )}
     </View>
   );
 };
@@ -209,6 +178,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  androidButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: 15,
+  },
   list: {
     flex: 1,
   },
@@ -218,6 +193,6 @@ const styles = StyleSheet.create({
 });
 
 export enum testIds {
-  NAV_LEFT_BUTTON = 'WorldClock-nav-left-button',
-  NAV_RIGHT_BUTTON = 'WorldClock-nav-right-button',
+  NAV_EDIT_BUTTON = 'WorldClock-nav-left-button',
+  NAV_ADD_BUTTON = 'WorldClock-nav-right-button',
 }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Time Goes By",
     "slug": "my-clock",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -25,7 +25,11 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.igorpastoreli.myclock",
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "useNextNotificationsApi": true,
+      "enableBackgroundNotification": true,
+      "priority": "max",
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"

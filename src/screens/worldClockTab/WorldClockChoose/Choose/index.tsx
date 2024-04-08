@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   FlatList,
+  Platform,
   Pressable,
   StyleSheet,
   View,
@@ -68,7 +69,11 @@ const Choose: React.FC = () => {
       <StatusBar
         backgroundColor={theme.containerSecondaryBg}
         translucent
-        style={colorScheme === 'light' ? 'dark' : 'light'}
+        style={
+          colorScheme === 'light' && Platform.OS === 'android'
+            ? 'dark'
+            : 'light'
+        }
       />
       <Header>
         <View style={styles.headerContent}>

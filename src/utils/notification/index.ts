@@ -5,6 +5,9 @@ import notifee, {
   EventDetail,
   AndroidImportance,
   AlarmType,
+  AndroidCategory,
+  AndroidChannelGroup,
+  AndroidChannel,
 } from '@notifee/react-native';
 import { ClockTimeType, clockTimeToInteger } from '../time';
 import {
@@ -13,11 +16,13 @@ import {
   updateAlarm,
 } from '../alarm';
 import {
-  AndroidChanels,
+  AndroidChannelGroups,
+  AndroidChannels,
   NotificationActions,
   NotificationId,
 } from '../../consts';
 import { Alarm } from '../../interfaces/alarm';
+import { Platform } from 'react-native';
 
 export enum RepeatNotificatonType {
   ONLY_ONE = 1,
@@ -27,46 +32,86 @@ export enum RepeatNotificatonType {
 
 const REPEAT_NOTIFICATION_NUMBER = 50;
 
-export type scheduleNotificationTriggerProps = {
+export type ScheduleNotificationTriggerProps = {
   date: number;
   repeat?: RepeatNotificatonType;
   repeatFrequency?: RepeatFrequency;
 };
 
-export type scheduleNotificationConfigProps = Omit<Notification, 'id'>;
+export type ScheduleNotificationConfigProps = Omit<Notification, 'id'>;
 
-export type scheduleNotificationProps = {
+export type ScheduleNotificationChanelProps = {
+  channelId: string;
+  channelName: string;
+  channelGroupId: string;
+  channelGroupName: string;
+  resetChannel?: boolean;
+};
+
+export type ScheduleNotificationProps = {
   id: string;
-  chanelId: AndroidChanels;
-  config: scheduleNotificationConfigProps;
-  trigger: scheduleNotificationTriggerProps;
+  channel: ScheduleNotificationChanelProps;
+  config: ScheduleNotificationConfigProps;
+  trigger: ScheduleNotificationTriggerProps;
 };
 
 export type cancelScheduleNotificationsProps = {
   id: string;
-  cancelOnllyFollowing?: boolean;
   repeat?: RepeatNotificatonType;
+  deleteChannelId?: string;
+};
+
+export const createChannelGroup = async (data: AndroidChannelGroup) => {
+  const currentGroup = Boolean(await notifee.getChannelGroup(data.id));
+  if (!currentGroup) {
+    await notifee.createChannelGroup(data);
+  }
+  return data.id;
+};
+
+export const deleteChannel = async (id: string) => {
+  await notifee.deleteChannel(id);
+};
+
+export const createChannel = async (data: AndroidChannel, reset?: boolean) => {
+  const currentChannel = Boolean(await notifee.getChannel(data.id));
+  if (reset && currentChannel) {
+    await deleteChannel(data.id);
+  } else if (!currentChannel) {
+    await notifee.createChannel(data);
+  }
+
+  return data.id;
 };
 
 export const scheduleNotifications = async ({
   id,
-  chanelId,
+  channel,
   config,
   trigger,
-}: scheduleNotificationProps) => {
+}: ScheduleNotificationProps) => {
   const repeatType = trigger.repeat || RepeatNotificatonType.ONLY_ONE;
   const repeatCount =
     repeatType === RepeatNotificatonType.ONLY_ONE
       ? 1
       : REPEAT_NOTIFICATION_NUMBER;
 
-  const channelId = await notifee.createChannel({
-    id: chanelId,
-    name: chanelId,
-    vibration: true,
-    sound: config.android?.sound?.replace('.mp3', ''),
-    importance: AndroidImportance.HIGH,
+  const channelGroupId = await createChannelGroup({
+    id: channel.channelGroupId,
+    name: channel.channelGroupName,
   });
+
+  const channelId = await createChannel(
+    {
+      id: channel.channelId,
+      name: channel.channelName,
+      groupId: channelGroupId,
+      vibration: true,
+      sound: config.android?.sound?.replace('.mp3', ''),
+      importance: AndroidImportance.HIGH,
+    },
+    channel.resetChannel,
+  );
 
   for (
     let i = repeatType === RepeatNotificatonType.ONLY_FOR_REPEAT ? 1 : 0;
@@ -82,6 +127,11 @@ export const scheduleNotifications = async ({
           sound: config.android?.sound?.replace('.mp3', ''),
           channelId,
           importance: AndroidImportance.HIGH,
+          loopSound: true,
+          category: AndroidCategory.ALARM,
+          fullScreenAction: {
+            id: 'default',
+          },
         },
         data: {
           ...config.data,
@@ -94,7 +144,7 @@ export const scheduleNotifications = async ({
           trigger.date + clockTimeToInteger(i * 7, ClockTimeType.SECONDS),
         repeatFrequency: i > 0 ? RepeatFrequency.NONE : trigger.repeatFrequency,
         alarmManager: {
-          type: AlarmType.SET_EXACT_AND_ALLOW_WHILE_IDLE,
+          type: AlarmType.SET_ALARM_CLOCK,
         },
       },
     );
@@ -104,7 +154,12 @@ export const scheduleNotifications = async ({
 export const cancelScheduleNotifications = ({
   id,
   repeat,
+  deleteChannelId,
 }: cancelScheduleNotificationsProps) => {
+  if (deleteChannelId) {
+    deleteChannel(deleteChannelId);
+  }
+
   const notificationsId: string[] = [];
   if (repeat !== RepeatNotificatonType.ONLY_ONE) {
     for (let i = 1; i < REPEAT_NOTIFICATION_NUMBER; i++) {
@@ -120,7 +175,7 @@ export const cancelScheduleNotifications = ({
 export const dysplayNotification = async (
   title: string,
   description: string,
-  chanel: AndroidChanels,
+  chanel: AndroidChannels,
 ) => {
   const channelId = await notifee.createChannel({
     id: chanel,
@@ -155,6 +210,7 @@ const handleCancelAlarmNotifications = async (alarmId: string) => {
       cancelScheduleNotifications({
         id: item.id,
         repeat: RepeatNotificatonType.ALL,
+        deleteChannelId: `${NotificationId.ALARM}-${alarmId}`,
       });
     });
     await updateAlarm(alarmItem);
@@ -189,32 +245,44 @@ const handleAlarmNotification = async (
       currentNotification = alarmData.notifications[newPosition];
     }
     if (alarmData.repeat.length > 0 || snooze) {
-      cancelScheduleNotifications({
-        id: data.id as string,
-        cancelOnllyFollowing: true,
-        repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
-      });
-      scheduleNotifications({
-        id: currentNotification.id,
-        chanelId: AndroidChanels.ALARMS,
-        config: getAlarmNotificationBody({
-          id: currentNotification.id,
-          alarm: alarmData,
-          dateTrigger: currentNotification.triggerDate,
-        }),
-        trigger: {
-          date: snooze
-            ? new Date().valueOf() +
-              clockTimeToInteger(10, ClockTimeType.MINUTES)
-            : currentNotification.triggerDate,
+      if (Platform.OS === 'ios') {
+        cancelScheduleNotifications({
+          id: data.id as string,
           repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
-        },
-      });
+        });
+      }
+      if (Platform.OS === 'ios' || snooze) {
+        scheduleNotifications({
+          id: currentNotification.id,
+          channel: {
+            channelGroupId: AndroidChannelGroups.ALARM.id,
+            channelGroupName: AndroidChannelGroups.ALARM.name,
+            channelId: `${AndroidChannels.ALARMS}-${alarmData.id}`,
+            channelName: `${AndroidChannels.ALARMS}-${alarmData.id}`,
+            resetChannel: true,
+          },
+          config: getAlarmNotificationBody({
+            id: currentNotification.id,
+            alarm: alarmData,
+            dateTrigger: currentNotification.triggerDate,
+          }),
+          trigger: {
+            date: snooze
+              ? new Date().valueOf() +
+                clockTimeToInteger(10, ClockTimeType.MINUTES)
+              : currentNotification.triggerDate,
+            repeat:
+              Platform.OS === 'ios'
+                ? RepeatNotificatonType.ONLY_FOR_REPEAT
+                : RepeatNotificatonType.ONLY_ONE,
+          },
+        });
+      }
       if (snooze) {
         dysplayNotification(
           'Time Goes By',
           'Seu alarme irá tocar novamente em 10 minutos!',
-          AndroidChanels.SNOOZE,
+          AndroidChannels.SNOOZE,
         );
       }
     } else {

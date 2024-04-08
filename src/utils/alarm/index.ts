@@ -4,7 +4,7 @@ import {
   NotificationId,
   StorageKeys,
 } from '../../consts';
-import { scheduleNotificationConfigProps } from '../notification';
+import { ScheduleNotificationConfigProps } from '../notification';
 import { Alarm } from '../../interfaces/alarm';
 import {
   androidAlarmActions,
@@ -45,7 +45,7 @@ export const getAlarmNotificationBody = (data: {
   id: string;
   dateTrigger: number;
   alarm: Alarm;
-}): scheduleNotificationConfigProps => {
+}): ScheduleNotificationConfigProps => {
   return {
     title: 'Time Goes By',
     body: `Alarme: ${data.alarm.name}`,

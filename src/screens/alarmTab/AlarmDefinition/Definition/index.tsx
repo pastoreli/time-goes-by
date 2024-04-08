@@ -1,5 +1,11 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, useColorScheme } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  View,
+  useColorScheme,
+} from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -69,7 +75,11 @@ const Definition = () => {
       <StatusBar
         backgroundColor={theme.containerSecondaryBg}
         translucent
-        style={colorScheme === 'light' ? 'dark' : 'light'}
+        style={
+          colorScheme === 'light' && Platform.OS === 'android'
+            ? 'dark'
+            : 'light'
+        }
       />
       <Clock
         itemsList={[hour24List, zerotoSixty]}

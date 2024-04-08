@@ -13,18 +13,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components/native';
-import { FloatingAction, IActionProps } from 'react-native-floating-action';
 import { Text, EmptyInfo } from '../../../components';
 import { useWorldClock } from '../../../hooks';
 import { WorldClockList } from '../sections';
 import { WorldClockNavigatorRoutes } from '../../../../routes';
 import { useTabBar } from '../../../components/TabBar';
 import { StatusBar } from 'expo-status-bar';
-
-enum fabIds {
-  BT_ADD = 'btn_add',
-  BT_EDIT = 'btn_edit',
-}
 
 type ScreenNavigationProp = NavigationProp<
   WorldClockNavigatorRoutes,
@@ -46,19 +40,6 @@ const WorldClock = () => {
     refetchWorldClockList,
   } = useWorldClock();
 
-  const fabActions: IActionProps[] = [
-    {
-      icon: <Icon name="plus" size={25} color={theme.lighthen} />,
-      name: fabIds.BT_ADD,
-      color: theme.primary,
-    },
-    {
-      icon: <Icon name="pencil-outline" size={22} color={theme.lighthen} />,
-      name: fabIds.BT_EDIT,
-      color: theme.primary,
-    },
-  ];
-
   useEffect(() => {
     if (screenIsFocused) {
       refetchWorldClockList();
@@ -72,44 +53,51 @@ const WorldClock = () => {
     navigation.navigate('WorldClockChooseModal');
   }, [navigation, worldClockEditMode]);
 
-  const RightNavButton = useCallback(
-    () => (
-      <Pressable testID={testIds.NAV_RIGHT_BUTTON} onPress={handleGoToAdd}>
+  const RightNavButton = useCallback(() => {
+    if (Platform.OS === 'android') {
+      return (
+        <View style={styles.androidButtons}>
+          {!worldClockEditMode && (
+            <Pressable testID={testIds.NAV_ADD_BUTTON} onPress={handleGoToAdd}>
+              <Icon name="plus" size={30} color={theme.darken} />
+            </Pressable>
+          )}
+          <Pressable testID={testIds.NAV_EDIT_BUTTON} onPress={toogleEditMode}>
+            <Icon
+              name={worldClockEditMode ? 'check' : 'pencil-outline'}
+              size={worldClockEditMode ? 30 : 26}
+              color={theme.darken}
+            />
+          </Pressable>
+        </View>
+      );
+    }
+
+    return (
+      <Pressable testID={testIds.NAV_ADD_BUTTON} onPress={handleGoToAdd}>
         <Icon name="plus" size={30} color={theme.primary} />
       </Pressable>
-    ),
-    [theme.primary, handleGoToAdd],
-  );
+    );
+  }, [theme, handleGoToAdd]);
 
-  const LeftNavButton = useCallback(
-    () => (
-      <Pressable testID={testIds.NAV_LEFT_BUTTON} onPress={toogleEditMode}>
+  const LeftNavButton = useCallback(() => {
+    if (Platform.OS === 'android') {
+      return null;
+    }
+
+    return (
+      <Pressable testID={testIds.NAV_EDIT_BUTTON} onPress={toogleEditMode}>
         <Text size={18} weight="medium" color={theme.primary}>
           {worldClockEditMode ? 'Concluir' : 'Editar'}
         </Text>
       </Pressable>
-    ),
-    [theme.primary, toogleEditMode, worldClockEditMode],
-  );
-
-  const handleFabActions = (id: fabIds) => {
-    if (id === fabIds.BT_ADD) {
-      handleGoToAdd();
-    } else {
-      toogleEditMode();
-    }
-  };
+    );
+  }, [theme.primary, toogleEditMode, worldClockEditMode]);
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft:
-        worldClockList.length > 0 && Platform.OS === 'ios'
-          ? LeftNavButton
-          : undefined,
-      headerRight:
-        worldClockList.length > 0 && Platform.OS === 'ios'
-          ? RightNavButton
-          : undefined,
+      headerLeft: worldClockList.length > 0 ? LeftNavButton : null,
+      headerRight: worldClockList.length > 0 ? RightNavButton : null,
     });
   }, [LeftNavButton, RightNavButton, navigation, worldClockList]);
 
@@ -157,29 +145,6 @@ const WorldClock = () => {
             onDelete={deleteWorldClockItem}
           />
         </View>
-        {Platform.OS === 'android' && (
-          <FloatingAction
-            actions={worldClockEditMode ? undefined : fabActions}
-            color={theme.primary}
-            buttonSize={60}
-            distanceToEdge={{
-              vertical: tabBarDistance + 20,
-              horizontal: worldClockEditMode ? 0 : 30,
-            }}
-            position={worldClockEditMode ? 'center' : 'right'}
-            floatingIcon={
-              worldClockEditMode ? (
-                <Icon name="check" size={30} color="#FFFFFF" />
-              ) : undefined
-            }
-            onPressMain={() =>
-              worldClockEditMode ? toogleEditMode() : undefined
-            }
-            onPressItem={id =>
-              worldClockEditMode ? undefined : handleFabActions(id as fabIds)
-            }
-          />
-        )}
       </View>
     </>
   );
@@ -191,6 +156,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  androidButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    gap: 15,
+  },
   list: {
     flex: 1,
   },
@@ -200,6 +171,6 @@ const styles = StyleSheet.create({
 });
 
 export enum testIds {
-  NAV_LEFT_BUTTON = 'WorldClock-nav-left-button',
-  NAV_RIGHT_BUTTON = 'WorldClock-nav-right-button',
+  NAV_EDIT_BUTTON = 'WorldClock-nav-left-button',
+  NAV_ADD_BUTTON = 'WorldClock-nav-right-button',
 }
