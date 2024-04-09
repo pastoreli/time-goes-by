@@ -46,7 +46,9 @@ const AlarmList: React.FC<AlarmListProps> = ({
               <MinusButton
                 testID={testIds.DELETE_BUTON}
                 onPress={() => onDelete && onDelete(item)}>
-                <Icon name="minus" size={22} color="white" />
+                <MinusButtonContent>
+                  <Icon name="minus" size={22} color="white" />
+                </MinusButtonContent>
               </MinusButton>
             )}
             <View>
@@ -122,8 +124,16 @@ const styles = StyleSheet.create({
 });
 
 const MinusButton = styled.TouchableOpacity`
+  display: flex;
+  justify-content: center;
   padding-top: 0.5px;
   margin-right: 20px;
+  width: 22px;
+  height: 80px;
+  border-radius: 50px;
+`;
+
+const MinusButtonContent = styled.View`
   background-color: ${({ theme }) => theme.danger};
   width: 22px;
   height: 22px;

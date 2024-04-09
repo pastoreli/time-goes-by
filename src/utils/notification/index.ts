@@ -45,7 +45,6 @@ export type ScheduleNotificationChanelProps = {
   channelName: string;
   channelGroupId: string;
   channelGroupName: string;
-  resetChannel?: boolean;
 };
 
 export type ScheduleNotificationProps = {
@@ -73,11 +72,10 @@ export const deleteChannel = async (id: string) => {
   await notifee.deleteChannel(id);
 };
 
-export const createChannel = async (data: AndroidChannel, reset?: boolean) => {
+export const createChannel = async (data: AndroidChannel) => {
   const currentChannel = Boolean(await notifee.getChannel(data.id));
-  if (reset && currentChannel) {
-    await deleteChannel(data.id);
-  } else if (!currentChannel) {
+
+  if (!currentChannel) {
     await notifee.createChannel(data);
   }
 
@@ -101,17 +99,14 @@ export const scheduleNotifications = async ({
     name: channel.channelGroupName,
   });
 
-  const channelId = await createChannel(
-    {
-      id: channel.channelId,
-      name: channel.channelName,
-      groupId: channelGroupId,
-      vibration: true,
-      sound: config.android?.sound?.replace('.mp3', ''),
-      importance: AndroidImportance.HIGH,
-    },
-    channel.resetChannel,
-  );
+  const channelId = await createChannel({
+    id: channel.channelId,
+    name: channel.channelName,
+    groupId: channelGroupId,
+    vibration: true,
+    sound: config.android?.sound?.replace('.mp3', ''),
+    importance: AndroidImportance.HIGH,
+  });
 
   for (
     let i = repeatType === RepeatNotificatonType.ONLY_FOR_REPEAT ? 1 : 0;
@@ -210,7 +205,6 @@ const handleCancelAlarmNotifications = async (alarmId: string) => {
       cancelScheduleNotifications({
         id: item.id,
         repeat: RepeatNotificatonType.ALL,
-        deleteChannelId: `${NotificationId.ALARM}-${alarmId}`,
       });
     });
     await updateAlarm(alarmItem);
@@ -251,15 +245,15 @@ const handleAlarmNotification = async (
           repeat: RepeatNotificatonType.ONLY_FOR_REPEAT,
         });
       }
+
       if (Platform.OS === 'ios' || snooze) {
         scheduleNotifications({
           id: currentNotification.id,
           channel: {
             channelGroupId: AndroidChannelGroups.ALARM.id,
             channelGroupName: AndroidChannelGroups.ALARM.name,
-            channelId: `${AndroidChannels.ALARMS}-${alarmData.id}`,
-            channelName: `${AndroidChannels.ALARMS}-${alarmData.id}`,
-            resetChannel: true,
+            channelId: alarmData.androidChanelId,
+            channelName: alarmData.androidChanelId,
           },
           config: getAlarmNotificationBody({
             id: currentNotification.id,

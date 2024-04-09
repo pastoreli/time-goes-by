@@ -63,7 +63,9 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
           <MinusButton
             testID={testIds.DELETE_BUTON}
             onPress={() => onDelete && onDelete(item)}>
-            <Icon name="minus" size={22} color="white" />
+            <MinusButtonContent>
+              <Icon name="minus" size={22} color="white" />
+            </MinusButtonContent>
           </MinusButton>
         )}
         <View>
@@ -84,7 +86,6 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
             <Icon name="menu" size={30} color={theme.lighthen2} />
           </TouchableOpacity>
         ) : (
-          // <Text size={56}>{date.tz(item.timeZone).format('H:mm')}</Text>
           <Text size={56}>
             {dateUtil.formatInTimeZone(date.valueOf(), item.timeZone, 'H:mm')}
           </Text>
@@ -136,8 +137,16 @@ const styles = StyleSheet.create({
 });
 
 const MinusButton = styled.TouchableOpacity`
+  display: flex;
+  justify-content: center;
   padding-top: 0.5px;
   margin-right: 20px;
+  width: 22px;
+  height: 80px;
+  border-radius: 50px;
+`;
+
+const MinusButtonContent = styled.View`
   background-color: ${({ theme }) => theme.danger};
   width: 22px;
   height: 22px;

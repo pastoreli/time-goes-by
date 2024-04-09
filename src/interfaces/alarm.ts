@@ -17,4 +17,5 @@ export interface Alarm {
   snooze: boolean;
   active: boolean;
   notifications: AlarmNotification[];
+  androidChanelId: string;
 }

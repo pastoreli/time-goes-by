@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import syncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 import { Alarm, AlarmNotification } from '../../interfaces/alarm';
 import {
   AndroidChannels,
@@ -95,9 +96,8 @@ const useAlarm = () => {
         channel: {
           channelGroupId: AndroidChannelGroup.id,
           channelGroupName: AndroidChannelGroup.name,
-          channelId: `${AndroidChannels.ALARMS}-${alarm.id}`,
-          channelName: `${AndroidChannels.ALARMS}-${alarm.id}`,
-          resetChannel: true,
+          channelId: alarm.androidChanelId,
+          channelName: alarm.androidChanelId,
         },
         config: getAlarmNotificationBody({
           id: item.id,
@@ -121,6 +121,7 @@ const useAlarm = () => {
 
   const setAlarmItem = (alarm: Alarm) => {
     const alarmCopy = JSON.parse(JSON.stringify(alarm)) as Alarm;
+    alarmCopy.androidChanelId = `${AndroidChannels.ALARMS}-${uuid.v4().toString()}`;
     alarmCopy.notifications = getAlarmNotifications(alarm);
     defineAlarmNotifications(alarmCopy);
     const newList = [...list, alarmCopy];
@@ -148,8 +149,9 @@ const useAlarm = () => {
   };
 
   const updateAlarm = (alarm: Alarm) => {
-    cancelNotifications(alarm.notifications);
+    cancelNotifications(alarm.notifications, alarm.androidChanelId);
     const alarmCopy: Alarm = JSON.parse(JSON.stringify(alarm));
+    alarmCopy.androidChanelId = `${AndroidChannels.ALARMS}-${uuid.v4().toString()}`;
     alarmCopy.active = true;
     alarmCopy.notifications = getAlarmNotifications(alarmCopy);
     defineAlarmNotifications(alarmCopy);
@@ -160,10 +162,7 @@ const useAlarm = () => {
   };
 
   const deleteAlarmItem = (alarm: Alarm) => {
-    cancelNotifications(
-      alarm.notifications,
-      `${AndroidChannels.ALARMS}-${alarm.id}`,
-    );
+    cancelNotifications(alarm.notifications, alarm.androidChanelId);
     const newList = list.filter(item => item.id !== alarm.id);
     handleUpdateList(newList);
   };

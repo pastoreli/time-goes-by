@@ -19,7 +19,7 @@ const alarmDefinitionReducer = createSlice({
   initialState,
   reducers: {
     initAlarm: (state, action: PayloadAction<Alarm | undefined>) => {
-      const today = new Date();
+      const today = dateUtils.addMinutes(new Date(), 1);
       state.alarm = action.payload || {
         id: uuid.v4().toString(),
         hour: hour24List.findIndex(item => item === dateUtils.getHours(today)),
@@ -32,6 +32,7 @@ const alarmDefinitionReducer = createSlice({
         snooze: true,
         active: true,
         notifications: [],
+        androidChanelId: '',
       };
 
       state.isUpdate = !!action.payload;
