@@ -16,6 +16,7 @@ export enum StorageKeys {
   TIMER = 'timer',
   LAST_SET_TIMER = 'lastSetTimer',
   STOPWATCH = 'stopwatch',
+  SETTINGS_ONBOARDING = 'settingsOnboarding',
 }
 
 export enum NotificationId {
@@ -48,3 +49,17 @@ export const AndroidChannelGroups = {
     name: 'Timer',
   },
 };
+
+export enum IosNativeScreens {
+  DO_NOT_DISTURB = 'App-Prefs:DO_NOT_DISTURB',
+  TIME_GOES_BY_NOTIFICATION_SETTINGS = 'App-Prefs:NOTIFICATIONS_ID&path=com.igorpastoreli.myclock',
+}
+
+export enum OnboardingSections {
+  INTRO = 0,
+  ALLOW_NOTIFICATIONS_IOS = 1,
+  ALLOW_NOTIFICATIONS_ANDROID = 2,
+  DO_NOT_DISTURB_IOS = 3,
+  DO_NOT_DISTURB_ANDROID = 4,
+  ALLOW_ALARM_ANDROID = 5,
+}

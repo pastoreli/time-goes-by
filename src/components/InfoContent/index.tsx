@@ -3,14 +3,17 @@ import { View, StyleSheet } from 'react-native';
 import { useTheme } from 'styled-components';
 import Text from '../Text';
 import Button from '../Button';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export type InfoContentProps = {
   banner?: ReactElement;
   title: string;
   description?: string;
+  descriptionButtonText?: string;
   hint?: string;
   hintColor?: string;
   actionText?: string;
+  onDescriptionButtonPress?: () => void;
   onActionPress?: () => void;
 };
 
@@ -18,10 +21,12 @@ const InfoContent: React.FC<InfoContentProps> = ({
   banner,
   title,
   description,
+  descriptionButtonText,
   hint,
   hintColor,
   actionText,
   onActionPress,
+  onDescriptionButtonPress,
 }) => {
   const theme = useTheme();
 
@@ -40,6 +45,17 @@ const InfoContent: React.FC<InfoContentProps> = ({
         <Text textAlign="center" size={20} weight="medium" color={theme.darken}>
           {description}
         </Text>
+      )}
+      {onDescriptionButtonPress && (
+        <TouchableOpacity onPress={onDescriptionButtonPress}>
+          <Text
+            color={theme.primary}
+            size={16}
+            weight="semibold"
+            textMargin="20px 0 0 0 ">
+            {descriptionButtonText}
+          </Text>
+        </TouchableOpacity>
       )}
       {hint && (
         <Text

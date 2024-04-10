@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Linking } from 'react-native';
 import { InfoContent } from '../.././../../components';
 import { useTheme } from 'styled-components/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { IosNativeScreens } from '../../../../consts';
+import { useSettings } from '../../../../hooks';
 
 export type DoNotDisturbProps = {
   actionText: string;
@@ -16,6 +18,16 @@ const DoNotDisturb: React.FC<DoNotDisturbProps> = ({
 }) => {
   const theme = useTheme();
   const safeAreaInsets = useSafeAreaInsets();
+  const { handleOnboardingView } = useSettings();
+
+  const openSettings = () => {
+    Linking.openURL(IosNativeScreens.DO_NOT_DISTURB);
+  };
+
+  const handlePress = async () => {
+    await handleOnboardingView('doNotDisturb');
+    onActionPress();
+  };
 
   return (
     <View style={{ ...styles.container, paddingTop: safeAreaInsets.top }}>
@@ -38,8 +50,10 @@ const DoNotDisturb: React.FC<DoNotDisturbProps> = ({
             </View>
           }
           hint="Não se esqueça de adicionar a outros modos caso você tenha!"
+          descriptionButtonText="Ir as configurações"
           actionText={actionText}
-          onActionPress={onActionPress}
+          onActionPress={handlePress}
+          onDescriptionButtonPress={openSettings}
         />
       </ScrollView>
     </View>

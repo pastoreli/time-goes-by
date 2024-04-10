@@ -1,7 +1,11 @@
+import { OnboardingSections } from './src/consts';
 import { Alarm } from './src/interfaces/alarm';
 
 export type RootStack = {
-  Onboarding: undefined;
+  LoadingApp: undefined;
+  Onboarding: {
+    flow: OnboardingSections[];
+  };
   BottomNaviagtor: {
     initialScreen?: keyof BottomNavigatorRoutes;
   };

@@ -9,6 +9,7 @@ import notifee, {
   AndroidChannelGroup,
   AndroidChannel,
   AuthorizationStatus,
+  AndroidNotificationSetting,
 } from '@notifee/react-native';
 import { ClockTimeType, clockTimeToInteger } from '../time';
 import {
@@ -74,6 +75,15 @@ export const requestForNotificationAuthorization = async () => {
     criticalAlert: true,
   });
   return finalStatus.authorizationStatus >= AuthorizationStatus.AUTHORIZED;
+};
+
+export const isAndroidAlarmPermissionAllowed = async () => {
+  const settings = await notifee.getNotificationSettings();
+  return settings.android.alarm === AndroidNotificationSetting.ENABLED;
+};
+
+export const openAlarmPermissionSettings = async () => {
+  await notifee.openAlarmPermissionSettings();
 };
 
 export const createChannelGroup = async (data: AndroidChannelGroup) => {

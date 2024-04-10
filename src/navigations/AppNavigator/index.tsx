@@ -4,24 +4,29 @@ import { useTheme } from 'styled-components/native';
 import { useNavigatorUtils } from '../../hooks';
 
 // Interfaces
-import { BottomNavigatorRoutes, RootStack } from '../../../routes';
+import { RootStack } from '../../../routes';
 
 // Screens
 import BottomNavigator from '../BottomNavigator';
 import Onboarding from '../../screens/onboarding/Onboarding';
-
-export type AppNavigatorProps = {
-  initialScreen?: keyof BottomNavigatorRoutes;
-};
+import LoadingApp from '../../screens/loadingApp/Loading';
 
 const Stack = createNativeStackNavigator<RootStack>();
 
-const AppNavigator: React.FC<AppNavigatorProps> = ({ initialScreen }) => {
+const AppNavigator = () => {
   const theme = useTheme();
   const { screenOptions } = useNavigatorUtils();
 
   return (
-    <Stack.Navigator initialRouteName="Onboarding">
+    <Stack.Navigator initialRouteName="LoadingApp">
+      <Stack.Screen
+        name="LoadingApp"
+        component={LoadingApp}
+        options={{
+          ...screenOptions,
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="Onboarding"
         component={Onboarding}
@@ -33,9 +38,6 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ initialScreen }) => {
       <Stack.Screen
         name="BottomNaviagtor"
         component={BottomNavigator}
-        initialParams={{
-          initialScreen,
-        }}
         options={{
           headerShown: false,
           contentStyle: {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { InfoContent } from '../.././../../components';
 import { useTheme } from 'styled-components';
 import { requestForNotificationAuthorization } from '../../../../utils/notification';
+import { IosNativeScreens } from '../../../../consts';
 
 export type AllowNotificationsProps = {
   onAllowed: () => void;
@@ -26,6 +27,10 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
     }
   };
 
+  const openSettings = () => {
+    Linking.openURL(IosNativeScreens.TIME_GOES_BY_NOTIFICATION_SETTINGS);
+  };
+
   if (nowAllowed) {
     return (
       <InfoContent
@@ -34,21 +39,20 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
         banner={
           <View
             style={{
-              ...styles.notAllowedContainer,
-              borderColor: theme.darken1,
+              ...styles.iconContainer,
+              backgroundColor: theme.primaryLight,
             }}>
-            <Image
-              source={require('../../../../assets/images/ios-allow-notification.gif')}
-              borderRadius={10}
-            />
+            <Icon name="bell-off" size={120} color={theme.lighthen} />
           </View>
         }
+        descriptionButtonText="Ir as configurações"
         hint={
           checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
         }
         hintColor={theme.danger}
         actionText="Verificar"
         onActionPress={handleRequestPermission}
+        onDescriptionButtonPress={openSettings}
       />
     );
   }
