@@ -1,6 +1,7 @@
 import { Alarm } from './src/interfaces/alarm';
 
 export type RootStack = {
+  Onboarding: undefined;
   BottomNaviagtor: {
     initialScreen?: keyof BottomNavigatorRoutes;
   };

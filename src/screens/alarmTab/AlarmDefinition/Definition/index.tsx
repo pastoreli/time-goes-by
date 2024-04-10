@@ -96,6 +96,7 @@ const Definition = () => {
           value={currentAlarm.name}
           bg={theme.containerBg}
           placeholder="Insira um nome para o alarme (opcional)"
+          maxLength={30}
           onChangeText={value =>
             dispatch(updateAlarmReducer({ ...currentAlarm, name: value }))
           }

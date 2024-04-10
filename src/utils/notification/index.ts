@@ -8,6 +8,7 @@ import notifee, {
   AndroidCategory,
   AndroidChannelGroup,
   AndroidChannel,
+  AuthorizationStatus,
 } from '@notifee/react-native';
 import { ClockTimeType, clockTimeToInteger } from '../time';
 import {
@@ -58,6 +59,21 @@ export type cancelScheduleNotificationsProps = {
   id: string;
   repeat?: RepeatNotificatonType;
   deleteChannelId?: string;
+};
+
+export const isNotificationAllowed = async () => {
+  const settings = await notifee.getNotificationSettings();
+  return settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED;
+};
+
+export const requestForNotificationAuthorization = async () => {
+  const finalStatus = await notifee.requestPermission({
+    sound: true,
+    alert: true,
+    announcement: true,
+    criticalAlert: true,
+  });
+  return finalStatus.authorizationStatus >= AuthorizationStatus.AUTHORIZED;
 };
 
 export const createChannelGroup = async (data: AndroidChannelGroup) => {

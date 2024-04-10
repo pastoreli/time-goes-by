@@ -4,6 +4,7 @@ export { default as Card } from './Card';
 export * from './List';
 export { default as Clock } from './Clock';
 export { default as EmptyInfo } from './EmptyInfo';
+export { default as InfoContent } from './InfoContent';
 export { default as PressableArea } from './PressableArea';
 export { default as Switch } from './Switch';
 export { default as TabBar } from './TabBar';

@@ -83,9 +83,9 @@ export const NotificationProvider: React.FC<PropsWithChildren> = ({
     await registerAction();
   };
 
-  useEffect(() => {
-    registerForPushNotifications();
-  }, []);
+  // useEffect(() => {
+  //   registerForPushNotifications();
+  // }, []);
 
   const handleNofications = useCallback(
     async ({ type, detail }: Event) => {

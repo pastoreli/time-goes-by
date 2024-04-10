@@ -117,6 +117,8 @@ const styles = StyleSheet.create({
   rightItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexShrink: 1,
+    marginRight: 40,
   },
   queueOrganizer: {
     marginRight: 20,

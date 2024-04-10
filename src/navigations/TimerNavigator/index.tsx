@@ -6,7 +6,7 @@ import { useNavigatorUtils } from '../../hooks';
 import { TimerNavigatorRoutes } from '../../../routes';
 
 // Screens
-import HomeScreen from '../../screens/TimerTab/Timer';
+import HomeScreen from '../../screens/timerTab/Timer';
 
 const Stack = createNativeStackNavigator<TimerNavigatorRoutes>();
 

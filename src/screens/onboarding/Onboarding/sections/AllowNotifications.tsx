@@ -1,0 +1,92 @@
+import React, { useState } from 'react';
+import { View, StyleSheet, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { InfoContent } from '../.././../../components';
+import { useTheme } from 'styled-components';
+import { requestForNotificationAuthorization } from '../../../../utils/notification';
+
+export type AllowNotificationsProps = {
+  onAllowed: () => void;
+};
+
+const AllowNotifications: React.FC<AllowNotificationsProps> = ({
+  onAllowed,
+}) => {
+  const theme = useTheme();
+  const [nowAllowed, setNotAllowed] = useState(false);
+  const [checkFaills, setCheckFaills] = useState(false);
+
+  const handleRequestPermission = async () => {
+    const allowed = await requestForNotificationAuthorization();
+    if (allowed) {
+      onAllowed();
+    } else {
+      setCheckFaills(nowAllowed);
+      setNotAllowed(true);
+    }
+  };
+
+  if (nowAllowed) {
+    return (
+      <InfoContent
+        title="Sem permição para notificações"
+        description="Acesse as configurações de notificações no seu aparelho e permita que o Time Goes By use o recurso."
+        banner={
+          <View
+            style={{
+              ...styles.notAllowedContainer,
+              borderColor: theme.darken1,
+            }}>
+            <Image
+              source={require('../../../../assets/images/ios-allow-notification.gif')}
+              borderRadius={10}
+            />
+          </View>
+        }
+        hint={
+          checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
+        }
+        hintColor={theme.danger}
+        actionText="Verificar"
+        onActionPress={handleRequestPermission}
+      />
+    );
+  }
+
+  return (
+    <InfoContent
+      title="Notificações"
+      description="Permita as notificações para que o Time Goes By possa lhe avisar."
+      banner={
+        <View
+          style={{
+            ...styles.iconContainer,
+            backgroundColor: theme.primaryLight,
+          }}>
+          <Icon name="bell-badge" size={120} color={theme.lighthen} />
+        </View>
+      }
+      actionText="Permitir"
+      onActionPress={handleRequestPermission}
+    />
+  );
+};
+
+export default AllowNotifications;
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    width: 180,
+    height: 180,
+    borderRadius: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notAllowedContainer: {
+    borderRadius: 15,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    overflow: 'hidden',
+    padding: 5,
+  },
+});
