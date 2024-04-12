@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Image, Linking } from 'react-native';
+import { View, StyleSheet, Image, Linking, Platform } from 'react-native';
 import { InfoContent } from '../.././../../components';
 import { useTheme } from 'styled-components/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { IosNativeScreens } from '../../../../consts';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AndroidNativeScreens, IosNativeScreens } from '../../../../consts';
 import { useSettings } from '../../../../hooks';
 
 export type DoNotDisturbProps = {
@@ -21,7 +22,11 @@ const DoNotDisturb: React.FC<DoNotDisturbProps> = ({
   const { handleOnboardingView } = useSettings();
 
   const openSettings = () => {
-    Linking.openURL(IosNativeScreens.DO_NOT_DISTURB);
+    if (Platform.OS === 'ios') {
+      Linking.openURL(IosNativeScreens.DO_NOT_DISTURB);
+    } else {
+      Linking.sendIntent(AndroidNativeScreens.SETTINGS);
+    }
   };
 
   const handlePress = async () => {
@@ -38,16 +43,26 @@ const DoNotDisturb: React.FC<DoNotDisturbProps> = ({
             'Para que o Time Goes By funcione no modo "Não perturbe" acesse as configurações do modo e inclua o App.'
           }
           banner={
-            <View
-              style={{
-                ...styles.banner,
-                borderColor: theme.darken1,
-              }}>
-              <Image
-                source={require('../../../../assets/images/ios-do-not-disturb.gif')}
-                borderRadius={10}
-              />
-            </View>
+            Platform.OS === 'ios' ? (
+              <View
+                style={{
+                  ...styles.banner,
+                  borderColor: theme.darken1,
+                }}>
+                <Image
+                  source={require('../../../../assets/images/ios-do-not-disturb.gif')}
+                  borderRadius={10}
+                />
+              </View>
+            ) : (
+              <View
+                style={{
+                  ...styles.iconContainer,
+                  backgroundColor: theme.primaryLight,
+                }}>
+                <Icon name="volume-off" size={120} color={theme.lighthen} />
+              </View>
+            )
           }
           hint="Não se esqueça de adicionar a outros modos caso você tenha!"
           descriptionButtonText="Ir as configurações"
@@ -75,5 +90,12 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     overflow: 'hidden',
     padding: 5,
+  },
+  iconContainer: {
+    width: 180,
+    height: 180,
+    borderRadius: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

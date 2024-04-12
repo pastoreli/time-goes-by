@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Linking } from 'react-native';
+import { View, StyleSheet, Linking, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { InfoContent } from '../.././../../components';
 import { useTheme } from 'styled-components';
@@ -28,7 +28,11 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
   };
 
   const openSettings = () => {
-    Linking.openURL(IosNativeScreens.TIME_GOES_BY_NOTIFICATION_SETTINGS);
+    if (Platform.OS === 'ios') {
+      Linking.openURL(IosNativeScreens.TIME_GOES_BY_NOTIFICATION_SETTINGS);
+    } else {
+      Linking.openSettings();
+    }
   };
 
   if (nowAllowed) {

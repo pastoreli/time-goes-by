@@ -2,7 +2,12 @@ import React, { useCallback, useRef } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Intro, AllowNotifications, DoNotDisturb } from './sections';
+import {
+  Intro,
+  AllowNotifications,
+  DoNotDisturb,
+  AndroidAllowAlarm,
+} from './sections';
 import { RootStack } from '../../../../routes';
 import {
   NavigationProp,
@@ -34,9 +39,11 @@ export const Onboarding = () => {
     switch (type) {
       case OnboardingSections.INTRO:
         return <Intro actionText="Próximo" onActionPress={onActionPress} />;
-      case OnboardingSections.ALLOW_NOTIFICATIONS_IOS:
+      case OnboardingSections.ALLOW_NOTIFICATIONS:
         return <AllowNotifications onAllowed={onActionPress} />;
-      case OnboardingSections.DO_NOT_DISTURB_IOS:
+      case OnboardingSections.ALLOW_ALARM_ANDROID:
+        return <AndroidAllowAlarm onAllowed={onActionPress} />;
+      case OnboardingSections.DO_NOT_DISTURB:
         return (
           <DoNotDisturb
             actionText={last ? 'Concluir' : 'Próximo'}

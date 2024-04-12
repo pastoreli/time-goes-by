@@ -33,11 +33,7 @@ const useSettings = () => {
     }
 
     if (!(await isNotificationAllowed())) {
-      flow.push(
-        Platform.OS === 'ios'
-          ? OnboardingSections.ALLOW_NOTIFICATIONS_IOS
-          : OnboardingSections.ALLOW_NOTIFICATIONS_ANDROID,
-      );
+      flow.push(OnboardingSections.ALLOW_NOTIFICATIONS);
     }
 
     if (
@@ -48,11 +44,7 @@ const useSettings = () => {
     }
 
     if (!onboardingSettings.doNotDisturb) {
-      flow.push(
-        Platform.OS === 'ios'
-          ? OnboardingSections.DO_NOT_DISTURB_IOS
-          : OnboardingSections.DO_NOT_DISTURB_ANDROID,
-      );
+      flow.push(OnboardingSections.DO_NOT_DISTURB);
     }
 
     return flow;

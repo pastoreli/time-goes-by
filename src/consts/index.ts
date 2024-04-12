@@ -55,11 +55,13 @@ export enum IosNativeScreens {
   TIME_GOES_BY_NOTIFICATION_SETTINGS = 'App-Prefs:NOTIFICATIONS_ID&path=com.igorpastoreli.myclock',
 }
 
+export enum AndroidNativeScreens {
+  SETTINGS = 'android.settings.SETTINGS',
+}
+
 export enum OnboardingSections {
   INTRO = 0,
-  ALLOW_NOTIFICATIONS_IOS = 1,
-  ALLOW_NOTIFICATIONS_ANDROID = 2,
-  DO_NOT_DISTURB_IOS = 3,
-  DO_NOT_DISTURB_ANDROID = 4,
-  ALLOW_ALARM_ANDROID = 5,
+  ALLOW_NOTIFICATIONS = 1,
+  DO_NOT_DISTURB = 2,
+  ALLOW_ALARM_ANDROID = 3,
 }

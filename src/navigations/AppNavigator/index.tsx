@@ -25,6 +25,7 @@ const AppNavigator = () => {
         options={{
           ...screenOptions,
           headerShown: false,
+          navigationBarColor: theme.containerBg,
         }}
       />
       <Stack.Screen
@@ -33,6 +34,7 @@ const AppNavigator = () => {
         options={{
           ...screenOptions,
           headerShown: false,
+          navigationBarColor: theme.containerBg,
         }}
       />
       <Stack.Screen

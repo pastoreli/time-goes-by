@@ -3,16 +3,10 @@ import styled, { useTheme } from 'styled-components/native';
 import {
   TouchableOpacityProps,
   ActivityIndicator,
-  PressableAndroidRippleConfig,
   Pressable,
   View,
 } from 'react-native';
 import Text from '../Text';
-
-const android_ripple: PressableAndroidRippleConfig = {
-  borderless: false,
-  color: 'white',
-};
 
 export type ButtonProps = TouchableOpacityProps & {
   loading?: boolean;
@@ -76,6 +70,11 @@ const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.6}
       disabled={disabled || loading}
       testID="Button"
+      android_ripple={{
+        color: theme.lighthen3,
+        borderless: false,
+        radius: 22.5,
+      }}
       borderColor={pallet.border}
       {...props}>
       <BgContainer bg={pallet.bg} opacity={pallet.opacity} />
@@ -105,9 +104,7 @@ const Button: React.FC<ButtonProps> = ({
 
 export default Button;
 
-const Container = styled(Pressable).attrs(props => ({
-  android_ripple: props.android_ripple || android_ripple,
-}))<{ block?: boolean; borderColor: string }>`
+const Container = styled(Pressable)<{ block?: boolean; borderColor: string }>`
   position: relative;
   overflow: hidden;
   min-height: 40px;
