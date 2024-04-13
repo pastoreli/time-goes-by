@@ -40,9 +40,16 @@
 		9E0A0A51955E4359B48E52C2 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D832B21CA8FA43228BEB1A38 /* Montserrat-ExtraBoldItalic.ttf */; };
 		AB0BF5AF5EAF44298C933E10 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C26F5EED1F544F9906AD90A /* Montserrat-BlackItalic.ttf */; };
 		AD484CBC5BF8443988FE9613 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CD0551D643447A79D88E08D /* Nunito-Regular.ttf */; };
-		AD8B06262BAB92C900D4A3EE /* alarm_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD8B06252BAB92C900D4A3EE /* alarm_2.mp3 */; };
-		AD8B06282BAB92D100D4A3EE /* alarm_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD8B06272BAB92D100D4A3EE /* alarm_3.mp3 */; };
-		AD8B062A2BAB931A00D4A3EE /* alarm_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD8B06292BAB931A00D4A3EE /* alarm_1.mp3 */; };
+		AD627BB62BCAF50D002D5A52 /* alarm_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */; };
+		AD627BB72BCAF50D002D5A52 /* alarm_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */; };
+		AD627BB82BCAF50D002D5A52 /* alarm_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAE2BCAF50D002D5A52 /* alarm_4.mp3 */; };
+		AD627BB92BCAF50D002D5A52 /* alarm_9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAF2BCAF50D002D5A52 /* alarm_9.mp3 */; };
+		AD627BBA2BCAF50D002D5A52 /* alarm_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB02BCAF50D002D5A52 /* alarm_5.mp3 */; };
+		AD627BBB2BCAF50D002D5A52 /* alarm_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB12BCAF50D002D5A52 /* alarm_7.mp3 */; };
+		AD627BBC2BCAF50D002D5A52 /* alarm_10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB22BCAF50D002D5A52 /* alarm_10.mp3 */; };
+		AD627BBD2BCAF50D002D5A52 /* alarm_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB32BCAF50D002D5A52 /* alarm_8.mp3 */; };
+		AD627BBE2BCAF50D002D5A52 /* alarm_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB42BCAF50D002D5A52 /* alarm_6.mp3 */; };
+		AD627BBF2BCAF50D002D5A52 /* alarm_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BB52BCAF50D002D5A52 /* alarm_2.mp3 */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		D8EEDEE86D2D47DAA761D13E /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91DC239C403C416F9DA518C0 /* Nunito-BoldItalic.ttf */; };
@@ -81,9 +88,16 @@
 		A1ADB7F63FB04E8686335C4A /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		A2757753E4CD49ACA44ECA0F /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = TimeGoesBy/SplashScreen.storyboard; sourceTree = "<group>"; };
-		AD8B06252BAB92C900D4A3EE /* alarm_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_2.mp3; path = ../../../../Downloads/alarm_2.mp3; sourceTree = "<group>"; };
-		AD8B06272BAB92D100D4A3EE /* alarm_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_3.mp3; path = ../../../../Downloads/alarm_3.mp3; sourceTree = "<group>"; };
-		AD8B06292BAB931A00D4A3EE /* alarm_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_1.mp3; path = ../../../../Downloads/alarm_1.mp3; sourceTree = "<group>"; };
+		AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_3.mp3; path = ../../../../Downloads/alarm_3.mp3; sourceTree = "<group>"; };
+		AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_1.mp3; path = ../../../../Downloads/alarm_1.mp3; sourceTree = "<group>"; };
+		AD627BAE2BCAF50D002D5A52 /* alarm_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_4.mp3; path = ../../../../Downloads/alarm_4.mp3; sourceTree = "<group>"; };
+		AD627BAF2BCAF50D002D5A52 /* alarm_9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_9.mp3; path = ../../../../Downloads/alarm_9.mp3; sourceTree = "<group>"; };
+		AD627BB02BCAF50D002D5A52 /* alarm_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_5.mp3; path = ../../../../Downloads/alarm_5.mp3; sourceTree = "<group>"; };
+		AD627BB12BCAF50D002D5A52 /* alarm_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_7.mp3; path = ../../../../Downloads/alarm_7.mp3; sourceTree = "<group>"; };
+		AD627BB22BCAF50D002D5A52 /* alarm_10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_10.mp3; path = ../../../../Downloads/alarm_10.mp3; sourceTree = "<group>"; };
+		AD627BB32BCAF50D002D5A52 /* alarm_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_8.mp3; path = ../../../../Downloads/alarm_8.mp3; sourceTree = "<group>"; };
+		AD627BB42BCAF50D002D5A52 /* alarm_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_6.mp3; path = ../../../../Downloads/alarm_6.mp3; sourceTree = "<group>"; };
+		AD627BB52BCAF50D002D5A52 /* alarm_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_2.mp3; path = ../../../../Downloads/alarm_2.mp3; sourceTree = "<group>"; };
 		BA67FD9EF83D45F1901D7AF3 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../src/assets/fonts/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		CF209E90F28D4ECA9F262B52 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-MediumItalic.ttf"; path = "../src/assets/fonts/Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -191,9 +205,16 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				AD8B06292BAB931A00D4A3EE /* alarm_1.mp3 */,
-				AD8B06272BAB92D100D4A3EE /* alarm_3.mp3 */,
-				AD8B06252BAB92C900D4A3EE /* alarm_2.mp3 */,
+				AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */,
+				AD627BB52BCAF50D002D5A52 /* alarm_2.mp3 */,
+				AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */,
+				AD627BAE2BCAF50D002D5A52 /* alarm_4.mp3 */,
+				AD627BB02BCAF50D002D5A52 /* alarm_5.mp3 */,
+				AD627BB42BCAF50D002D5A52 /* alarm_6.mp3 */,
+				AD627BB12BCAF50D002D5A52 /* alarm_7.mp3 */,
+				AD627BB32BCAF50D002D5A52 /* alarm_8.mp3 */,
+				AD627BAF2BCAF50D002D5A52 /* alarm_9.mp3 */,
+				AD627BB22BCAF50D002D5A52 /* alarm_10.mp3 */,
 				13B07FAE1A68108700A75B9A /* TimeGoesBy */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -309,10 +330,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD627BB62BCAF50D002D5A52 /* alarm_3.mp3 in Resources */,
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				AD627BBE2BCAF50D002D5A52 /* alarm_6.mp3 in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				AD8B06262BAB92C900D4A3EE /* alarm_2.mp3 in Resources */,
 				484BB7F4F9E24EA8901E620A /* Montserrat-Black.ttf in Resources */,
 				AB0BF5AF5EAF44298C933E10 /* Montserrat-BlackItalic.ttf in Resources */,
 				1FC240DDF0244B3EAD4443B3 /* Montserrat-Bold.ttf in Resources */,
@@ -320,31 +342,37 @@
 				9468FB2FC6544A1D816DDE19 /* Montserrat-ExtraBold.ttf in Resources */,
 				9E0A0A51955E4359B48E52C2 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 				FA7064F053E44D3D8BA873B2 /* Montserrat-ExtraLight.ttf in Resources */,
+				AD627BBF2BCAF50D002D5A52 /* alarm_2.mp3 in Resources */,
 				19487701BDEA4B1380B44BBD /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				6468F4554E0E43079C06A5CB /* Montserrat-Italic.ttf in Resources */,
 				66F8088FD3154D62875224D5 /* Montserrat-Light.ttf in Resources */,
+				AD627BB72BCAF50D002D5A52 /* alarm_1.mp3 in Resources */,
+				AD627BBB2BCAF50D002D5A52 /* alarm_7.mp3 in Resources */,
 				3F5BDB51E8E54057BCBB0C69 /* Montserrat-LightItalic.ttf in Resources */,
 				00C46E348E80431BAA8AE75C /* Montserrat-Medium.ttf in Resources */,
 				E0A8B05064634F10B29A9FB8 /* Montserrat-MediumItalic.ttf in Resources */,
 				E348D062D6134BEEA7D20189 /* Montserrat-Regular.ttf in Resources */,
-				AD8B06282BAB92D100D4A3EE /* alarm_3.mp3 in Resources */,
 				5A12D02361054564AA3CAA4B /* Montserrat-SemiBold.ttf in Resources */,
 				2993E0EC3E2A4988BB726A64 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				61E1190F23594595A9833557 /* Montserrat-Thin.ttf in Resources */,
 				9AA6D53248B8487196D6E970 /* Montserrat-ThinItalic.ttf in Resources */,
 				20402D18A41747AF8FD72E67 /* Nunito-Black.ttf in Resources */,
-				AD8B062A2BAB931A00D4A3EE /* alarm_1.mp3 in Resources */,
+				AD627BB92BCAF50D002D5A52 /* alarm_9.mp3 in Resources */,
 				531626D8E8E64B4CB4E670BA /* Nunito-BlackItalic.ttf in Resources */,
 				380326E1C2184F50A920D881 /* Nunito-Bold.ttf in Resources */,
 				D8EEDEE86D2D47DAA761D13E /* Nunito-BoldItalic.ttf in Resources */,
+				AD627BB82BCAF50D002D5A52 /* alarm_4.mp3 in Resources */,
 				7DD2E5609AAB4970B4317B45 /* Nunito-ExtraBold.ttf in Resources */,
 				173D10BF5B9E48978471F7BC /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				14D3F979C0C74B36A9593E3C /* Nunito-ExtraLight.ttf in Resources */,
 				5ABBB06CF89B4FBFBA5F4C73 /* Nunito-ExtraLightItalic.ttf in Resources */,
 				E15A4403828A4801AC6D7280 /* Nunito-Italic.ttf in Resources */,
+				AD627BBA2BCAF50D002D5A52 /* alarm_5.mp3 in Resources */,
 				239559703F934B9DAD79A080 /* Nunito-Light.ttf in Resources */,
+				AD627BBC2BCAF50D002D5A52 /* alarm_10.mp3 in Resources */,
 				4A68FE7962F44FD5A01A6E8A /* Nunito-LightItalic.ttf in Resources */,
 				AD484CBC5BF8443988FE9613 /* Nunito-Regular.ttf in Resources */,
+				AD627BBD2BCAF50D002D5A52 /* alarm_8.mp3 in Resources */,
 				31CFFE5B9851495B938D8ADA /* Nunito-SemiBold.ttf in Resources */,
 				0D9C60E30921448AA1E869A3 /* Nunito-SemiBoldItalic.ttf in Resources */,
 			);

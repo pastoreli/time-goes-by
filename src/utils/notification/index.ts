@@ -21,6 +21,7 @@ import {
   AndroidChannelGroups,
   AndroidChannels,
   NotificationActions,
+  NotificationActionsGroup,
   NotificationId,
 } from '../../consts';
 import { Alarm } from '../../interfaces/alarm';
@@ -60,6 +61,33 @@ export type cancelScheduleNotificationsProps = {
   id: string;
   repeat?: RepeatNotificatonType;
   deleteChannelId?: string;
+};
+
+export const registerIosAction = async () => {
+  await notifee.setNotificationCategories([
+    {
+      id: NotificationActionsGroup.SIMPLE_STOP,
+      actions: [
+        {
+          id: NotificationActions.STOP,
+          title: 'Parar',
+        },
+      ],
+    },
+    {
+      id: NotificationActionsGroup.ALARM,
+      actions: [
+        {
+          id: NotificationActions.STOP,
+          title: 'Parar',
+        },
+        {
+          id: NotificationActions.SNOOZE,
+          title: 'Adiar',
+        },
+      ],
+    },
+  ]);
 };
 
 export const isNotificationAllowed = async () => {

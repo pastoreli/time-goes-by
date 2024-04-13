@@ -60,12 +60,17 @@ const DoNotDisturb: React.FC<DoNotDisturbProps> = ({
                   ...styles.iconContainer,
                   backgroundColor: theme.primaryLight,
                 }}>
-                <Icon name="volume-off" size={120} color={theme.lighthen} />
+                <Icon
+                  name="moon-waning-crescent"
+                  size={120}
+                  color={theme.lighthen}
+                  style={styles.icon}
+                />
               </View>
             )
           }
           hint="Não se esqueça de adicionar a outros modos caso você tenha!"
-          descriptionButtonText="Ir as configurações"
+          descriptionButtonText="Ir às configurações"
           actionText={actionText}
           onActionPress={handlePress}
           onDescriptionButtonPress={openSettings}
@@ -97,5 +102,9 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     justifyContent: 'center',
     alignItems: 'center',
+    transform: 'rotate(-40deg)',
+  },
+  icon: {
+    marginLeft: 20,
   },
 });

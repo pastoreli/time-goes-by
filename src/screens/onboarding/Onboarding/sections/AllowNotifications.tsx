@@ -38,7 +38,7 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
   if (nowAllowed) {
     return (
       <InfoContent
-        title="Sem permição para notificações"
+        title="Sem permissão para notificações"
         description="Acesse as configurações de notificações no seu aparelho e permita que o Time Goes By use o recurso."
         banner={
           <View
@@ -49,7 +49,7 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
             <Icon name="bell-off" size={120} color={theme.lighthen} />
           </View>
         }
-        descriptionButtonText="Ir as configurações"
+        descriptionButtonText="Ir às configurações"
         hint={
           checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
         }

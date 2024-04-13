@@ -41,11 +41,11 @@ const TabBar: React.FC<TabBarProps> = ({ navigation, state, show }) => {
           <Icon
             name={icon}
             size={30}
-            color={active ? theme.primary : theme.darken2}
+            color={active ? theme.primary : theme.darken1}
           />
           <Text
             size={10}
-            color={active ? theme.primary : theme.darken2}
+            color={active ? theme.primary : theme.darken1}
             weight="semibold"
             style={styles.itemText}>
             {text}

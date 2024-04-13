@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,6 +16,7 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { OnboardingSections } from '../../../consts';
+import { registerIosAction } from '../../../utils/notification';
 
 type ScreenNavigationProp = NavigationProp<RootStack, 'Onboarding'>;
 type ScreenRouteProp = RouteProp<RootStack, 'Onboarding'>;
@@ -30,6 +31,10 @@ export const Onboarding = () => {
   const refCarousel = useRef<any>();
 
   const { flow } = route.params;
+
+  useEffect(() => {
+    registerIosAction();
+  }, []);
 
   const RenderContent: React.FC<{
     type: OnboardingSections;

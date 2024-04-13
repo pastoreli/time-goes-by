@@ -31,7 +31,7 @@ const AndroidAllowAlarm: React.FC<AndroidAllowAlarm> = ({ onAllowed }) => {
   return (
     <InfoContent
       title="Notificações de alarme"
-      description="Acesse as configurações para permitir notifiçaões de alarme agendadas"
+      description="Acesse as configurações para permitir notificações de alarme agendadas."
       banner={
         <View
           style={{
@@ -41,7 +41,7 @@ const AndroidAllowAlarm: React.FC<AndroidAllowAlarm> = ({ onAllowed }) => {
           <Icon name="clock-alert" size={120} color={theme.lighthen} />
         </View>
       }
-      descriptionButtonText="Ir as configurações"
+      descriptionButtonText="Ir às configurações"
       hint={
         checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
       }
