@@ -55,7 +55,6 @@ const useAlarm = () => {
     });
 
     if (now.valueOf() > closestAlarmDateTime.valueOf()) {
-      // closestAlarmDateTime = closestAlarmDateTime.add(1, 'days');
       closestAlarmDateTime = dateUtils.addDays(closestAlarmDateTime, 1);
     }
 
