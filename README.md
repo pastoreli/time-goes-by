@@ -10,7 +10,7 @@
   <a aria-label="Expo version" href="https://expo.dev" target="_blank">
     <img alt="Expo version" src="https://img.shields.io/badge/Expo-50.0.11-%23FFFFFF?style=flat&logo=expo&logoColor=%23FFFFFF&labelColor=%23000000" />
   </a>
-  <a aria-label="Chat or ask a question" href="https://www.linkedin.com/in/igor-pastoreli-702685149" target="_blank">
+  <a aria-label="Chat or ask a question" href="https://www.linkedin.com/in/igor-pastoreli" target="_blank">
     <img alt="Chat or ask a question" src="https://img.shields.io/badge/Contact-LinkedIn-%230059B5?style=flat&logo=linkedin&logoColor=%230059B5&labelColor=%23000000" />
   </a>
 </p>
@@ -27,7 +27,7 @@
 
 <hr />
 
-Time Goes By was developed by [Igor Pastoreli](https://www.linkedin.com/in/igor-pastoreli-702685149) and written in React Native.
+Time Goes By was developed by [Igor Pastoreli](https://www.linkedin.com/in/igor-pastoreli) and written in React Native.
 
 ## Introduction
 
@@ -65,7 +65,7 @@ Time Goes By is a cross-platform clock app made for Android and IOS
     yarn test
 
 ## Author
-* [Igor Pastoreli](https://www.linkedin.com/in/igor-pastoreli-702685149/)
+* [Igor Pastoreli](https://www.linkedin.com/in/igor-pastoreli/)
 
 ## Credits
 * App icon: [Fernanda Ramos Matos](https://sandwiche.me/fernandarmatos)
