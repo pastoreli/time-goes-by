@@ -23,6 +23,7 @@ import { RootState } from '../../store';
 import { useShortCuts } from '../../hooks';
 import { ShortCuts } from '../../consts';
 import { ShortcutItem } from 'react-native-actions-shortcuts';
+import { Platform } from 'react-native';
 
 type ScreenRouteProp = RouteProp<RootStack, 'BottomNaviagtor'>;
 
@@ -59,13 +60,14 @@ const BottomNavigator: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const subscription = ShortcutsEmitter.addListener(
-      'onShortcutItemPressed',
-      handleSortCuts,
-    );
+    if (Platform.OS === 'ios') {
+      ShortcutsEmitter.addListener('onShortcutItemPressed', handleSortCuts);
+    }
 
     return () => {
-      subscription.remove();
+      if (Platform.OS === 'ios') {
+        ShortcutsEmitter.removeAllListeners('onShortcutItemPressed');
+      }
     };
   }, [handleSortCuts]);
 
