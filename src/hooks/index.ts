@@ -5,3 +5,4 @@ export { default as useSound } from './useSound';
 export { default as useStopwatch } from './useStopwatch';
 export { default as useTimer } from './useTimer';
 export { default as useSettings } from './useSettings';
+export { default as useShortCuts } from './useShortCuts';

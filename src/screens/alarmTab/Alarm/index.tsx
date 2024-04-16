@@ -1,7 +1,9 @@
 import {
   NavigationProp,
+  RouteProp,
   useIsFocused,
   useNavigation,
+  useRoute,
 } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
 import {
@@ -24,10 +26,12 @@ import { useAppState } from '@react-native-community/hooks';
 import { StatusBar } from 'expo-status-bar';
 
 type ScreenNavigationProp = NavigationProp<AlarmNavigatorRoutes, 'Alarm'>;
+type ScreenRouteProp = RouteProp<AlarmNavigatorRoutes, 'Alarm'>;
 
 const Alarm = () => {
   const theme = useTheme();
   const navigation = useNavigation<ScreenNavigationProp>();
+  const route = useRoute<ScreenRouteProp>();
   const { alarmNotificationAction } = useNotification();
   const screenIsFocused = useIsFocused();
   const { tabBarDistance } = useTabBar();
@@ -42,6 +46,8 @@ const Alarm = () => {
     toogleActiveAlarm,
     refetchAlarmList,
   } = useAlarm();
+
+  const { openDefinitions } = route.params || {};
 
   useEffect(() => {
     if (screenIsFocused) {
@@ -128,6 +134,12 @@ const Alarm = () => {
       refetchAlarmList();
     }
   }, [appState]);
+
+  useEffect(() => {
+    if (openDefinitions) {
+      handleGoToDefinitions();
+    }
+  }, [openDefinitions, handleGoToDefinitions]);
 
   if (alarmList.length === 0) {
     return (

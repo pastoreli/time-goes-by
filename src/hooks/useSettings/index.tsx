@@ -1,6 +1,5 @@
 import syncStorage from '@react-native-async-storage/async-storage';
 import { OnboardingSections, StorageKeys } from '../../consts';
-import { useEffect, useState } from 'react';
 import { SettingsOnboarding } from '../../interfaces/settings';
 import {
   isAndroidAlarmPermissionAllowed,

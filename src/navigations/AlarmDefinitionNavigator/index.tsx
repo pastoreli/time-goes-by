@@ -27,7 +27,9 @@ const AlarmDefinitionNavigator = () => {
   const dispatch = useDispatch();
   const { screenOptions } = useNavigatorUtils();
 
-  const { selectedAlarm } = route?.params;
+  console.log('selected: ', route?.params);
+
+  const { selectedAlarm } = route?.params || {};
 
   useEffect(() => {
     dispatch(initAlarm(selectedAlarm));

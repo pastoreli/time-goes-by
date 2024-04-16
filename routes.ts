@@ -13,8 +13,13 @@ export type RootStack = {
 
 export type BottomNavigatorRoutes = {
   WorldClockTab: undefined;
-  AlarmTab: undefined;
-  StopwatchTab: undefined;
+  AlarmTab: {
+    openDefinitions?: boolean;
+  };
+  StopwatchTab: {
+    start?: boolean;
+    stop?: boolean;
+  };
   TimerTab: undefined;
 };
 
@@ -28,7 +33,9 @@ export type WorldClockChooseRoutes = {
 };
 
 export type AlarmNavigatorRoutes = {
-  Alarm: undefined;
+  Alarm: {
+    openDefinitions?: boolean;
+  };
   AlarmDefinitionModal: {
     selectedAlarm?: Alarm;
   };
@@ -41,7 +48,10 @@ export type AlarmDefinitionRoutes = {
 };
 
 export type StopwatchNavigatorRoutes = {
-  Stopwatch: undefined;
+  Stopwatch: {
+    start?: boolean;
+    stop?: boolean;
+  };
 };
 
 export type TimerNavigatorRoutes = {

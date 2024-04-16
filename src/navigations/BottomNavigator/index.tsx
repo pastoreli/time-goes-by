@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Interfaces
@@ -12,9 +12,17 @@ import WorldClockNavigator from '../WorldClockNavigator';
 import AlarmNavigator from '../AlarmNavigator';
 import StopwatchNavigator from '../StopwatchNavigator';
 import TimerNavigator from '../TimerNavigator';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import {
+  CommonActions,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { useShortCuts } from '../../hooks';
+import { ShortCuts } from '../../consts';
+import { ShortcutItem } from 'react-native-actions-shortcuts';
 
 type ScreenRouteProp = RouteProp<RootStack, 'BottomNaviagtor'>;
 
@@ -23,8 +31,47 @@ const Tab = createBottomTabNavigator<BottomNavigatorRoutes>();
 const BottomNavigator: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
   const { tabBarVisible } = useSelector((state: RootState) => state.layout);
+  const { ShortcutsEmitter, setShortcuts, getShortcuts } = useShortCuts();
+  const navigation = useNavigation();
 
   const { initialScreen } = route.params;
+
+  const registerShortCuts = useCallback(async () => {
+    const result = await getShortcuts();
+    if (result.length === 0) {
+      setShortcuts([
+        ShortCuts.SET_ALARM,
+        ShortCuts.START_STOPWATCH,
+        ShortCuts.SET_TIMER,
+      ]);
+    }
+  }, []);
+
+  const handleSortCuts = useCallback((item: ShortcutItem) => {
+    if (item.data.screen) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [item.data.screen],
+        }),
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    const subscription = ShortcutsEmitter.addListener(
+      'onShortcutItemPressed',
+      handleSortCuts,
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, [handleSortCuts]);
+
+  useEffect(() => {
+    registerShortCuts();
+  }, [registerShortCuts]);
 
   return (
     <Tab.Navigator

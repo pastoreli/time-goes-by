@@ -1,3 +1,5 @@
+import { ShortcutItem } from 'react-native-actions-shortcuts';
+
 export enum WeekDay {
   SUNDAY = 0,
   MONDAY = 1,
@@ -65,3 +67,73 @@ export enum OnboardingSections {
   DO_NOT_DISTURB = 2,
   ALLOW_ALARM_ANDROID = 3,
 }
+
+export const ShortCuts: { [key: string]: ShortcutItem } = {
+  SET_ALARM: {
+    type: 'set_alarm',
+    title: 'Novo Alarme',
+    shortTitle: 'Novo Alarme',
+    iconName: 'ic_clock_plus',
+    data: {
+      screen: {
+        name: 'AlarmTab',
+        params: {
+          openDefinitions: true,
+        },
+      },
+    },
+  },
+  SET_TIMER: {
+    type: 'set_timer',
+    title: 'Iniciar Temporizador',
+    shortTitle: 'Iniciar Temporizador',
+    iconName: 'ic_timer',
+    data: {
+      screen: {
+        name: 'TimerTab',
+      },
+    },
+  },
+  START_STOPWATCH: {
+    type: 'start_stopwatch',
+    title: 'Iniciar Cronômetro',
+    shortTitle: 'Iniciar Cronômetro',
+    iconName: 'ic_stopwatch_play',
+    data: {
+      screen: {
+        name: 'StopwatchTab',
+        params: {
+          start: true,
+        },
+      },
+    },
+  },
+  RESUME_STOPWATCH: {
+    type: 'resume_stopwatch',
+    title: 'Retomar Cronômetro',
+    shortTitle: 'Retomar Cronômetro',
+    iconName: 'ic_stopwatch_play',
+    data: {
+      screen: {
+        name: 'StopwatchTab',
+        params: {
+          start: true,
+        },
+      },
+    },
+  },
+  STOP_STOPWATCH: {
+    type: 'stop_stopwatch',
+    title: 'Parar Cronômetro',
+    shortTitle: 'Parar Cronômetro',
+    iconName: 'ic_stopwatch_pause',
+    data: {
+      screen: {
+        name: 'StopwatchTab',
+        params: {
+          stop: true,
+        },
+      },
+    },
+  },
+};

@@ -5,16 +5,26 @@ import { useTheme } from 'styled-components/native';
 import { Text, Button } from '../../../components';
 import { useAppState } from '@react-native-community/hooks';
 import { ClockTimeType, integerToClockTime } from '../../../utils/time';
-import { useStopwatch } from '../../../hooks';
+import { useShortCuts, useStopwatch } from '../../../hooks';
 import { StatusBar } from 'expo-status-bar';
+import { ShortCuts } from '../../../consts';
+import { ShortcutItem } from 'react-native-actions-shortcuts';
+import { StopwatchNavigatorRoutes } from '../../../../routes';
+import { RouteProp, useRoute } from '@react-navigation/native';
+
+type ScreenRouteProp = RouteProp<StopwatchNavigatorRoutes, 'Stopwatch'>;
 
 const Stopwatch = () => {
   const safeAreaInsets = useSafeAreaInsets();
   const theme = useTheme();
   const appState = useAppState();
   const colorScheme = useColorScheme();
+  const { removerShortcuts, setShortcut } = useShortCuts();
   const { setStopwatch, findExistingStopwatch, clearStopwatch } =
     useStopwatch();
+  const route = useRoute<ScreenRouteProp>();
+
+  const { start: initStart, stop: initStop } = route.params;
 
   const refTimerInterval = useRef<NodeJS.Timeout>();
   const refLapInterval = useRef<NodeJS.Timeout>();
@@ -22,6 +32,24 @@ const Stopwatch = () => {
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [lapList, setLapList] = useState<number[]>([]);
+
+  const handleShortCuts = async (shorCut: ShortcutItem) => {
+    const stopWatchShortCuts = [
+      ShortCuts.START_STOPWATCH,
+      ShortCuts.RESUME_STOPWATCH,
+      ShortCuts.STOP_STOPWATCH,
+    ];
+
+    await removerShortcuts(
+      stopWatchShortCuts.reduce(
+        (result: string[], item) =>
+          item.type !== shorCut.type ? [...result, item.type] : result,
+        [],
+      ),
+    );
+
+    setShortcut(shorCut, 1);
+  };
 
   const startLapTimmmer = (list: number[]) => {
     const lapCopy = [...list];
@@ -38,12 +66,14 @@ const Stopwatch = () => {
     );
     startLapTimmmer(laps.length > 0 ? laps : [0]);
     setIsActive(true);
+    handleShortCuts(ShortCuts.STOP_STOPWATCH);
   };
 
   const stopTimmer = () => {
     setIsActive(false);
     clearInterval(refTimerInterval.current);
     clearInterval(refLapInterval.current);
+    handleShortCuts(ShortCuts.RESUME_STOPWATCH);
   };
 
   const resetTimmer = () => {
@@ -51,6 +81,7 @@ const Stopwatch = () => {
     setTimer(0);
     setLapList([]);
     clearStopwatch();
+    handleShortCuts(ShortCuts.START_STOPWATCH);
   };
 
   const newLap = () => {
@@ -83,8 +114,10 @@ const Stopwatch = () => {
     const data = await findExistingStopwatch();
     setTimer(data.timer);
     setLapList(data.laps);
-    if (!data.paused) {
+    if (!initStop && (!data.paused || initStart)) {
       startTimmer(data.laps);
+    } else if (initStop) {
+      stopTimmer();
     }
   };
 
