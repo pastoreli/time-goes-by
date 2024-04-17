@@ -5,7 +5,7 @@ import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
 import { trigger, HapticFeedbackTypes } from 'react-native-haptic-feedback';
-import { Text, Card } from '../../../../components';
+import { Text, CardDaily } from '../../../../components';
 import styled, { useTheme } from 'styled-components/native';
 import dateUtil from '../../../../utils/date';
 import { timeZoneToDisplaySimpleText } from '../../../../utils/stringUtils';
@@ -57,7 +57,13 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
     item,
     drag,
   }) => (
-    <Card testID={testIds.LIST_ITEM} key={item.timeZone}>
+    <CardDaily
+      testID={testIds.LIST_ITEM}
+      key={item.timeZone}
+      hour={parseInt(
+        dateUtil.formatInTimeZone(date.valueOf(), item.timeZone, 'H'),
+        10,
+      )}>
       <View style={styles.rightItem}>
         {editMode && (
           <MinusButton
@@ -91,7 +97,7 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
           </Text>
         )}
       </View>
-    </Card>
+    </CardDaily>
   );
 
   return (

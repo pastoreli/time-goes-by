@@ -8,6 +8,7 @@ const Card = styled.View`
   height: 110px;
   background-color: ${({ theme }) => theme.card.color};
   border-radius: 20px;
+  overflow: hidden;
   shadow-opacity: 0.1;
   shadow-radius: 4px;
   shadow-color: ${({ theme }) => theme.shadowColor};

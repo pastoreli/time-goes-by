@@ -7,7 +7,7 @@ import DraggableFlatList, {
 } from 'react-native-draggable-flatlist';
 import { Alarm } from '../../../../interfaces/alarm';
 import { useTabBar } from '../../../../components/TabBar';
-import { Card, Switch, Text } from '../../../../components';
+import { CardDaily, Switch, Text } from '../../../../components';
 import { HapticFeedbackTypes, trigger } from 'react-native-haptic-feedback';
 import { formatSelectedWeekList } from '../../../../utils/stringUtils';
 
@@ -40,7 +40,7 @@ const AlarmList: React.FC<AlarmListProps> = ({
       <TouchableOpacity
         testID={testIds.LIST_ITEM}
         onPress={() => onSelect?.(item)}>
-        <Card>
+        <CardDaily hour={item.hour}>
           <View style={styles.rightItem}>
             {editMode && (
               <MinusButton
@@ -76,7 +76,7 @@ const AlarmList: React.FC<AlarmListProps> = ({
               />
             )}
           </View>
-        </Card>
+        </CardDaily>
       </TouchableOpacity>
     );
   };

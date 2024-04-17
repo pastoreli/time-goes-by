@@ -1,6 +1,7 @@
 export { default as BlockButton } from './BlockButton';
 export { default as Button } from './Button';
 export { default as Card } from './Card';
+export { default as CardDaily } from './CardDaily';
 export * from './List';
 export { default as Clock } from './Clock';
 export { default as EmptyInfo } from './EmptyInfo';
