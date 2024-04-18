@@ -10,6 +10,7 @@ import { RootStack } from '../../../routes';
 import BottomNavigator from '../BottomNavigator';
 import Onboarding from '../../screens/onboarding/Onboarding';
 import LoadingApp from '../../screens/loadingApp/Loading';
+import { Platform } from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStack>();
 
@@ -46,6 +47,7 @@ const AppNavigator = () => {
             backgroundColor: theme.containerBg,
           },
           navigationBarColor: theme.bottomNavigation,
+          animation: Platform.OS === 'android' ? 'slide_from_right' : 'default',
         }}
       />
     </Stack.Navigator>

@@ -8,21 +8,30 @@ import Card from '../Card';
 export type CardDailyProps = PropsWithChildren & {
   testID?: string;
   hour: number;
+  reduceIconOpacity?: boolean;
 };
 
-const CardDaily: React.FC<CardDailyProps> = ({ testID, hour, children }) => {
+const CardDaily: React.FC<CardDailyProps> = ({
+  testID,
+  hour,
+  reduceIconOpacity,
+  children,
+}) => {
   const colorScheme = useColorScheme();
 
   const cardLayout = useMemo(() => {
     const layout = {
       color: '#2DA4F4',
       icon: (
-        <IconIon
-          name="sunny"
-          color="#E7CE6C"
-          size={60}
-          style={{ right: -25, opacity: 0.8 }}
-        />
+        <View
+          style={{
+            width: 50,
+            right: -20,
+            opacity: 0.6,
+            transform: 'scaleX(-1)',
+          }}>
+          <IconIon name="partly-sunny" color="#E7CE6C" size={50} />
+        </View>
       ),
     };
 
@@ -39,15 +48,12 @@ const CardDaily: React.FC<CardDailyProps> = ({ testID, hour, children }) => {
     } else if (hour >= 12) {
       layout.color = '#FFAC6D';
       layout.icon = (
-        <View
-          style={{
-            width: 50,
-            right: -20,
-            opacity: 0.6,
-            transform: 'scaleX(-1)',
-          }}>
-          <IconIon name="partly-sunny" color="#FFFFFF" size={50} />
-        </View>
+        <IconIon
+          name="sunny"
+          color="#FFFFFF"
+          size={60}
+          style={{ right: -25, opacity: 0.8 }}
+        />
       );
     }
 
@@ -59,7 +65,7 @@ const CardDaily: React.FC<CardDailyProps> = ({ testID, hour, children }) => {
       <View
         style={{
           ...styles.designContainer,
-          opacity: colorScheme === 'dark' ? 0.8 : 0.5,
+          opacity: reduceIconOpacity ? 0.1 : colorScheme === 'dark' ? 0.8 : 0.5,
         }}>
         <DesignColor color={cardLayout.color} />
         <View style={styles.designBlurContainer}>

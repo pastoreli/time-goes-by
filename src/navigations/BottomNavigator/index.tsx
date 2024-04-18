@@ -35,7 +35,7 @@ const BottomNavigator: React.FC = () => {
   const { ShortcutsEmitter, setShortcuts, getShortcuts } = useShortCuts();
   const navigation = useNavigation();
 
-  const { initialScreen } = route.params;
+  const { initialScreen } = route.params || {};
 
   const registerShortCuts = useCallback(async () => {
     const result = await getShortcuts();

@@ -59,11 +59,11 @@ const WorldClockList: React.FC<WorldClockListProps> = ({
   }) => (
     <CardDaily
       testID={testIds.LIST_ITEM}
-      key={item.timeZone}
       hour={parseInt(
         dateUtil.formatInTimeZone(date.valueOf(), item.timeZone, 'H'),
         10,
-      )}>
+      )}
+      reduceIconOpacity={editMode}>
       <View style={styles.rightItem}>
         {editMode && (
           <MinusButton

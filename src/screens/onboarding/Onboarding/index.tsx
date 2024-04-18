@@ -10,6 +10,7 @@ import {
 } from './sections';
 import { RootStack } from '../../../../routes';
 import {
+  CommonActions,
   NavigationProp,
   RouteProp,
   useNavigation,
@@ -60,7 +61,17 @@ export const Onboarding = () => {
 
   const handleNext = (last: boolean) => {
     if (last) {
-      navigation.navigate('BottomNaviagtor', {});
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'BottomNaviagtor',
+              params: {},
+            },
+          ],
+        }),
+      );
     } else {
       refCarousel.current.next();
     }

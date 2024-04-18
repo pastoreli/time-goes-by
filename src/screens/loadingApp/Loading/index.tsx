@@ -8,7 +8,11 @@ import { BottomNavigatorRoutes, RootStack } from '../../../../routes';
 import { OnboardingSections } from '../../../consts';
 import { useSettings } from '../../../hooks';
 import { handleNotificationInteraction } from '../../../utils/notification';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  CommonActions,
+  NavigationProp,
+  useNavigation,
+} from '@react-navigation/native';
 
 type ScreenNavigationProp = NavigationProp<RootStack, 'LoadingApp'>;
 
@@ -68,13 +72,33 @@ const Loading = () => {
       !isLoading.interval
     ) {
       if (onboardingFlow.length > 0) {
-        navigation.navigate('Onboarding', {
-          flow: onboardingFlow,
-        });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Onboarding',
+                params: {
+                  flow: onboardingFlow,
+                },
+              },
+            ],
+          }),
+        );
       } else {
-        navigation.navigate('BottomNaviagtor', {
-          initialScreen: initialScreen || 'WorldClockTab',
-        });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'BottomNaviagtor',
+                params: {
+                  initialScreen: initialScreen || 'WorldClockTab',
+                },
+              },
+            ],
+          }),
+        );
       }
     }
   }, [isLoading]);

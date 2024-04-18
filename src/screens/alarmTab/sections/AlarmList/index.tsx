@@ -40,7 +40,7 @@ const AlarmList: React.FC<AlarmListProps> = ({
       <TouchableOpacity
         testID={testIds.LIST_ITEM}
         onPress={() => onSelect?.(item)}>
-        <CardDaily hour={item.hour}>
+        <CardDaily hour={item.hour} reduceIconOpacity={editMode}>
           <View style={styles.rightItem}>
             {editMode && (
               <MinusButton
