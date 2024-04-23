@@ -69,7 +69,7 @@ const Clock: React.FC<ClockProps> = ({
             wrapperHeight={300}
             wrapperBackground="transparent"
             itemHeight={100}
-            highlightColor={theme.primary}
+            highlightColor={theme.lighthen3}
             highlightBorderWidth={2}
             onValueChange={data => onChange(data, index)}
           />
@@ -84,7 +84,7 @@ const Clock: React.FC<ClockProps> = ({
                 style={{
                   ...styles.dotsItem,
                   ...styles.dotsItemBorder,
-                  borderColor: theme.primary,
+                  borderColor: theme.lighthen3,
                 }}>
                 <Text size={40}>:</Text>
               </View>

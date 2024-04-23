@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   actions: {
-    marginTop: 20,
+    marginTop: 50,
   },
 });

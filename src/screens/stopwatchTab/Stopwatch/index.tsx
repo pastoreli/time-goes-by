@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingTop: 20,
+    paddingTop: 80,
   },
   timer: {
     paddingLeft: 20,
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 10,
-    marginTop: 30,
+    marginTop: 80,
   },
   lapContent: {
     padding: 20,
