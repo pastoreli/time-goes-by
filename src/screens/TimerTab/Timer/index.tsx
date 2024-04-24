@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, useColorScheme, Platform } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  useColorScheme,
+  Platform,
+  NativeModules,
+} from 'react-native';
 import { TimerDefinitions, TimerRunning } from '../sections';
 import { ClockTimeType, clockTimeToInteger } from '../../../utils/time';
 import { useTimer } from '../../../hooks';
@@ -19,6 +25,8 @@ import {
 import { androidSimpleStopActions } from '../../../utils/lists/notifications';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from 'styled-components/native';
+
+const { LiveTimer } = NativeModules;
 
 const AndroidChannelGroup = AndroidChannelGroups.TIMER;
 
@@ -96,6 +104,11 @@ const Timer = () => {
     const definedTimer = setTimer(timerTotal);
     defineNotification(definedTimer);
     setLastSetTimer(timerTotal);
+
+    // TODO: MODULARIZE
+    console.log('total: ', timerTotal);
+    LiveTimer.startActivity(timerTotal.toString());
+    // LiveTimer.startActivity(200);
   };
 
   const handleCancel = (isOuver: boolean) => {
@@ -103,6 +116,7 @@ const Timer = () => {
       cancelNotification();
     }
     clearTimer();
+    LiveTimer.endActivity();
   };
 
   const handleStatusUpdate = (timerValue: number, paused: boolean) => {

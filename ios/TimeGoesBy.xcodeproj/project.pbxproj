@@ -40,6 +40,16 @@
 		9E0A0A51955E4359B48E52C2 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D832B21CA8FA43228BEB1A38 /* Montserrat-ExtraBoldItalic.ttf */; };
 		AB0BF5AF5EAF44298C933E10 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C26F5EED1F544F9906AD90A /* Montserrat-BlackItalic.ttf */; };
 		AD484CBC5BF8443988FE9613 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CD0551D643447A79D88E08D /* Nunito-Regular.ttf */; };
+		AD4FD2632BD898C500960876 /* LiveTimerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD2622BD898C500960876 /* LiveTimerModule.swift */; };
+		AD4FD2652BD8995E00960876 /* LiveTimerModuleHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD2642BD8995E00960876 /* LiveTimerModuleHeader.m */; };
+		AD4FD2862BD8A8F400960876 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FD26B2BD8A3C600960876 /* WidgetKit.framework */; };
+		AD4FD2872BD8A8F400960876 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4FD26D2BD8A3C600960876 /* SwiftUI.framework */; };
+		AD4FD28A2BD8A8F400960876 /* LiveTimerBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD2892BD8A8F400960876 /* LiveTimerBundle.swift */; };
+		AD4FD28C2BD8A8F400960876 /* LiveTimerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD28B2BD8A8F400960876 /* LiveTimerLiveActivity.swift */; };
+		AD4FD28E2BD8A8F400960876 /* LiveTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD28D2BD8A8F400960876 /* LiveTimer.swift */; };
+		AD4FD2902BD8A8F600960876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4FD28F2BD8A8F600960876 /* Assets.xcassets */; };
+		AD4FD2942BD8A8F600960876 /* LiveTimerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD4FD2852BD8A8F400960876 /* LiveTimerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD4FD2982BD8A99000960876 /* LiveTimerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FD28B2BD8A8F400960876 /* LiveTimerLiveActivity.swift */; };
 		AD627BB62BCAF50D002D5A52 /* alarm_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */; };
 		AD627BB72BCAF50D002D5A52 /* alarm_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */; };
 		AD627BB82BCAF50D002D5A52 /* alarm_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AD627BAE2BCAF50D002D5A52 /* alarm_4.mp3 */; };
@@ -58,6 +68,30 @@
 		E348D062D6134BEEA7D20189 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F156D794C4244B809C392874 /* Montserrat-Regular.ttf */; };
 		FA7064F053E44D3D8BA873B2 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA67FD9EF83D45F1901D7AF3 /* Montserrat-ExtraLight.ttf */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AD4FD2922BD8A8F600960876 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD4FD2842BD8A8F400960876;
+			remoteInfo = LiveTimerExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AD4FD27F2BD8A3C800960876 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AD4FD2942BD8A8F600960876 /* LiveTimerExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		020E1ADBC4764C9592BE8BF6 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
@@ -88,6 +122,16 @@
 		A1ADB7F63FB04E8686335C4A /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		A2757753E4CD49ACA44ECA0F /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = TimeGoesBy/SplashScreen.storyboard; sourceTree = "<group>"; };
+		AD4FD2622BD898C500960876 /* LiveTimerModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTimerModule.swift; sourceTree = "<group>"; };
+		AD4FD2642BD8995E00960876 /* LiveTimerModuleHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveTimerModuleHeader.m; sourceTree = "<group>"; };
+		AD4FD26B2BD8A3C600960876 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		AD4FD26D2BD8A3C600960876 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AD4FD2852BD8A8F400960876 /* LiveTimerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveTimerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD4FD2892BD8A8F400960876 /* LiveTimerBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTimerBundle.swift; sourceTree = "<group>"; };
+		AD4FD28B2BD8A8F400960876 /* LiveTimerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTimerLiveActivity.swift; sourceTree = "<group>"; };
+		AD4FD28D2BD8A8F400960876 /* LiveTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTimer.swift; sourceTree = "<group>"; };
+		AD4FD28F2BD8A8F600960876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AD4FD2912BD8A8F600960876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_3.mp3; path = ../../../../Downloads/alarm_3.mp3; sourceTree = "<group>"; };
 		AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_1.mp3; path = ../../../../Downloads/alarm_1.mp3; sourceTree = "<group>"; };
 		AD627BAE2BCAF50D002D5A52 /* alarm_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_4.mp3; path = ../../../../Downloads/alarm_4.mp3; sourceTree = "<group>"; };
@@ -128,6 +172,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD4FD2822BD8A8F400960876 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD4FD2872BD8A8F400960876 /* SwiftUI.framework in Frameworks */,
+				AD4FD2862BD8A8F400960876 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -152,6 +205,8 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-TimeGoesBy.a */,
+				AD4FD26B2BD8A3C600960876 /* WidgetKit.framework */,
+				AD4FD26D2BD8A3C600960876 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,6 +260,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AD4FD2642BD8995E00960876 /* LiveTimerModuleHeader.m */,
+				AD4FD2622BD898C500960876 /* LiveTimerModule.swift */,
 				AD627BAD2BCAF50D002D5A52 /* alarm_1.mp3 */,
 				AD627BB52BCAF50D002D5A52 /* alarm_2.mp3 */,
 				AD627BAC2BCAF50D002D5A52 /* alarm_3.mp3 */,
@@ -217,6 +274,7 @@
 				AD627BB22BCAF50D002D5A52 /* alarm_10.mp3 */,
 				13B07FAE1A68108700A75B9A /* TimeGoesBy */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				AD4FD2882BD8A8F400960876 /* LiveTimer */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
@@ -232,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* TimeGoesBy.app */,
+				AD4FD2852BD8A8F400960876 /* LiveTimerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -242,6 +301,18 @@
 				FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */,
 			);
 			name = TimeGoesBy;
+			sourceTree = "<group>";
+		};
+		AD4FD2882BD8A8F400960876 /* LiveTimer */ = {
+			isa = PBXGroup;
+			children = (
+				AD4FD2892BD8A8F400960876 /* LiveTimerBundle.swift */,
+				AD4FD28B2BD8A8F400960876 /* LiveTimerLiveActivity.swift */,
+				AD4FD28D2BD8A8F400960876 /* LiveTimer.swift */,
+				AD4FD28F2BD8A8F600960876 /* Assets.xcassets */,
+				AD4FD2912BD8A8F600960876 /* Info.plist */,
+			);
+			path = LiveTimer;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -284,15 +355,34 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
+				AD4FD27F2BD8A3C800960876 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AD4FD2932BD8A8F600960876 /* PBXTargetDependency */,
 			);
 			name = TimeGoesBy;
 			productName = TimeGoesBy;
 			productReference = 13B07F961A680F5B00A75B9A /* TimeGoesBy.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AD4FD2842BD8A8F400960876 /* LiveTimerExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD4FD2952BD8A8F600960876 /* Build configuration list for PBXNativeTarget "LiveTimerExtension" */;
+			buildPhases = (
+				AD4FD2812BD8A8F400960876 /* Sources */,
+				AD4FD2822BD8A8F400960876 /* Frameworks */,
+				AD4FD2832BD8A8F400960876 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiveTimerExtension;
+			productName = LiveTimerExtension;
+			productReference = AD4FD2852BD8A8F400960876 /* LiveTimerExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -300,10 +390,14 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
+					};
+					AD4FD2842BD8A8F400960876 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -321,6 +415,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* TimeGoesBy */,
+				AD4FD2842BD8A8F400960876 /* LiveTimerExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -375,6 +470,14 @@
 				AD627BBD2BCAF50D002D5A52 /* alarm_8.mp3 in Resources */,
 				31CFFE5B9851495B938D8ADA /* Nunito-SemiBold.ttf in Resources */,
 				0D9C60E30921448AA1E869A3 /* Nunito-SemiBoldItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD4FD2832BD8A8F400960876 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD4FD2902BD8A8F600960876 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,17 +610,39 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
+				AD4FD2982BD8A99000960876 /* LiveTimerLiveActivity.swift in Sources */,
 				5C9A9139D08E4EEA97E73B99 /* noop-file.swift in Sources */,
+				AD4FD2652BD8995E00960876 /* LiveTimerModuleHeader.m in Sources */,
+				AD4FD2632BD898C500960876 /* LiveTimerModule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD4FD2812BD8A8F400960876 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD4FD28C2BD8A8F400960876 /* LiveTimerLiveActivity.swift in Sources */,
+				AD4FD28A2BD8A8F400960876 /* LiveTimerBundle.swift in Sources */,
+				AD4FD28E2BD8A8F400960876 /* LiveTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AD4FD2932BD8A8F600960876 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD4FD2842BD8A8F400960876 /* LiveTimerExtension */;
+			targetProxy = AD4FD2922BD8A8F600960876 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C2E3173556A471DD304B334 /* Pods-TimeGoesBy.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TimeGoesBy/TimeGoesBy.entitlements;
@@ -542,7 +667,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igorpastoreli.myclock;
-				PRODUCT_NAME = "TimeGoesBy";
+				PRODUCT_NAME = TimeGoesBy;
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeGoesBy/TimeGoesBy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -555,6 +680,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-TimeGoesBy.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TimeGoesBy/TimeGoesBy.entitlements;
@@ -574,7 +700,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igorpastoreli.myclock;
-				PRODUCT_NAME = "TimeGoesBy";
+				PRODUCT_NAME = TimeGoesBy;
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeGoesBy/TimeGoesBy-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -640,10 +766,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = false;
@@ -700,14 +823,98 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = false;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AD4FD2962BD8A8F600960876 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = X29RRZH2A5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveTimer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveTimer;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igorpastoreli.myclock.LiveTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD4FD2972BD8A8F600960876 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = X29RRZH2A5;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveTimer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveTimer;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igorpastoreli.myclock.LiveTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -728,6 +935,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD4FD2952BD8A8F600960876 /* Build configuration list for PBXNativeTarget "LiveTimerExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD4FD2962BD8A8F600960876 /* Debug */,
+				AD4FD2972BD8A8F600960876 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
