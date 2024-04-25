@@ -26,6 +26,7 @@ import {
 } from '../../consts';
 import { Alarm } from '../../interfaces/alarm';
 import { Platform } from 'react-native';
+import { LiveTimerActivity } from '../../modules/native/ios/LiveActivities';
 
 export enum RepeatNotificatonType {
   ONLY_ONE = 1,
@@ -243,6 +244,7 @@ export const dysplayNotification = async (
 
 const handleTimerNotification = (notification: Notification) => {
   if (notification.data) {
+    LiveTimerActivity.endActivity();
     const data = notification.data;
     cancelScheduleNotifications({
       id: data.id as string,

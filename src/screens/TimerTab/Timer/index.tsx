@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  useColorScheme,
-  Platform,
-  NativeModules,
-} from 'react-native';
+import { View, StyleSheet, useColorScheme, Platform } from 'react-native';
 import { TimerDefinitions, TimerRunning } from '../sections';
 import { ClockTimeType, clockTimeToInteger } from '../../../utils/time';
 import { useTimer } from '../../../hooks';
@@ -25,8 +19,7 @@ import {
 import { androidSimpleStopActions } from '../../../utils/lists/notifications';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from 'styled-components/native';
-
-const { LiveTimer } = NativeModules;
+import { LiveTimerActivity } from '../../../modules/native/ios/LiveActivities';
 
 const AndroidChannelGroup = AndroidChannelGroups.TIMER;
 
@@ -101,14 +94,16 @@ const Timer = () => {
     let timerTotal = clockTimeToInteger(timer[0], ClockTimeType.HOURS);
     timerTotal += clockTimeToInteger(timer[1], ClockTimeType.MINUTES);
     timerTotal += clockTimeToInteger(timer[2], ClockTimeType.SECONDS);
+
     const definedTimer = setTimer(timerTotal);
-    defineNotification(definedTimer);
-    setLastSetTimer(timerTotal);
 
     // TODO: MODULARIZE
-    console.log('total: ', timerTotal);
-    LiveTimer.startActivity(timerTotal.toString());
-    // LiveTimer.startActivity(200);
+    LiveTimerActivity.startActivity({
+      timerValue: timerTotal.toString(),
+    });
+
+    defineNotification(definedTimer);
+    setLastSetTimer(timerTotal);
   };
 
   const handleCancel = (isOuver: boolean) => {
@@ -116,7 +111,7 @@ const Timer = () => {
       cancelNotification();
     }
     clearTimer();
-    LiveTimer.endActivity();
+    LiveTimerActivity.endActivity();
   };
 
   const handleStatusUpdate = (timerValue: number, paused: boolean) => {

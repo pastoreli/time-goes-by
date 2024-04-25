@@ -9,10 +9,19 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
+@available(iOS 16.1, *)
+struct TimerView: View {
+  let timer: Int
+  
+  var body: some View {
+    Text(timerInterval: Date.now...Date(timeInterval: Double(timer) / 1000, since: .now), pauseTime: Date.now)
+  }
+}
+
 struct LiveTimerAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var timer: Int
+      var timer: Int
     }
 
     // Fixed non-changing properties about your activity go here!
@@ -21,41 +30,63 @@ struct LiveTimerAttributes: ActivityAttributes {
 
 @available(iOS 16.1, *)
 struct LiveTimerLiveActivity: Widget {
-  func getTimerText (timer: Int) -> String {
-    let minutes = Int(floor(Double((timer % 3600000) / 60000)));
-    let seconds = Int(floor(Double((timer % 60000) / 1000)));
-    return "\(minutes):\(seconds)"
-  }
-  
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LiveTimerAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.timer)")
+          HStack(spacing: 20) {
+            Image("logo")
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 45, height: 45)
+            Spacer()
+            HStack(alignment: .bottom, spacing: 10){
+              Spacer()
+              Spacer()
+              Text("Timer")
+                .font(.system(size: 20, weight: .bold))
+              TimerView(timer: context.state.timer)
+                .font(.system(size: 30, weight: .bold))
+                .monospacedDigit()
+                .frame(width: 135)
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
-
+            .multilineTextAlignment(.trailing)
+            .frame(alignment: .trailing)
+          }
+          .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15))
+          .frame(maxWidth: .infinity)
+          .activityBackgroundTint(Color.white)
+          .activitySystemActionForegroundColor(Color.black)
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
-                DynamicIslandExpandedRegion(.leading) {
-                  Text("\(context.state.timer)")
+              DynamicIslandExpandedRegion(.leading) {
+                Image("logo")
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .frame(width: 60, height: 60)
+              }
+              DynamicIslandExpandedRegion(.trailing) {
+                VStack(alignment: .trailing, spacing: 10){
+                  Text("Timer")
+                    .font(.system(size: 16, weight: .bold))
+                    TimerView(timer: context.state.timer)
+                      .font(.system(size: 30, weight: .bold))
+                      .lineLimit(1)
+                      .frame(width: 135)
+                      .multilineTextAlignment(.trailing)
+                      .monospacedDigit()
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
-                }
-                DynamicIslandExpandedRegion(.bottom) {
-                  Text("Bottom \(getTimerText(timer: context.state.timer))")
-                    // more content
-                }
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 5))
+              }
             } compactLeading: {
-                Text("L")
+              Image("logo").resizable().aspectRatio(contentMode: .fit)
             } compactTrailing: {
-                Text("T \(context.state.timer)")
+              TimerView(timer: context.state.timer)
+                .font(.system(size: 14, weight: .bold))
+                .frame(maxWidth: 70)
+                .multilineTextAlignment(.trailing)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 1))
+                .monospacedDigit()
             } minimal: {
-              Text("\(context.state.timer)")
+              Image("logo").resizable().aspectRatio(contentMode: .fit)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
