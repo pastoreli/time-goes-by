@@ -23,7 +23,7 @@ class LiveTimer: NSObject {
     let parsedValue = Int((timerDataInfo["timerValue"]) as! String) ?? 0
     do{
       let liveTimerAttributes = LiveTimerAttributes(name: "Live Timer")
-      let liveTimerContentState = LiveTimerAttributes.ContentState(timer: parsedValue)
+      let liveTimerContentState = LiveTimerAttributes.ContentState(timer: parsedValue, now: Date.now)
       let liveTimerActivity = try Activity<LiveTimerAttributes>.request(attributes: liveTimerAttributes, contentState: liveTimerContentState, pushType: nil)
     }catch (_){
       print("there is some error")

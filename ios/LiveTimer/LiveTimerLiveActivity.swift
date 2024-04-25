@@ -12,9 +12,10 @@ import SwiftUI
 @available(iOS 16.1, *)
 struct TimerView: View {
   let timer: Int
+  let now: Date
   
   var body: some View {
-    Text(timerInterval: Date.now...Date(timeInterval: Double(timer) / 1000, since: .now), pauseTime: Date.now)
+    Text(timerInterval: now...Date(timeInterval: Double(timer) / 1000, since: .now), pauseTime: Date.now)
   }
 }
 
@@ -22,6 +23,7 @@ struct LiveTimerAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
       var timer: Int
+      var now: Date
     }
 
     // Fixed non-changing properties about your activity go here!
@@ -43,13 +45,14 @@ struct LiveTimerLiveActivity: Widget {
               Spacer()
               Text("Timer")
                 .font(.system(size: 20, weight: .bold))
-              TimerView(timer: context.state.timer)
+              TimerView(timer: context.state.timer, now: context.state.now)
                 .font(.system(size: 30, weight: .bold))
+                .lineLimit(1)
                 .monospacedDigit()
-                .frame(width: 135)
+                .minimumScaleFactor(0.1)
+                .frame(width: 80)
+                .multilineTextAlignment(.trailing)
             }
-            .multilineTextAlignment(.trailing)
-            .frame(alignment: .trailing)
           }
           .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15))
           .frame(maxWidth: .infinity)
@@ -67,7 +70,7 @@ struct LiveTimerLiveActivity: Widget {
                 VStack(alignment: .trailing, spacing: 10){
                   Text("Timer")
                     .font(.system(size: 16, weight: .bold))
-                    TimerView(timer: context.state.timer)
+                    TimerView(timer: context.state.timer, now: context.state.now)
                       .font(.system(size: 30, weight: .bold))
                       .lineLimit(1)
                       .frame(width: 135)
@@ -77,11 +80,19 @@ struct LiveTimerLiveActivity: Widget {
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 5))
               }
             } compactLeading: {
-              Image("logo").resizable().aspectRatio(contentMode: .fit)
+              ProgressView(
+                  timerInterval: context.state.now...Date(timeInterval: Double(context.state.timer) / 1000, since: .now),
+                  countsDown: false,
+                  label: { EmptyView() },
+                  currentValueLabel: { EmptyView() }
+              )
+              .progressViewStyle(.circular)
+              .tint(.blue)
             } compactTrailing: {
-              TimerView(timer: context.state.timer)
+              TimerView(timer: context.state.timer, now: context.state.now)
                 .font(.system(size: 14, weight: .bold))
-                .frame(maxWidth: 70)
+                .minimumScaleFactor(0.1)
+                .frame(maxWidth: 55)
                 .multilineTextAlignment(.trailing)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 1))
                 .monospacedDigit()
