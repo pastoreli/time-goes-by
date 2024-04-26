@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Linking, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { InfoContent } from '../.././../../components';
 import { useTheme } from 'styled-components';
-import { requestForNotificationAuthorization } from '../../../../utils/notification';
+import {
+  requestForNotificationAuthorization,
+  isNotificationAllowed,
+} from '../../../../utils/notification';
 import { IosNativeScreens } from '../../../../consts';
+import { useAppState } from '@react-native-community/hooks';
+import { useSettings } from '../../../../hooks';
 
 export type AllowNotificationsProps = {
   onAllowed: () => void;
@@ -14,15 +19,24 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
   onAllowed,
 }) => {
   const theme = useTheme();
+  const { handleOnboardingView, getOnboardingSettings } = useSettings();
+  const appState = useAppState();
+
   const [nowAllowed, setNotAllowed] = useState(false);
-  const [checkFaills, setCheckFaills] = useState(false);
+
+  const handleNotificationStatus = async () => {
+    const allowed = await isNotificationAllowed();
+    if (allowed) {
+      onAllowed();
+    }
+  };
 
   const handleRequestPermission = async () => {
     const allowed = await requestForNotificationAuthorization();
+    handleOnboardingView('haveTriedAllowNotifications');
     if (allowed) {
       onAllowed();
     } else {
-      setCheckFaills(nowAllowed);
       setNotAllowed(true);
     }
   };
@@ -34,6 +48,21 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
       Linking.openSettings();
     }
   };
+
+  const handleShowSection = async () => {
+    const data = await getOnboardingSettings();
+    setNotAllowed(Boolean(data.haveTriedAllowNotifications));
+  };
+
+  useEffect(() => {
+    handleShowSection();
+  }, []);
+
+  useEffect(() => {
+    if (appState === 'active') {
+      handleNotificationStatus();
+    }
+  }, [appState]);
 
   if (nowAllowed) {
     return (
@@ -49,14 +78,11 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
             <Icon name="bell-off" size={120} color={theme.lighthen} />
           </View>
         }
-        descriptionButtonText="Ir às configurações"
-        hint={
-          checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
-        }
-        hintColor={theme.danger}
-        actionText="Verificar"
-        onActionPress={handleRequestPermission}
-        onDescriptionButtonPress={openSettings}
+        hint="O alarme não irá tocar enquanto as notificações estiverem desativadas."
+        actionText="Ir as configurações"
+        sencondaryActionText="Agora não"
+        onActionPress={openSettings}
+        onSecondaryActionPress={onAllowed}
       />
     );
   }
@@ -89,12 +115,5 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  notAllowedContainer: {
-    borderRadius: 15,
-    borderWidth: 2,
-    borderStyle: 'solid',
-    overflow: 'hidden',
-    padding: 5,
   },
 });

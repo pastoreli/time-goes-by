@@ -86,6 +86,7 @@ export const Onboarding = () => {
         data={flow}
         scrollAnimationDuration={1000}
         enabled={false}
+        autoFillData={false}
         renderItem={({ item, index }) => (
           <RenderContent
             type={item}

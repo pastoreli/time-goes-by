@@ -104,26 +104,3 @@ struct LiveTimerLiveActivity: Widget {
         }
     }
 }
-
-//extension LiveTimerAttributes {
-//    fileprivate static var preview: LiveTimerAttributes {
-//        LiveTimerAttributes(name: "World")
-//    }
-//}
-//
-//extension LiveTimerAttributes.ContentState {
-//    fileprivate static var smiley: LiveTimerAttributes.ContentState {
-//        LiveTimerAttributes.ContentState(emoji: "😀")
-//     }
-//     
-//     fileprivate static var starEyes: LiveTimerAttributes.ContentState {
-//         LiveTimerAttributes.ContentState(emoji: "🤩")
-//     }
-//}
-
-//#Preview("Notification", as: .content, using: LiveTimerAttributes.preview) {
-//   LiveTimerLiveActivity()
-//} contentStates: {
-//    LiveTimerAttributes.ContentState.smiley
-//    LiveTimerAttributes.ContentState.starEyes
-//}

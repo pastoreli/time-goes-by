@@ -13,8 +13,10 @@ export type InfoContentProps = {
   hint?: string;
   hintColor?: string;
   actionText?: string;
+  sencondaryActionText?: string;
   onDescriptionButtonPress?: () => void;
   onActionPress?: () => void;
+  onSecondaryActionPress?: () => void;
 };
 
 const InfoContent: React.FC<InfoContentProps> = ({
@@ -26,6 +28,8 @@ const InfoContent: React.FC<InfoContentProps> = ({
   hintColor,
   actionText,
   onActionPress,
+  sencondaryActionText,
+  onSecondaryActionPress,
   onDescriptionButtonPress,
 }) => {
   const theme = useTheme();
@@ -71,6 +75,17 @@ const InfoContent: React.FC<InfoContentProps> = ({
         <View style={styles.actions}>
           <Button onPress={onActionPress}>{actionText}</Button>
         </View>
+      )}
+      {onSecondaryActionPress && (
+        <TouchableOpacity onPress={onSecondaryActionPress}>
+          <Text
+            color={theme.primary}
+            size={16}
+            weight="semibold"
+            textMargin="20px 0 0 0 ">
+            {sencondaryActionText}
+          </Text>
+        </TouchableOpacity>
       )}
     </View>
   );
