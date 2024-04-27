@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 const { LiveTimer } = NativeModules;
 
@@ -11,9 +11,21 @@ export type LiveTimerActivityProps = {
   endActivity: () => void;
 };
 
+const handleStartActivity = (data: StartLiveTimerActivityParama) => {
+  if (Platform.OS === 'ios') {
+    LiveTimer.startActivity(data);
+  }
+};
+
+const handleEndActivity = () => {
+  if (Platform.OS === 'ios') {
+    LiveTimer.endActivity();
+  }
+};
+
 const LiveTimerActivity: LiveTimerActivityProps = {
-  startActivity: LiveTimer.startActivity,
-  endActivity: LiveTimer.endActivity,
+  startActivity: handleStartActivity,
+  endActivity: handleEndActivity,
 };
 
 export default LiveTimerActivity;

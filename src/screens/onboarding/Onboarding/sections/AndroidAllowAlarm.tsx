@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { InfoContent } from '../.././../../components';
@@ -7,26 +7,35 @@ import {
   isAndroidAlarmPermissionAllowed,
   openAlarmPermissionSettings,
 } from '../../../../utils/notification';
+import { useAppState } from '@react-native-community/hooks';
 
 export type AndroidAllowAlarm = {
+  active?: boolean;
   onAllowed: () => void;
 };
 
-const AndroidAllowAlarm: React.FC<AndroidAllowAlarm> = ({ onAllowed }) => {
+const AndroidAllowAlarm: React.FC<AndroidAllowAlarm> = ({
+  active,
+  onAllowed,
+}) => {
   const theme = useTheme();
-  const [checkFaills, setCheckFaills] = useState(false);
+  const appState = useAppState();
 
-  const handleRequestPermission = async () => {
+  const handleAlarmNotificationStatus = async () => {
     if (await isAndroidAlarmPermissionAllowed()) {
       onAllowed();
-    } else {
-      setCheckFaills(true);
     }
   };
 
   const openSettings = () => {
     openAlarmPermissionSettings();
   };
+
+  useEffect(() => {
+    if (appState === 'active' && active) {
+      handleAlarmNotificationStatus();
+    }
+  }, [appState, active]);
 
   return (
     <InfoContent
@@ -41,14 +50,10 @@ const AndroidAllowAlarm: React.FC<AndroidAllowAlarm> = ({ onAllowed }) => {
           <Icon name="clock-alert" size={120} color={theme.lighthen} />
         </View>
       }
-      descriptionButtonText="Ir às configurações"
-      hint={
-        checkFaills ? 'Você ainda não autorizou! Tente novamente.' : undefined
-      }
-      hintColor={theme.danger}
-      actionText="Verificar"
-      onActionPress={handleRequestPermission}
-      onDescriptionButtonPress={openSettings}
+      actionText="Ir às configurações"
+      sencondaryActionText="Agora não"
+      onActionPress={openSettings}
+      onSecondaryActionPress={onAllowed}
     />
   );
 };

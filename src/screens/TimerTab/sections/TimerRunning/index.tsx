@@ -127,6 +127,7 @@ const TimerRunning: React.FC<TimerRunningProps> = ({
               <Text
                 color={theme.darken}
                 size={screenWidth / 9}
+                style={{ fontVariant: ['tabular-nums'] }}
                 textAlign="center">
                 {formatTimmer(currentTimer)}
               </Text>

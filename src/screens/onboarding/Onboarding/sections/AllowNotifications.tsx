@@ -12,10 +12,12 @@ import { useAppState } from '@react-native-community/hooks';
 import { useSettings } from '../../../../hooks';
 
 export type AllowNotificationsProps = {
+  active?: boolean;
   onAllowed: () => void;
 };
 
 const AllowNotifications: React.FC<AllowNotificationsProps> = ({
+  active,
   onAllowed,
 }) => {
   const theme = useTheme();
@@ -59,10 +61,10 @@ const AllowNotifications: React.FC<AllowNotificationsProps> = ({
   }, []);
 
   useEffect(() => {
-    if (appState === 'active') {
+    if (appState === 'active' && active) {
       handleNotificationStatus();
     }
-  }, [appState]);
+  }, [appState, active]);
 
   if (nowAllowed) {
     return (

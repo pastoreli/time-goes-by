@@ -38,7 +38,7 @@ struct LiveTimerLiveActivity: Widget {
             Image("logo")
               .resizable()
               .aspectRatio(contentMode: .fit)
-              .frame(width: 45, height: 45)
+              .frame(width: 60, height: 60)
             Spacer()
             HStack(alignment: .bottom, spacing: 10){
               Spacer()
@@ -56,7 +56,6 @@ struct LiveTimerLiveActivity: Widget {
           }
           .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15))
           .frame(maxWidth: .infinity)
-          .activityBackgroundTint(Color.white)
           .activitySystemActionForegroundColor(Color.black)
         } dynamicIsland: { context in
             DynamicIsland {

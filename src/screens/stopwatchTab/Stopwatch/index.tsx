@@ -147,7 +147,10 @@ const Stopwatch = () => {
         style={colorScheme === 'light' ? 'dark' : 'light'}
       />
       <View style={styles.timer}>
-        <Text size={70} textAlign="center">
+        <Text
+          style={{ fontVariant: ['tabular-nums'] }}
+          size={68}
+          textAlign="center">
           {formatTimmer(timer)}
         </Text>
         <View style={styles.action}>
@@ -187,6 +190,7 @@ const Stopwatch = () => {
             <Text
               size={16}
               weight="semibold"
+              style={{ fontVariant: ['tabular-nums'] }}
               color={
                 lapList.length > 2 ? getLapTextColorByValue(lap) : theme.darken
               }>

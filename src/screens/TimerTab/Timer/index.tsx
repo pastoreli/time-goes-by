@@ -97,7 +97,6 @@ const Timer = () => {
 
     const definedTimer = setTimer(timerTotal);
 
-    // TODO: MODULARIZE
     LiveTimerActivity.startActivity({
       timerValue: timerTotal.toString(),
     });
@@ -117,8 +116,12 @@ const Timer = () => {
   const handleStatusUpdate = (timerValue: number, paused: boolean) => {
     const result = setTimer(timerValue, paused);
     if (paused) {
+      LiveTimerActivity.endActivity();
       cancelNotification();
     } else {
+      LiveTimerActivity.startActivity({
+        timerValue: timerValue.toString(),
+      });
       defineNotification(result);
     }
   };
