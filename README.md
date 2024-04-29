@@ -20,7 +20,7 @@
   <a aria-label="Tyme Goes By Android" href="https://play.google.com/store/apps/details?id=" target="_blank">
     <img alt="Tyme Goes By Android" src="https://img.shields.io/badge/Play Store-ffffff?style=for-the-badge&logo=googleplay&logoColor=000000" target="_blank" />
   </a>&nbsp;
-   <a aria-label="Tyme Goes By IOS" href="https://apps.apple.com/br/app/time-goes-by/id" target="_blank">
+   <a aria-label="Tyme Goes By IOS" href="https://apps.apple.com/app/id6479380239" target="_blank">
     <img alt="Tyme Goes By IOS" src="https://img.shields.io/badge/App Store-ffffff?style=for-the-badge&logo=apple&logoColor=000000" target="_blank" />
   </a>
 </p>
